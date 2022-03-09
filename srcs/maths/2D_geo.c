@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   2D_geo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/09 18:50:38 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/09 18:57:55 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/09 18:59:41 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../../includes/miniRT.h"
 
-int	main(void)
+t_2D_point	point(float x, float y)
 {
-	t_data	*data;
+	t_2D_point	point = {x, y};
 
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (EXIT_FAILURE);
-	data_init(data);
-	mlx_start(data);
-	img_init(data);
-	draw_circle(data, 0, 0, 500);
-	mlx_put_image_to_window(data->session, data->win, data->img->ptr, 0, 0);
-	mlx_loop(data->session);
+	return (point);
 }

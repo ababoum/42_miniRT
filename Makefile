@@ -10,29 +10,40 @@ F_BLUE		= \033[34m
 
 CC			= @gcc
 
-SRCS		= ./srcs/main.c \
-				
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -lm -O3
 
+SRCS		= ./srcs/main.c \
+				./srcs/image_tools/2d_coordinates.c \
+				./srcs/memory/frees.c \
+				./srcs/memory/memory_log.c \
+				./srcs/mlx_tools/mlx_utils.c \
+				
 INCLUDES	= ./includes/miniRT.h \
-			./includes/types.h
+				./includes/types.h
 
 OBJS		= $(SRCS:.c=.o)
 
-FLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
+%.o: %.c
+	$(CC) $(CFLAGS) -c $^ -o $@ -I$(MLXPATH)
 
 NAME		= miniRT
 
-MLXPATH		= ./minilibx-linux-master
+LIB_MLX		= ./minilibx-linux/libmlx_Linux.a
+MLXPATH		= ./minilibx-linux
+MLX_FLAGS	= -lX11 -lXext
+
+$(LIB_MLX):
+	$(MAKE) -C ./minilibx-linux
 
 all: $(NAME)
 
-$(NAME):	$(OBJS) $(INCL)
-		@make -C ${MLXPATH}
-		$(CC) $(FLAGS) $(SRCS) -o $(NAME) -L ${MLXPATH} -lm -lbsd -lX11 -lXext
+$(NAME): $(LIB_MLX) $(OBJS) $(INCLUDES)
+		$(CC) $(CFLAGS) $(OBJS) $(LIB_MLX) -o $(NAME) $(MLX_FLAGS)
 		@echo "$(F_GREEN)$(F_BOLD) $(NAME) executable is compiled and ready.$(F_NONE)"
 
 clean:
 		@rm -f $(OBJS)
+		$(MAKE) -C ./minilibx-linux clean
 		@echo "$(F_CYAN)$(F_BOLD) .o files successfully deleted.$(F_NONE)"
 
 fclean:	clean

@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_2D_shape.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/09 18:50:38 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/09 18:49:33 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/09 18:57:45 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/miniRT.h"
+#include "../../includes/miniRT.h"
 
-int	main(void)
+void	draw_circle(t_data *data, float x_center, float y_center, float radius)
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (EXIT_FAILURE);
-	data_init(data);
-	mlx_start(data);
-	img_init(data);
-	draw_circle(data, 0, 0, 500);
-	mlx_put_image_to_window(data->session, data->win, data->img->ptr, 0, 0);
-	mlx_loop(data->session);
+	int	x;
+	int	y;
+	
+	x = 0;
+	y = 0;
+	while (x < WIN_WIDTH)
+	{
+		y = 0;
+		while (y < WIN_HEIGHT)
+		{
+			if (distance())
+			{
+				pixel_put(data, x, y, RED);
+			}
+			y++;
+		}
+		x++;
+	}
 }
