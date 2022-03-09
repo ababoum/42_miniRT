@@ -1,22 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   types.h                                            :+:      :+:    :+:   */
+/*   2d_coordinates.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/09 16:43:10 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/09 16:37:51 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/09 16:39:40 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPES_H
-# define TYPES_H
+#include "../../includes/miniRT.h"
 
-typedef	struct s_data {
-	void	*session;
-	void	*win;
-	void	*img;
-}	t_data;
-
-#endif
+int	pixel_put(void *img, )

@@ -22,12 +22,12 @@ FLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
 
 NAME		= miniRT
 
-MLXPATH		= ./minilibx_opengl_20191021
+MLXPATH		= ./minilibx-linux-master
 
 all: $(NAME)
 
 $(NAME):	$(OBJS) $(INCL)
-		make -C ${MLXPATH}
+		@make -C ${MLXPATH}
 		$(CC) $(FLAGS) $(SRCS) -o $(NAME) -L ${MLXPATH} -lm -lbsd -lX11 -lXext
 		@echo "$(F_GREEN)$(F_BOLD) $(NAME) executable is compiled and ready.$(F_NONE)"
 
