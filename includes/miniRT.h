@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/09 19:00:20 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 11:46:36 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void		exit_message(t_data *data, char *message, int exit_code);
 void		pixel_put(t_data *data, int x, int y, int color);
 
 // 2D geometry
-t_2D_point	point(float x, float y);
+t_2D_point	point_2D(float x, float y);
 
 // maths
-float		distance(t_2D_point A, t_2D_point B);
+float		distance_2D(t_2D_point A, t_2D_point B);
 
 // tests
 void		draw_circle(t_data *data, int x_center, int y_center, int radius);

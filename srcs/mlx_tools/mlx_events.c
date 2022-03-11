@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2D_geo.c                                           :+:      :+:    :+:   */
+/*   mlx_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 18:57:55 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 11:47:28 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/11 12:01:27 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/11 12:28:24 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-t_2D_point	point_2D(float x, float y)
+int	key_hook(int keycode, t_data *data)
 {
-	t_2D_point	point = {x, y};
-
-	return (point);
+	if (keycode == ESC_KEY)
+		clear_exit(data, EXIT_SUCCESS);
 }
 
-t_3D_point	point_3D(float x, float y, float z)
+void	mlx_events(t_data *data)
 {
-	t_3D_point	point = {x, y, z};
-
-	return (point);
+	mlx_key_hook(data->win, key_hook, data);
 }

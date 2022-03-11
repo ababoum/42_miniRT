@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/09 18:55:49 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 12:24:38 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define RED		0x00FF0000
 # define GREEN		0x0000FF00
 # define BLUE		0x000000FF
+
+# define ESC_KEY	17
 
 typedef struct s_memlog {
 	void				*ptr;
@@ -48,5 +50,21 @@ typedef struct s_2D_point {
 	const float	x;
 	const float	y;
 }	t_2D_point;
+
+typedef struct s_3D_point {
+	const float	x;
+	const float	y;
+	const float	z;
+}	t_3D_point;
+
+typedef struct s_ray {
+	t_3D_point	origin;
+	t_3D_point	dir;
+}	t_ray;
+
+typedef struct s_sphere {
+	t_3D_point	center;
+	float		radius;
+}	t_sphere;
 
 #endif

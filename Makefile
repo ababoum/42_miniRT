@@ -13,7 +13,7 @@ CC			= @gcc
 CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -lm -O3
 
 SRCS		= ./srcs/main.c \
-				./srcs/image_tools/2d_coordinates.c \
+				./srcs/image_tools/2D_drawing.c \
 				./srcs/memory/frees.c \
 				./srcs/memory/memory_log.c \
 				./srcs/mlx_tools/mlx_utils.c \
