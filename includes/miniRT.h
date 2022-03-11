@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 11:46:36 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 12:31:32 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 void		mlx_start(t_data *data);
 void		img_init(t_data *data);
 void		data_init(t_data *data);
+void		mlx_events(t_data *data);
 
 // memory & frees
 void		*malloc_log(t_data *data, int size);
