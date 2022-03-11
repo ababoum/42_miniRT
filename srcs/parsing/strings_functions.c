@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   strings_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:22:52 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/11 17:49:12 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/11 17:51:29 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-int	verify_file(t_data *data, const char *path)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int fd;
+	int	i;
 
-	if (ft_strlen(path) < 3 || ft_strcmp(path + ft_strlen(path) - 3, ".rt"))
+	i = 0;
+	while (s1[i])
 	{
-		ft_putstr_fd("Incorrect filename (extension should be .rt)\n", 2);
-		clear_exit(data, 1);
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(path);
-		clear_exit(data, 1);
-	}
-	return (fd);
+	return (s1[i] - s2[i]);
 }
+

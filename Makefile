@@ -1,4 +1,4 @@
-F_NONE		= \033[37m
+F_NONE		= \033[37;0m
 F_BOLD		= \033[1m
 F_ORANGE	= \033[38m
 F_RED		= \033[31m
@@ -16,15 +16,23 @@ SRCS		= ./srcs/main.c \
 				./srcs/image_tools/2D_drawing.c \
 				./srcs/memory/frees.c \
 				./srcs/memory/memory_log.c \
+				./srcs/tests/draw_2D_shape.c \
 				./srcs/mlx_tools/mlx_utils.c \
+				./srcs/mlx_tools/mlx_events.c \
+				./srcs/maths/distance.c \
+				./srcs/maths/2D_geo.c \
+				./srcs/misc_tools/str_display.c \
+				./srcs/parsing/get_next_line.c \
+				./srcs/parsing/get_next_line_utils.c \
+				./srcs/parsing/parse_file.c \
+				./srcs/parsing/check_file.c \
+				./srcs/parsing/strings_functions.c \
+
 				
 INCLUDES	= ./includes/miniRT.h \
 				./includes/types.h
 
 OBJS		= $(SRCS:.c=.o)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@ -I$(MLXPATH)
 
 NAME		= miniRT
 
@@ -32,18 +40,18 @@ LIB_MLX		= ./minilibx-linux/libmlx_Linux.a
 MLXPATH		= ./minilibx-linux
 MLX_FLAGS	= -lX11 -lXext
 
-$(LIB_MLX):
-	$(MAKE) -C ./minilibx-linux
+# $(LIB_MLX):
+# 	make -C ./minilibx-linux
 
 all: $(NAME)
 
-$(NAME): $(LIB_MLX) $(OBJS) $(INCLUDES)
+$(NAME): $(OBJS) $(INCLUDES) #$(LIB_MLX)
 		$(CC) $(CFLAGS) $(OBJS) $(LIB_MLX) -o $(NAME) $(MLX_FLAGS)
 		@echo "$(F_GREEN)$(F_BOLD) $(NAME) executable is compiled and ready.$(F_NONE)"
 
 clean:
 		@rm -f $(OBJS)
-		$(MAKE) -C ./minilibx-linux clean
+#		$(MAKE) -C ./minilibx-linux clean
 		@echo "$(F_CYAN)$(F_BOLD) .o files successfully deleted.$(F_NONE)"
 
 fclean:	clean

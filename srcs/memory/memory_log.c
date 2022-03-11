@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:52:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/09 17:57:12 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 14:16:07 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,16 @@ void	*malloc_log(t_data *data, int size)
 	if (!ptr)
 		exit_message(data, "Malloc failure", EXIT_FAILURE);
 	mem_add_back(&(data->mem_lst), new_mem(data, ptr, MEM_TYPE));
+	return (ptr);
+}
+
+void	*img_log(t_data *data, int width, int height)
+{
+	void	*ptr;
+
+	ptr = mlx_new_image(data->session, width, height);
+	if (!ptr)
+		exit_message(data, "Image creation failure", EXIT_FAILURE);
+	mem_add_back(&(data->mem_lst), new_mem(data, ptr, IMG_TYPE));
 	return (ptr);
 }

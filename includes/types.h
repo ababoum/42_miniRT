@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 12:24:38 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 17:36:54 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,15 @@
 # define GREEN		0x0000FF00
 # define BLUE		0x000000FF
 
-# define ESC_KEY	17
+# define ESC_KEY		65307
+# define ARROW_LEFT		65361
+# define ARROW_UP		65362
+# define ARROW_RIGHT	65363
+# define ARROW_DOWN		65364
+
+# define X_CLOSE		17
+
+# define BUFFER_SIZE	42
 
 typedef struct s_memlog {
 	void				*ptr;
@@ -47,14 +55,14 @@ typedef struct s_data {
 }	t_data;
 
 typedef struct s_2D_point {
-	const float	x;
-	const float	y;
+	float	x;
+	float	y;
 }	t_2D_point;
 
 typedef struct s_3D_point {
-	const float	x;
-	const float	y;
-	const float	z;
+	float	x;
+	float	y;
+	float	z;
 }	t_3D_point;
 
 typedef struct s_ray {
