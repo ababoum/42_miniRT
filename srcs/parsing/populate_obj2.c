@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strings_functions.c                                :+:      :+:    :+:   */
+/*   populate_obj2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 17:49:12 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:51:10 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/11 19:01:55 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	populate_plan(t_data *data, char *line)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (s1[i] - s2[i]);
+	
 }
 
-int	is_char(char c, const char *set)
+void	populate_sphere(t_data *data, char *line)
 {
-	int	i;
+	
+}
 
-	i = 0;
-	while (set[i])
-	{
-		if (c == set[i])
-			return (1);
-		i++;
-	}
-	return (0);
+void	populate_cyl(t_data *data, char *line)
+{
+	
 }

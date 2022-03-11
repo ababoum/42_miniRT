@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strings_functions.c                                :+:      :+:    :+:   */
+/*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 17:49:12 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:51:10 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/11 19:10:36 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/11 19:11:13 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_atoi(const char *str)
 {
 	int	i;
+	int	sign;
+	int	output;
 
 	i = 0;
-	while (s1[i])
+	output = 0;
+	sign = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '-')
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		sign = -1;
 		i++;
 	}
-	return (s1[i] - s2[i]);
-}
-
-int	is_char(char c, const char *set)
-{
-	int	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (c == set[i])
-			return (1);
+	else if (str[i] == '+')
 		i++;
-	}
-	return (0);
+	while (ft_isdigit(str[i]))
+		output = output * 10 + (str[i++] - 48);
+	return (sign * output);
 }

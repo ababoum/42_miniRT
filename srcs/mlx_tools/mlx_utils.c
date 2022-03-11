@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:48:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:22:08 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 18:47:56 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,4 @@ void	img_init(t_data *data)
 	img->ptr = img_log(data, WIN_WIDTH, WIN_HEIGHT);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, \
 		&img->line_length, &img->endian);
-}
-
-void	data_init(t_data *data, const char *path)
-{
-	data->mem_lst = 0;
-	data->session = 0;
-	data->win = 0;
-	parse_input(data, path);
 }

@@ -14,6 +14,7 @@ CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -lm -O3
 
 SRCS		= ./srcs/main.c \
 				./srcs/image_tools/2D_drawing.c \
+				./srcs/image_tools/obj_lst.c \
 				./srcs/memory/frees.c \
 				./srcs/memory/memory_log.c \
 				./srcs/tests/draw_2D_shape.c \
@@ -22,13 +23,17 @@ SRCS		= ./srcs/main.c \
 				./srcs/maths/distance.c \
 				./srcs/maths/2D_geo.c \
 				./srcs/misc_tools/str_display.c \
+				./srcs/misc_tools/inits.c \
 				./srcs/parsing/get_next_line.c \
 				./srcs/parsing/get_next_line_utils.c \
 				./srcs/parsing/parse_file.c \
 				./srcs/parsing/check_file.c \
 				./srcs/parsing/strings_functions.c \
+				./srcs/parsing/split.c \
+				./srcs/parsing/populate_obj.c \
+				./srcs/parsing/populate_obj2.c \
 
-				
+
 INCLUDES	= ./includes/miniRT.h \
 				./includes/types.h
 

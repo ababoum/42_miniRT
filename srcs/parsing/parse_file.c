@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:15:29 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 19:09:30 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,33 @@
 
 void	parse_line(t_data *data, char *line)
 {
-	(void)line;
-	(void)data;
+	int		i;
+	char	*type;
+
+	i = 0;
+	while (is_char(line[i], " \t"))
+		i++;
+	type = ft_split(data, line, " \t")[0];
+	i += ft_strlen(type);
+	while (is_char(line[i], " \t"))
+		i++;
+	if (!ft_strcmp(type, "A"))
+		populate_amb(data, line + i);
+	else if (!ft_strcmp(type, "C"))
+		populate_cam(data, line + i);
+	else if (!ft_strcmp(type, "L"))
+		populate_light(data, line + i);
+	else if (!ft_strcmp(type, "sp"))
+		populate_sphere(data, line + i);
+	else if (!ft_strcmp(type, "pl"))
+		populate_plan(data, line + i);
+	else if (!ft_strcmp(type, "cy"))
+		populate_cyl(data, line + i);
+	else
+	{
+		ft_putstr_fd("Wrong object type in the file\n", 2);
+		clear_exit(data, EXIT_FAILURE);
+	}
 }
 
 void	parse_input(t_data *data, const char *path)
@@ -27,7 +52,8 @@ void	parse_input(t_data *data, const char *path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		parse_line(data, line);
+		if (*line != '\n')
+			parse_line(data, line);
 		free(line);
 		line = get_next_line(fd);
 	}

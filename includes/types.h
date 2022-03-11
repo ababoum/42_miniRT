@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 17:36:54 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 18:47:06 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,21 @@
 
 # define BUFFER_SIZE	42
 
+# define SPHERE			0
+# define PLAN			1
+# define CYLINDER		2
+
 typedef struct s_memlog {
-	void				*ptr;
-	struct s_memlog		*next;
-	int					type;
+	void			*ptr;
+	struct s_memlog	*next;
+	int				type;
 }	t_memlog;
 
-typedef struct s_img {
-	void	*ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img;
-
-typedef struct s_data {
-	void		*session;
-	void		*win;
-	t_img		*img;
-	t_memlog	*mem_lst;
-}	t_data;
+typedef struct s_obj {
+	void			*ptr;
+	struct s_obj	*next;
+	int				type;
+}	t_obj;
 
 typedef struct s_2D_point {
 	float	x;
@@ -64,6 +59,46 @@ typedef struct s_3D_point {
 	float	y;
 	float	z;
 }	t_3D_point;
+
+typedef struct s_img {
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
+typedef struct s_ambiance {
+	float	grad;
+	int		R;
+	int		G;
+	int		B;
+}	t_ambiance;
+
+typedef struct s_camera {
+	t_3D_point	POV;
+	t_3D_point	dir;
+	float		FOV;
+}	t_camera;
+
+typedef struct s_light {
+	t_3D_point	source;
+	float		luminosity;
+	int			R;
+	int			G;
+	int			B;
+}	t_light;
+
+typedef struct s_data {
+	void		*session;
+	void		*win;
+	t_img		*img;
+	t_memlog	*mem_lst;
+	t_obj		*obj_lst;
+	t_ambiance	*amb;
+	t_camera	*cam;
+	t_light		*light;
+}	t_data;
 
 typedef struct s_ray {
 	t_3D_point	origin;

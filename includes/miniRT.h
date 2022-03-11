@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:12:50 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/11 19:23:41 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,28 @@ void		ft_memset(void *ptr, int val, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 char		*get_next_line(int fd);
 
-// strings
+// strings & numbers
 int			ft_strcmp(const char *s1, const char *s2);
+int			is_char(char c, const char *set);
+char		**ft_split(t_data *data, char *s, const char *set);
+int			ft_atoi(const char *str);
+float		ft_atof(char *str);
 
 // strings display
 void		ft_putstr_fd(char *str, int fd);
 
+// objects
+t_obj		*new_obj(t_data *data, void *ptr, int type);
+void		obj_add_back(t_obj **alst, t_obj *new);
+
 // parsing
 void		parse_input(t_data *data, const char *path);
 int			verify_file(t_data *data, const char *path);
+
+// populate data
+void		populate_amb(t_data *data, char *line);
+void		populate_light(t_data *data, char *line);
+void		populate_cam(t_data *data, char *line);
 
 // 2D drawing
 void		pixel_put(t_data *data, int x, int y, int color);
