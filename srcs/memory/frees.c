@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:56:37 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:18:41 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:56:52 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	clear_exit(t_data *data, int exit_code)
 
 void	exit_message(t_data *data, char *message, int exit_code)
 {
-	printf("%s\n", message);
+	ft_putstr_fd(message, 2);
+	ft_putstr_fd("\n", 2);
 	clear_exit(data, exit_code);
 }

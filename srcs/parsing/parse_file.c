@@ -6,24 +6,14 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 19:09:30 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/15 14:57:16 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-void	parse_line(t_data *data, char *line)
+static void parse_line_redir(t_data *data, char *line, char *type, int i)
 {
-	int		i;
-	char	*type;
-
-	i = 0;
-	while (is_char(line[i], " \t"))
-		i++;
-	type = ft_split(data, line, " \t")[0];
-	i += ft_strlen(type);
-	while (is_char(line[i], " \t"))
-		i++;
 	if (!ft_strcmp(type, "A"))
 		populate_amb(data, line + i);
 	else if (!ft_strcmp(type, "C"))
@@ -37,10 +27,22 @@ void	parse_line(t_data *data, char *line)
 	else if (!ft_strcmp(type, "cy"))
 		populate_cyl(data, line + i);
 	else
-	{
-		ft_putstr_fd("Wrong object type in the file\n", 2);
-		clear_exit(data, EXIT_FAILURE);
-	}
+		exit_message(data, "Wrong object type in the file\n", EXIT_FAILURE);
+}
+
+void	parse_line(t_data *data, char *line)
+{
+	int		i;
+	char	*type;
+
+	i = 0;
+	while (is_char(line[i], " \t"))
+		i++;
+	type = ft_split(data, line, " \t")[0];
+	i += ft_strlen(type);
+	while (is_char(line[i], " \t"))
+		i++;
+	parse_line_redir(data, line, type, i);
 }
 
 void	parse_input(t_data *data, const char *path)

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 19:23:41 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/15 17:17:21 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void		img_init(t_data *data);
 void		data_init(t_data *data, const char *path);
 void		mlx_events(t_data *data);
 
+// colors
+int			check_int_color(int color_0_to_255);
+
 // memory & frees
 void		*malloc_log(t_data *data, int size);
 void		*img_log(t_data *data, int width, int height);
@@ -46,6 +49,7 @@ char		*get_next_line(int fd);
 int			ft_strcmp(const char *s1, const char *s2);
 int			is_char(char c, const char *set);
 char		**ft_split(t_data *data, char *s, const char *set);
+int			tab_len(char **tab);
 int			ft_atoi(const char *str);
 float		ft_atof(char *str);
 

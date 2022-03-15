@@ -22,6 +22,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/mlx_tools/mlx_events.c \
 				./srcs/maths/distance.c \
 				./srcs/maths/2D_geo.c \
+				./srcs/maths/3D_geo.c \
 				./srcs/misc_tools/str_display.c \
 				./srcs/misc_tools/inits.c \
 				./srcs/parsing/get_next_line.c \
@@ -30,6 +31,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/parsing/check_file.c \
 				./srcs/parsing/strings_functions.c \
 				./srcs/parsing/split.c \
+				./srcs/misc_tools/tab_len.c \
 				./srcs/parsing/populate_obj.c \
 				./srcs/parsing/populate_obj2.c \
 

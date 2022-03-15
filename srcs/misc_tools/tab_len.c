@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2D_geo.c                                           :+:      :+:    :+:   */
+/*   tab_len.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 18:57:55 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/15 18:29:21 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/15 15:18:13 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/15 17:05:10 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-t_2D_point	point_2D(float x, float y)
+int	tab_len(char **tab)
 {
-	t_2D_point	point = {x, y};
+	int	i;
 
-	return (point);
+	i = 0;
+	if (!tab)
+		return (0);
+	while (tab[i])
+		i++;
+	return (i);
 }

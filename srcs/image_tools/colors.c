@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2D_geo.c                                           :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 18:57:55 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/15 18:29:21 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/15 17:15:48 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/15 17:16:55 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-t_2D_point	point_2D(float x, float y)
+int	check_int_color(int color_0_to_255)
 {
-	t_2D_point	point = {x, y};
-
-	return (point);
+	if (color_0_to_255 < 0 || color_0_to_255 > 255)
+		return (0);
+	return (1);
 }
