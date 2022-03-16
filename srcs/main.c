@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:03:33 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/16 19:11:26 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int ac, char **av)
 	data_init(data, av[1]);
 	mlx_start(data);
 	img_init(data);
-	draw_circle(data, point_2D(500, 500), 500);
+	// draw_circle(data, dot_2D(500, 500), 500);
+	draw_sp(data);
 	mlx_put_image_to_window(data->session, data->win, data->img->ptr, 0, 0);
 	mlx_events(data);
 	mlx_loop(data->session);

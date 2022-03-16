@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:47:06 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/16 17:26:31 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define X_CLOSE		17
 
 # define BUFFER_SIZE	42
+
+# define EPSILON		0.00005
 
 # define SPHERE			0
 # define PLAN			1
@@ -70,9 +72,7 @@ typedef struct s_img {
 
 typedef struct s_ambiance {
 	float	grad;
-	int		R;
-	int		G;
-	int		B;
+	int		RGB[3];
 }	t_ambiance;
 
 typedef struct s_camera {
@@ -82,11 +82,9 @@ typedef struct s_camera {
 }	t_camera;
 
 typedef struct s_light {
-	t_3D_point	source;
-	float		luminosity;
-	int			R;
-	int			G;
-	int			B;
+	t_3D_point	src;
+	float		pow;
+	int			RGB[3];
 }	t_light;
 
 typedef struct s_data {
@@ -97,7 +95,7 @@ typedef struct s_data {
 	t_obj		*obj_lst;
 	t_ambiance	*amb;
 	t_camera	*cam;
-	t_light		*light;
+	t_light		*lum;
 }	t_data;
 
 typedef struct s_ray {
@@ -108,6 +106,7 @@ typedef struct s_ray {
 typedef struct s_sphere {
 	t_3D_point	center;
 	float		radius;
+	int			RGB[3];
 }	t_sphere;
 
 #endif

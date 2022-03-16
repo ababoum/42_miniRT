@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/15 17:17:21 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/16 19:11:18 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void		data_init(t_data *data, const char *path);
 void		mlx_events(t_data *data);
 
 // colors
-int			check_int_color(int color_0_to_255);
+int			check_int_color(int RGB[3]);
+int			RGB_to_int(int RGB[3]);
 
 // memory & frees
 void		*malloc_log(t_data *data, int size);
@@ -59,6 +60,7 @@ void		ft_putstr_fd(char *str, int fd);
 // objects
 t_obj		*new_obj(t_data *data, void *ptr, int type);
 void		obj_add_back(t_obj **alst, t_obj *new);
+t_sphere	*new_sphere(t_data *data);
 
 // parsing
 void		parse_input(t_data *data, const char *path);
@@ -68,17 +70,29 @@ int			verify_file(t_data *data, const char *path);
 void		populate_amb(t_data *data, char *line);
 void		populate_light(t_data *data, char *line);
 void		populate_cam(t_data *data, char *line);
+void		populate_plan(t_data *data, char *line);
+void		populate_sphere(t_data *data, char *line);
+void		populate_cyl(t_data *data, char *line);
+
 
 // 2D drawing
 void		pixel_put(t_data *data, int x, int y, int color);
 
 // 2D geometry
-t_2D_point	point_2D(float x, float y);
+t_2D_point	dot_2D(float x, float y);
+
+// 3D geometry
+t_3D_point	dot_3D(float x, float y, float z);
+int			check_dir_vector(t_3D_point vector);
+
+// 3D drawing
+int			intersect_sp(t_ray *ray, t_sphere *sp);
 
 // maths
 float		distance_2D(t_2D_point A, t_2D_point B);
 
 // tests
 void		draw_circle(t_data *data, t_2D_point center, float radius);
+void		draw_sp(t_data *data);
 
 #endif
