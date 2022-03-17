@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:48:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:47:56 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/17 18:09:58 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	mlx_start(t_data *data)
 
 	mlx = mlx_init();
 	if (!mlx)
-	{
-		free(data);
-		exit(EXIT_FAILURE);
-	}
+		exit_message(data, "Cannot start MLX", EXIT_FAILURE);
 	data->session = mlx;
 	data->win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "Raytracing");
 	if (!data->win)
