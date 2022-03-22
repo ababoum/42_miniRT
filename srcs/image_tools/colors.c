@@ -6,22 +6,22 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 17:15:48 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/16 18:40:04 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/22 14:46:07 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-int	check_int_color(int RGB[3])
+int	check_int_color(int rgb[3])
 {
-	if (RGB[0] < 0 || RGB[0] > 255 || \
-		RGB[1] < 0 || RGB[1] > 255 || \
-		RGB[2] < 0 || RGB[2] > 255)
+	if (rgb[0] < 0 || rgb[0] > 255 || \
+		rgb[1] < 0 || rgb[1] > 255 || \
+		rgb[2] < 0 || rgb[2] > 255)
 		return (0);
 	return (1);
 }
 
-int	RGB_to_int(int RGB[3])
+int	rgb_to_int(int rgb[3])
 {
-	return (0xFFFF * RGB[0] + 0xFF * RGB[1] + RGB[2]);
+	return (0xFFFF * rgb[0] + 0xFF * rgb[1] + rgb[2]);
 }

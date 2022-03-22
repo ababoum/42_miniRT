@@ -25,6 +25,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/maths/2D_geo.c \
 				./srcs/maths/3D_geo.c \
 				./srcs/maths/intersection.c \
+				./srcs/maths/vision_field.c \
 				./srcs/misc_tools/str_display.c \
 				./srcs/misc_tools/inits.c \
 				./srcs/misc_tools/tab_len.c \

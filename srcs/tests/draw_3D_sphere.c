@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 18:49:35 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/16 18:57:11 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/22 14:47:00 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	draw_sp(t_data *data)
 	int			i;
 
 	sp = data->obj_lst->ptr;
-	ray.origin = data->cam->POV;
+	ray.origin = data->cam->pov;
 	i = 0;
 	while (i < WIN_WIDTH * WIN_HEIGHT)
 	{
 		ray.dir.x = (i % WIN_WIDTH) / 100.0;
 		ray.dir.y = (i / WIN_WIDTH) / 100.0;
 		if (intersect_sp(&ray, sp))
-			pixel_put(data, i % WIN_WIDTH, i / WIN_WIDTH, RGB_to_int(sp->RGB));
+			pixel_put(data, i % WIN_WIDTH, i / WIN_WIDTH, rgb_to_int(sp->rgb));
 		else
 			pixel_put(data, i % WIN_WIDTH, i / WIN_WIDTH, \
-				RGB_to_int(data->amb->RGB));
+				rgb_to_int(data->amb->rgb));
 		i++;
 	}
 }

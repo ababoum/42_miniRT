@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   distance.c                                         :+:      :+:    :+:   */
+/*   vision_field.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 18:52:09 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/22 14:43:15 by mababou          ###   ########.fr       */
+/*   Created: 2022/03/22 15:08:26 by mababou           #+#    #+#             */
+/*   Updated: 2022/03/22 15:14:04 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-float	distance_2D(t_2D_point A, t_2D_point B)
+int	max_vision_axis(float fov)
 {
-	return (sqrtf(\
-		powf(A.x - B.x, 2) + \
-		powf(A.y - B.y, 2)\
-		));
-}
+	float	rad;
 
-float	distance_3D(t_3D_point A, t_3D_point B)
-{
-	return (\
-		sqrtf(\
-			powf(A.x - B.x, 2) + \
-			powf(A.y - B.y, 2) + \
-			powf(A.z - B.z, 2)\
-			)\
-		);
+	rad = M_PI * (fov / 180);
+	if (fov == 180)
+	{
+		return (INT_MAX);
+	}
+	else
+	{
+		return (tanf(fov));
+	}
 }

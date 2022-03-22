@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/16 19:11:18 by mababou          ###   ########.fr       */
+/*   Updated: 2022/03/22 15:14:14 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void		data_init(t_data *data, const char *path);
 void		mlx_events(t_data *data);
 
 // colors
-int			check_int_color(int RGB[3]);
-int			RGB_to_int(int RGB[3]);
+int			check_int_color(int rgb[3]);
+int			rgb_to_int(int rgb[3]);
 
 // memory & frees
 void		*malloc_log(t_data *data, int size);
@@ -74,7 +74,6 @@ void		populate_plan(t_data *data, char *line);
 void		populate_sphere(t_data *data, char *line);
 void		populate_cyl(t_data *data, char *line);
 
-
 // 2D drawing
 void		pixel_put(t_data *data, int x, int y, int color);
 
@@ -82,7 +81,7 @@ void		pixel_put(t_data *data, int x, int y, int color);
 t_2D_point	dot_2D(float x, float y);
 
 // 3D geometry
-t_3D_point	dot_3D(float x, float y, float z);
+t_3D_point	dot_3d(float x, float y, float z);
 int			check_dir_vector(t_3D_point vector);
 
 // 3D drawing
@@ -90,6 +89,9 @@ int			intersect_sp(t_ray *ray, t_sphere *sp);
 
 // maths
 float		distance_2D(t_2D_point A, t_2D_point B);
+
+// vision
+int			max_vision_axis(float fov);
 
 // tests
 void		draw_circle(t_data *data, t_2D_point center, float radius);
