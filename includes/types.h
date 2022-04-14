@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 16:59:19 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 17:07:52 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define TYPES_H
 
 # define SPACES		"\t\n\v\f\r "
+
+# define RED_TXT	"\e[31;1m"
+# define RESET_TXT	"\e[0m"
 
 # define MEM_TYPE	1
 # define IMG_TYPE	2
