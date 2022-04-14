@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:08:26 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/22 15:14:04 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 15:07:11 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	max_vision_axis(float fov)
 	}
 	else
 	{
-		return (tanf(fov));
+		return (tanf(rad));
 	}
 }

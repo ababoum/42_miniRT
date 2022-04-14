@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/22 14:56:29 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 15:33:24 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	populate_amb(t_data *data, char *line)
 	char	**tab;
 	char	**rgb;
 
+	check_amb(data);
 	tab = ft_split(data, line, " \t");
 	if (tab_len(tab) != 2)
 		exit_message(data, "Incorrect 'Ambiance' parameters", EXIT_FAILURE);
@@ -39,6 +40,7 @@ void	populate_light(t_data *data, char *line)
 	char	**src;
 	char	**rgb;
 
+	check_lum(data);
 	tab = ft_split(data, line, " \t");
 	if (tab_len(tab) != 3)
 		exit_message(data, "Incorrect 'Light' parameters", EXIT_FAILURE);
@@ -65,8 +67,7 @@ void	populate_cam(t_data *data, char *line)
 	char	**pov;
 	char	**dir;
 
-	if (data->cam)
-		exit_message(data, "Only one camera is allowed", EXIT_FAILURE);
+	check_amb(data);
 	tab = ft_split(data, line, " \t");
 	if (tab_len(tab) != 3)
 		exit_message(data, "Incorrect 'Camera' parameters", EXIT_FAILURE);

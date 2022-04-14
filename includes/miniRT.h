@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/22 15:14:14 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 15:32:44 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 
 // mlx tools
 void		mlx_start(t_data *data);
@@ -36,6 +37,7 @@ int			rgb_to_int(int rgb[3]);
 // memory & frees
 void		*malloc_log(t_data *data, int size);
 void		*img_log(t_data *data, int width, int height);
+t_data		*get_data(int code, t_data *input);
 void		clear_exit(t_data *data, int exit_code);
 void		exit_message(t_data *data, char *message, int exit_code);
 
@@ -65,6 +67,9 @@ t_sphere	*new_sphere(t_data *data);
 // parsing
 void		parse_input(t_data *data, const char *path);
 int			verify_file(t_data *data, const char *path);
+void		check_cam(t_data *data);
+void		check_amb(t_data *data);
+void		check_lum(t_data *data);
 
 // populate data
 void		populate_amb(t_data *data, char *line);
@@ -78,23 +83,24 @@ void		populate_cyl(t_data *data, char *line);
 void		pixel_put(t_data *data, int x, int y, int color);
 
 // 2D geometry
-t_2D_point	dot_2D(float x, float y);
+t_2D_point	*dot_2d(float x, float y);
 
 // 3D geometry
-t_3D_point	dot_3d(float x, float y, float z);
-int			check_dir_vector(t_3D_point vector);
+t_3D_point	*dot_3d(float x, float y, float z);
+t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
+int			check_dir_vector(t_3D_point *vector);
 
 // 3D drawing
 int			intersect_sp(t_ray *ray, t_sphere *sp);
 
 // maths
-float		distance_2D(t_2D_point A, t_2D_point B);
+float		distance_2d(t_2D_point *A, t_2D_point *B);
 
 // vision
 int			max_vision_axis(float fov);
 
 // tests
-void		draw_circle(t_data *data, t_2D_point center, float radius);
+void		draw_circle(t_data *data, t_2D_point *center, float radius);
 void		draw_sp(t_data *data);
 
 #endif

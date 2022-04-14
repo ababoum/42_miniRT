@@ -10,7 +10,7 @@ F_BLUE		= \033[34m
 
 CC			= @gcc
 
-CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -lm -O3
+CFLAGS		= -Wall -Wextra -Werror -g -lm -O3 #-fsanitize=address
 
 SRCS		= ./srcs/main.c \
 				./srcs/image_tools/2D_drawing.c \
@@ -19,6 +19,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/image_tools/colors.c \
 				./srcs/memory/frees.c \
 				./srcs/memory/memory_log.c \
+				./srcs/memory/data_access.c \
 				./srcs/mlx_tools/mlx_utils.c \
 				./srcs/mlx_tools/mlx_events.c \
 				./srcs/maths/distance.c \
@@ -34,7 +35,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/parsing/get_next_line.c \
 				./srcs/parsing/get_next_line_utils.c \
 				./srcs/parsing/parse_file.c \
-				./srcs/parsing/check_file.c \
+				./srcs/parsing/checks.c \
 				./srcs/parsing/strings_functions.c \
 				./srcs/parsing/split.c \
 				./srcs/parsing/populate_obj.c \

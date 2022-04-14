@@ -6,12 +6,14 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/22 14:59:19 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 16:14:43 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
+
+# define SPACES		"\t\n\v\f\r "
 
 # define MEM_TYPE	1
 # define IMG_TYPE	2
@@ -82,13 +84,13 @@ typedef struct s_ambiance {
 }	t_ambiance;
 
 typedef struct s_camera {
-	t_3D_point	pov;
-	t_3D_point	dir;
+	t_3D_point	*pov;
+	t_3D_point	*dir;
 	float		fov;
 }	t_camera;
 
 typedef struct s_light {
-	t_3D_point	src;
+	t_3D_point	*src;
 	float		pow;
 	int			rgb[3];
 }	t_light;
@@ -102,15 +104,16 @@ typedef struct s_data {
 	t_ambiance	*amb;
 	t_camera	*cam;
 	t_light		*lum;
+	// void		(*pop_fn[6])(struct s_data *, char *);
 }	t_data;
 
 typedef struct s_ray {
-	t_3D_point	origin;
-	t_3D_point	dir;
+	t_3D_point	*origin;
+	t_3D_point	*dir;
 }	t_ray;
 
 typedef struct s_sphere {
-	t_3D_point	center;
+	t_3D_point	*center;
 	float		radius;
 	int			rgb[3];
 }	t_sphere;

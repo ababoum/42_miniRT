@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_file.c                                       :+:      :+:    :+:   */
+/*   data_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:22:52 by mababou          ###   ########.fr       */
+/*   Created: 2022/04/14 14:48:48 by mababou           #+#    #+#             */
+/*   Updated: 2022/04/14 14:49:04 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-int	verify_file(t_data *data, const char *path)
+t_data	*get_data(int code, t_data *input)
 {
-	int fd;
+	static t_data	*data_ptr;
 
-	if (ft_strlen(path) < 3 || ft_strcmp(path + ft_strlen(path) - 3, ".rt"))
+	if (code == 0)
+		return (data_ptr);
+	else
 	{
-		ft_putstr_fd("Incorrect filename (extension should be .rt)\n", 2);
-		clear_exit(data, 1);
+		data_ptr = input;
+		return (0);
 	}
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(path);
-		clear_exit(data, 1);
-	}
-	return (fd);
 }

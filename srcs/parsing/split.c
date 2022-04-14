@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 18:56:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 18:57:33 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 14:35:03 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	*strdup_sep(t_data *data, char const *s, char const *set)
 		output[i] = s[i];
 		i++;
 	}
-	output[i] = '\0';
+	output[i] = 0;
 	return (output);
 }
 

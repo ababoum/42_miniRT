@@ -6,13 +6,13 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:12:12 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 19:23:05 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 14:55:17 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-static int ft_isdigit(int c)
+static int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -43,7 +43,7 @@ float	ft_atof(char *str)
 	i = 0;
 	output = 0.0;
 	sign = 1;
-	while (is_char(str[i], "\t\n\v\f\r "))
+	while (is_char(str[i], SPACES))
 		i++;
 	if (str[i] == '-')
 	{
