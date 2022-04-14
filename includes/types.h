@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 16:14:43 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 16:59:19 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ typedef struct s_data {
 	t_ambiance	*amb;
 	t_camera	*cam;
 	t_light		*lum;
-	// void		(*pop_fn[6])(struct s_data *, char *);
 }	t_data;
 
 typedef struct s_ray {
@@ -117,5 +116,7 @@ typedef struct s_sphere {
 	float		radius;
 	int			rgb[3];
 }	t_sphere;
+
+typedef void	(*t_pop_fn)(t_data *, char *);
 
 #endif

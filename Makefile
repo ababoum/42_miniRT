@@ -10,7 +10,7 @@ F_BLUE		= \033[34m
 
 CC			= @gcc
 
-CFLAGS		= -Wall -Wextra -Werror -g -lm -O3 #-fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -g -lm -O3 -fsanitize=address
 
 SRCS		= ./srcs/main.c \
 				./srcs/image_tools/2D_drawing.c \

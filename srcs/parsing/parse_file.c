@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 16:16:07 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 17:01:29 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,24 @@
 
 static void	parse_line_redir(t_data *data, char *line, char *type, int i)
 {
-	// const char	*obj_names[] = {"A", "C", "L", "sp", "pl", "cy"};
-	// size_t		index;
+	size_t			index;
+	const char		*obj_names[] = {"A", "C", "L", "sp", "pl", "cy"};
+	const t_pop_fn	pop_fn_lst[] = {
+		populate_amb, populate_cam, populate_light, \
+		populate_sphere, populate_plan, populate_cyl \
+	};
 
-	// index = 0;
-	// while (index < sizeof(obj_names) / sizeof(char *))
-	// {
-	// 	if (!ft_strcmp(type, obj_names[index]))
-	// 	{
-	// 		// data->pop_fn[index](data, line + i);
-	// 		return ;
-	// 	}
-	// 	index++;
-	// }
-	
-	if (!ft_strcmp(type, "A"))
-		populate_amb(data, line + i);
-	else if (!ft_strcmp(type, "C"))
-		populate_cam(data, line + i);
-	else if (!ft_strcmp(type, "L"))
-		populate_light(data, line + i);
-	else if (!ft_strcmp(type, "sp"))
-		populate_sphere(data, line + i);
-	else if (!ft_strcmp(type, "pl"))
-		populate_plan(data, line + i);
-	else if (!ft_strcmp(type, "cy"))
-		populate_cyl(data, line + i);
-	else
-		exit_message(data, "Unrecognized object type in the file\n", EXIT_FAILURE);
+	index = 0;
+	while (index < sizeof(obj_names) / sizeof(char *))
+	{
+		if (!ft_strcmp(type, obj_names[index]))
+		{
+			pop_fn_lst[index](data, line + i);
+			return ;
+		}
+		index++;
+	}
+	exit_message(data, "Unrecognized object type in the file\n", EXIT_FAILURE);
 }
 
 void	parse_line(t_data *data, char *line)

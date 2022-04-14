@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 15:33:24 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 16:39:08 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	populate_cam(t_data *data, char *line)
 	char	**pov;
 	char	**dir;
 
-	check_amb(data);
+	check_cam(data);
 	tab = ft_split(data, line, " \t");
 	if (tab_len(tab) != 3)
 		exit_message(data, "Incorrect 'Camera' parameters", EXIT_FAILURE);

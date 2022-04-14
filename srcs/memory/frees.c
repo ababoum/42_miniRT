@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:56:37 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/15 14:56:52 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/14 16:29:24 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_lstclear(t_data *data)
 		mlx_destroy_window(data->session, data->win);
 	if (data->session)
 		mlx_destroy_display(data->session);
-	free(data);
+	// free(data);
 	data = 0;
 }
 
