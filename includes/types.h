@@ -44,6 +44,9 @@
 # define PLAN			1
 # define CYLINDER		2
 
+
+
+
 typedef struct s_memlog {
 	void			*ptr;
 	struct s_memlog	*next;

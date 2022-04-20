@@ -42,10 +42,18 @@ SRCS		= ./srcs/main.c \
 				./srcs/parsing/populate_obj2.c \
 				./srcs/tests/draw_2D_shape.c \
 				./srcs/tests/draw_3D_sphere.c \
+				./srcs/ft3d/ft3d_perspective.c \
+				./srcs/ft3d/ft3d_resize.c \
+				./srcs/ft3d/ft3d_rotate.c \
+				./srcs/ft3d/ft3d_set.c \
+				./srcs/ft3d/ft3d_setrot.c \
+				./srcs/ft3d/ft3d_translate.c \
+				./srcs/ft3d/ft3d.c \
 
 
 INCLUDES	= ./includes/miniRT.h \
-				./includes/types.h
+				./includes/types.h \
+				./includes/ft3d.h
 
 OBJS		= $(SRCS:.c=.o)
 
