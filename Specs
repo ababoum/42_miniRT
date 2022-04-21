@@ -9,6 +9,11 @@
 	with a direction (0, 0, -1)
 
 
+===== FILE PARSING ======
+
+( ) Check if camera, ambiance or light is inexistant at the end of file parsing
+
+
 ===== OBJECTS ======
 
 ( ) Plan
