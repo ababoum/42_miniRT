@@ -30,12 +30,13 @@ void draw_data(t_data *data)
 	{
 		//calculate ray
 		//position "ecran"
+		//A voir si c'est vraiment utile ou si on peut juste partir de 0,0,0
 		float x_ecran = (i % WIN_WIDTH * 1.0) / WIN_WIDTH * 2.0 - 1;
 		float y_ecran = (i / WIN_WIDTH * 1.0) / WIN_HEIGHT * 2.0 - 1;
 
 
 		set_3d_point(ray.origin, x_ecran, 0, y_ecran);
-		set_3d_point(ray.origin, x_ecran * 10, 1, y_ecran * 10);
+		set_3d_point(ray.dir, x_ecran, 1, y_ecran);
 
 		t_obj *objs = data->obj_lst;
 
