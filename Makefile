@@ -10,13 +10,16 @@ F_BLUE		= \033[34m
 
 CC			= @gcc
 
-CFLAGS		= -Wall -Wextra -Werror -g -lm -O3 -fsanitize=address
+#Remove -O3 -fsanitize=address for debuging
+CFLAGS		= -Wall -Wextra -Werror -g -lm
+
 
 SRCS		= ./srcs/main.c \
 				./srcs/image_tools/2D_drawing.c \
 				./srcs/image_tools/obj_lst.c \
 				./srcs/image_tools/objects.c \
 				./srcs/image_tools/colors.c \
+				./srcs/image_tools/rgb.c \
 				./srcs/memory/frees.c \
 				./srcs/memory/memory_log.c \
 				./srcs/memory/data_access.c \

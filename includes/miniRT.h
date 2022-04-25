@@ -89,18 +89,26 @@ t_2D_point	*dot_2d(float x, float y);
 t_3D_point	*dot_3d(float x, float y, float z);
 t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
 int			check_dir_vector(t_3D_point *vector);
+void		normalize(t_3D_point *ray);
+
 
 // 3D drawing
 int			intersect_sp(t_ray *ray, t_sphere *sp);
+int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
+void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
 
 // maths
 float		distance_2d(t_2D_point *A, t_2D_point *B);
-
+float		distance_3d(t_3D_point *A, t_3D_point *B);
 // vision
 int			max_vision_axis(float fov);
 
 // tests
 void		draw_circle(t_data *data, t_2D_point *center, float radius);
 void		draw_sp(t_data *data);
+
+//RGB
+int rgb_ambiant(int rgb, int *lrgb, float grad);
+int arr_toRGB(int *rgb);
 
 #endif

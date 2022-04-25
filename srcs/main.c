@@ -19,24 +19,93 @@ void set_3d_point(t_3D_point *pt, float x, float y, float z)
 	pt->z = z;
 }
 
+
+int rgb_factor(int rgb, float factor)
+{
+	int r;
+	int g;
+	int b;
+
+	r = rgb % 256;
+	g = (rgb / 256) % 256;
+	b = (rgb / 65536) % 256;
+	r *= factor;
+	g *= factor;
+	b *= factor;
+
+	return (r + g * 256 + b * 65536);
+}
+
+int add_color(int rgb1, int rgb2)
+{
+	int r;
+	int g;
+	int b;
+
+	r = rgb1 % 256 + rgb2 % 256;
+	g = (rgb1 / 256) % 256 + (rgb2 / 256) % 256;
+	b = (rgb1 / 65536) % 256 + (rgb2 / 65536) % 256;
+
+	if (r > 255)
+		r = 255;
+	if (g > 255)
+		g = 255;
+	if (b > 255)
+		b = 255;
+	return (r + g * 256 + b * 65536);
+}
+
+int calc_spot(t_ray *norm, t_light *light, int *rgb)
+{
+	t_3D_point pt;
+	float	f;
+
+	pt.x = light->src->x - norm->origin->x;
+	pt.y = light->src->y - norm->origin->y;
+	pt.z = light->src->z - norm->origin->z;
+
+	normalize(&pt);
+	f = pt.x * norm->dir->x
+			+ pt.y * norm->dir->y
+			+ pt.z * norm->dir->z;
+
+	if (f < 0)
+		f = 0;
+	return (rgb_ambiant(arr_toRGB(rgb),light->rgb, f *light->pow));
+
+}
+
+
+
 void draw_data(t_data *data)
 {
 	t_ray ray;
-	ray.origin = dot_3d(0, 0, 0);
+	t_3D_point pt;
+	t_ray norm;
+	int i;
+
+
 	ray.dir = dot_3d(0, 0, 0);
+	ray.origin = dot_3d(0, 0, 0);
+	norm.dir = dot_3d(0, 0, 0);
+	norm.origin = dot_3d(0, 0, 0);
 
+	i = 0;
 
-	for (int i = 0; i < WIN_WIDTH * WIN_HEIGHT; ++i)
+	while (i < WIN_WIDTH * WIN_HEIGHT)
 	{
 		//calculate ray
 		//position "ecran"
 		//A voir si c'est vraiment utile ou si on peut juste partir de 0,0,0
-		float x_ecran = (i % WIN_WIDTH * 1.0) / WIN_WIDTH * 2.0 - 1;
-		float y_ecran = (i / WIN_WIDTH * 1.0) / WIN_HEIGHT * 2.0 - 1;
-
+		float ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
+		float x_ecran = (i % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
+		float y_ecran =
+				((i / WIN_WIDTH * 1.0f) / WIN_HEIGHT * 2.0f - 1) * ratio;
 
 		set_3d_point(ray.origin, x_ecran, 0, y_ecran);
-		set_3d_point(ray.dir, x_ecran, 1, y_ecran);
+		set_3d_point(ray.dir, x_ecran * 1.0f, 10, y_ecran * 1.0f);
+
+		normalize(ray.dir);
 
 		t_obj *objs = data->obj_lst;
 
@@ -46,10 +115,31 @@ void draw_data(t_data *data)
 		{
 			if (objs->type == 0)
 			{
-				t_sphere *sp = (t_sphere *)objs->ptr;
+				t_sphere *sp = (t_sphere *) objs->ptr;
+
 				if (intersect_sp(&ray, sp))
 				{
-					color = 1000;
+
+					(void) pt;
+					//Ambiant light
+					color = rgb_ambiant(arr_toRGB(sp->rgb), data->amb->rgb, data->amb->grad);
+
+					//spot
+//					norm.origin->x = pt.x;
+//					norm.origin->y = pt.y;
+//					norm.origin->z = pt.z;
+
+//					norm.dir->x = pt.x - sp->center->x;
+//					norm.dir->y = pt.y - sp->center->y;
+//					norm.dir->z = pt.z - sp->center->z;
+
+
+					normalize(norm.dir);
+
+//					color = add_color(color, calc_spot(&norm, data->lum, sp->rgb));
+
+					//Pour faire les calculs de lumiere il faudrait avoir la position de l'intersection du rayon et de la sphere
+
 				}
 			}
 			objs = objs->next;
@@ -58,6 +148,7 @@ void draw_data(t_data *data)
 
 		(void) ray;
 		pixel_put(data, i % WIN_WIDTH, i / WIN_WIDTH, color);
+		i++;
 	}
 
 
