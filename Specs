@@ -12,6 +12,7 @@
 ===== FILE PARSING ======
 
 ( ) Check if camera, ambiance or light is inexistant at the end of file parsing
+( ) Problem with light color, R switch with B
 
 
 ===== OBJECTS ======
@@ -44,6 +45,12 @@
 	(should it be indicated in the input file?)
 
 ( ) Handle the bump map texture
+
+( ) depth
+
+( ) shadow
+
+
 
 ===== INPUT FILES ======
 

@@ -15,6 +15,7 @@
 
 # include "types.h"
 # include "../minilibx-linux/mlx.h"
+#include "ft3d.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -90,6 +91,8 @@ t_3D_point	*dot_3d(float x, float y, float z);
 t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
 int			check_dir_vector(t_3D_point *vector);
 void		normalize(t_3D_point *ray);
+void		ray_mult_mat(t_ray *ray, t_m4 mat);
+
 
 
 // 3D drawing

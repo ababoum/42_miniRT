@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
+#include "../includes/ft3d.h"
 
 void set_3d_point(t_3D_point *pt, float x, float y, float z)
 {
@@ -58,8 +59,8 @@ int add_color(int rgb1, int rgb2)
 int calc_spot(t_ray *norm, t_light *light, int *rgb)
 {
 	t_3D_point pt;
-	float	f;
-	int		color;
+	float f;
+	int color;
 
 	pt.x = light->src->x - norm->origin->x;
 	pt.y = light->src->y - norm->origin->y;
@@ -67,22 +68,22 @@ int calc_spot(t_ray *norm, t_light *light, int *rgb)
 
 	normalize(&pt);
 	f = pt.x * norm->dir->x
-			+ pt.y * norm->dir->y
-			+ pt.z * norm->dir->z;
+		+ pt.y * norm->dir->y
+		+ pt.z * norm->dir->z;
 
 	if (f < 0)
 		f = 0;
-	color = (rgb_ambiant(arr_toRGB(rgb),light->rgb, f *light->pow));
+	color = (rgb_ambiant(arr_toRGB(rgb), light->rgb, f * light->pow));
 	//specular
 	if (f >= 0.98f)
 	{
-		f = (f-0.98f)/0.02f;
-		color = add_color(color, rgb_ambiant(arr_toRGB(light->rgb), light->rgb,f * light->pow));
+		f = (f - 0.98f) / 0.02f;
+		color = add_color(color, rgb_ambiant(arr_toRGB(light->rgb), light->rgb,
+											 f * light->pow));
 	}
 
 	return (color);
 }
-
 
 
 void draw_data(t_data *data)
@@ -90,6 +91,7 @@ void draw_data(t_data *data)
 	t_ray ray;
 	t_3D_point pt;
 	t_ray norm;
+	t_m4 mat;
 	int i;
 
 
@@ -98,6 +100,11 @@ void draw_data(t_data *data)
 	norm.dir = dot_3d(0, 0, 0);
 	norm.origin = dot_3d(0, 0, 0);
 
+	set_identity(&mat);
+	translate_mat(&mat, data->cam->pov->x,
+				  data->cam->pov->y,
+				  data->cam->pov->z);
+	//TODO calc angle and rotate matrix with
 	i = 0;
 
 	while (i < WIN_WIDTH * WIN_HEIGHT)
@@ -110,11 +117,16 @@ void draw_data(t_data *data)
 		float y_ecran =
 				((i / WIN_WIDTH * 1.0f) / WIN_HEIGHT * 2.0f - 1) * ratio;
 
-//		x_ecran= 0;
-//		y_ecran= 0;
 //TODO check FOV
+
+
+
+
 		set_3d_point(ray.origin, x_ecran * 0, 0, y_ecran * 0);
-		set_3d_point(ray.dir, x_ecran * 1.0f, 1/ tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0), y_ecran * 1.0f);
+		set_3d_point(ray.dir, x_ecran * 1.0f,
+					 1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0),
+					 y_ecran * 1.0f);
+		ray_mult_mat(&ray, mat);
 
 		normalize(ray.dir);
 
@@ -132,7 +144,8 @@ void draw_data(t_data *data)
 				{
 
 					//Ambiant light
-					color = rgb_ambiant(arr_toRGB(sp->rgb), data->amb->rgb, data->amb->grad);
+					color = rgb_ambiant(arr_toRGB(sp->rgb), data->amb->rgb,
+										data->amb->grad);
 
 					//spot
 					norm.origin->x = pt.x;
@@ -146,7 +159,8 @@ void draw_data(t_data *data)
 
 					normalize(norm.dir);
 
-					color = add_color(color, calc_spot(&norm, data->lum, sp->rgb));
+					color = add_color(color,
+									  calc_spot(&norm, data->lum, sp->rgb));
 
 
 					//Pour faire les calculs de lumiere il faudrait avoir la position de l'intersection du rayon et de la sphere
