@@ -59,6 +59,7 @@ int calc_spot(t_ray *norm, t_light *light, int *rgb)
 {
 	t_3D_point pt;
 	float	f;
+	int		color;
 
 	pt.x = light->src->x - norm->origin->x;
 	pt.y = light->src->y - norm->origin->y;
@@ -71,8 +72,15 @@ int calc_spot(t_ray *norm, t_light *light, int *rgb)
 
 	if (f < 0)
 		f = 0;
-	return (rgb_ambiant(arr_toRGB(rgb),light->rgb, f *light->pow));
+	color = (rgb_ambiant(arr_toRGB(rgb),light->rgb, f *light->pow));
+	//specular
+	if (f >= 0.98f)
+	{
+		f = (f-0.98f)/0.02f;
+		color = add_color(color, rgb_ambiant(arr_toRGB(light->rgb), light->rgb,f * light->pow));
+	}
 
+	return (color);
 }
 
 
@@ -102,8 +110,11 @@ void draw_data(t_data *data)
 		float y_ecran =
 				((i / WIN_WIDTH * 1.0f) / WIN_HEIGHT * 2.0f - 1) * ratio;
 
-		set_3d_point(ray.origin, x_ecran, 0, y_ecran);
-		set_3d_point(ray.dir, x_ecran * 1.0f, 10, y_ecran * 1.0f);
+//		x_ecran= 0;
+//		y_ecran= 0;
+//TODO check FOV
+		set_3d_point(ray.origin, x_ecran * 0, 0, y_ecran * 0);
+		set_3d_point(ray.dir, x_ecran * 1.0f, 1/ tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0), y_ecran * 1.0f);
 
 		normalize(ray.dir);
 
@@ -117,26 +128,26 @@ void draw_data(t_data *data)
 			{
 				t_sphere *sp = (t_sphere *) objs->ptr;
 
-				if (intersect_sp(&ray, sp))
+				if (intersection_pt_sp(&ray, sp, &pt))
 				{
 
-					(void) pt;
 					//Ambiant light
 					color = rgb_ambiant(arr_toRGB(sp->rgb), data->amb->rgb, data->amb->grad);
 
 					//spot
-//					norm.origin->x = pt.x;
-//					norm.origin->y = pt.y;
-//					norm.origin->z = pt.z;
+					norm.origin->x = pt.x;
+					norm.origin->y = pt.y;
+					norm.origin->z = pt.z;
 
-//					norm.dir->x = pt.x - sp->center->x;
-//					norm.dir->y = pt.y - sp->center->y;
-//					norm.dir->z = pt.z - sp->center->z;
+					norm.dir->x = pt.x - sp->center->x;
+					norm.dir->y = pt.y - sp->center->y;
+					norm.dir->z = pt.z - sp->center->z;
 
 
 					normalize(norm.dir);
 
-//					color = add_color(color, calc_spot(&norm, data->lum, sp->rgb));
+					color = add_color(color, calc_spot(&norm, data->lum, sp->rgb));
+
 
 					//Pour faire les calculs de lumiere il faudrait avoir la position de l'intersection du rayon et de la sphere
 
