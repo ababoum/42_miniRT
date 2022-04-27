@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 15:31:50 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 18:11:50 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,63 @@ int	verify_file(t_data *data, const char *path)
 	return (fd);
 }
 
-void	check_cam(t_data *data)
+void	check_scene_setting(t_data *data, int setting_type)
 {
-	if (!data->cam)
-		data->cam = malloc_log(data, sizeof(t_camera));
-	else
-		exit_message(data, "Only one camera is allowed", EXIT_FAILURE);
+	if (setting_type == CAMERA)
+	{
+		if (!data->cam)
+			data->cam = malloc_log(data, sizeof(t_camera));
+		else
+			exit_message(data, "Only one camera is allowed", EXIT_FAILURE);
+	}
+	else if (setting_type == AMBIANCE)
+	{
+		if (!data->amb)
+			data->amb = malloc_log(data, sizeof(t_ambiance));
+		else
+			exit_message(data, "Only one ambiance is allowed", EXIT_FAILURE);
+	}
+	else if (setting_type == LIGHT)
+	{
+		if (!data->lum)
+			data->lum = malloc_log(data, sizeof(t_light));
+		else
+			exit_message(data, "Only one light source is allowed", \
+				EXIT_FAILURE);
+	}
 }
 
-void	check_amb(t_data *data)
+void	check_line_args(t_data *data, const char *type, int argc)
 {
-	if (!data->amb)
-		data->amb = malloc_log(data, sizeof(t_ambiance));
-	else
-		exit_message(data, "Only one ambiance is allowed", EXIT_FAILURE);
+	if (!ft_strcmp(type, "Ambiance") && argc != 2)
+	{
+		ft_putstr_fd("Ambiance: ", 2);
+		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
+	}
+	else if (!ft_strcmp(type, "Cylinder") && && argc != 5)
+	{
+		ft_putstr_fd("Cylinder: ", 2);
+		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
+	}
+	else if (argc != 3)
+	{
+		ft_putstr_fd(type, 2);
+		ft_putstr_fd(": ", 2);
+		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
+	}
 }
 
-void	check_lum(t_data *data)
+void	check_arg(t_data *data, char **arg, int argc, char *msg_if_fail)
 {
-	if (!data->lum)
-		data->lum = malloc_log(data, sizeof(t_light));
-	else
-		exit_message(data, "Only one light source is allowed", EXIT_FAILURE);
+	if (tab_len(arg) != argc)
+		exit_message(data, msg_if_fail, EXIT_FAILURE);
+}
+
+int	check_dir_vector(t_3D_point *vector)
+{
+	if (vector->x < -1 || vector->x > 1 || \
+		vector->y < -1 || vector->y > 1 || \
+		vector->z < -1 || vector->z > 1)
+		return (0);
+	return (1);
 }

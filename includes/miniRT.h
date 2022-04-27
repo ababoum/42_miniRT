@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 10:58:37 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 18:20:38 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@ void		ft_putstr_fd(char *str, int fd);
 t_obj		*new_obj(t_data *data, void *ptr, int type);
 void		obj_add_back(t_obj **alst, t_obj *new);
 t_sphere	*new_sphere(t_data *data);
+t_plan		*new_plan(t_data *data);
+t_cylinder	*new_cylinder(t_data *data);
 
 // parsing
 void		parse_input(t_data *data, const char *path);
 int			verify_file(t_data *data, const char *path);
-void		check_cam(t_data *data);
-void		check_amb(t_data *data);
-void		check_lum(t_data *data);
+void		check_line_args(t_data *data, const char *type, int argc);
+void		check_scene_setting(t_data *data, int setting_type);
+void		check_arg(t_data *data, char **arg, int argc, char *msg_if_fail);
 
 // populate data
 void		populate_amb(t_data *data, char *line);
@@ -89,10 +91,13 @@ t_2D_point	*dot_2d(float x, float y);
 // 3D geometry
 t_3D_point	*dot_3d(float x, float y, float z);
 t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
+t_vec		*vector_f(float x, float y, float z);
 int			check_dir_vector(t_3D_point *vector);
 void		normalize(t_3D_point *ray);
 void		ray_mult_mat(t_ray *ray, t_m4 mat);
 
+// vectors maths
+float		norm2(t_vec *v);
 
 
 // 3D drawing
@@ -103,15 +108,16 @@ void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
 // maths
 float		distance_2d(t_2D_point *A, t_2D_point *B);
 float		distance_3d(t_3D_point *A, t_3D_point *B);
+
 // vision
-int			max_vision_axis(float fov);
+float		max_vision_axis(float fov);
 
 // tests
 void		draw_circle(t_data *data, t_2D_point *center, float radius);
 void		draw_sp(t_data *data);
 
-//RGB
-int rgb_ambiant(int rgb, int *lrgb, float grad);
-int arr_toRGB(int *rgb);
+// RGB
+int			rgb_ambiant(int rgb, int *lrgb, float grad);
+int			arr_toRGB(int *rgb);
 
 #endif

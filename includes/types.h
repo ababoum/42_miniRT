@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 17:07:52 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:46:51 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@
 # define PLAN			1
 # define CYLINDER		2
 
-
+# define AMBIANCE		10
+# define LIGHT			11
+# define CAMERA			12
 
 
 typedef struct s_memlog {
@@ -122,6 +124,20 @@ typedef struct s_sphere {
 	float		radius;
 	int			rgb[3];
 }	t_sphere;
+
+typedef struct s_plan {
+	t_3D_point	*point;
+	t_vec		*normal;
+	int			rgb[3];
+}	t_plan;
+
+typedef struct s_cylinder {
+	t_3D_point	*point;
+	t_vec		*dir;
+	float		radius;
+	float		height;
+	int			rgb[3];
+}	t_cylinder;
 
 typedef void	(*t_pop_fn)(t_data *, char *);
 

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:32:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 10:55:23 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 11:40:03 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 
 float norm(t_3D_point *pt)
 {
-	float n;
+	float	n;
 
 	n = 0;
 	n += pt->x * pt->x;
@@ -94,12 +94,11 @@ float norm(t_3D_point *pt)
 	n += pt->z * pt->z;
 
 	return (powf(n, 0.5f));
-
 }
 
 void normalize(t_3D_point *pt)
 {
-	float n;
+	float	n;
 
 	n = norm(pt);
 	pt->x /= n;

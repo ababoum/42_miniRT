@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/22 14:46:10 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 18:27:00 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,75 @@
 
 void	populate_plan(t_data *data, char *line)
 {
-	(void)data;
-	(void)line;
+	char		**tab;
+	char		**arg;
+	t_plan		*obj;
+
+	tab = ft_split(data, line, SPACES);
+	check_line_args(data, "Plan", tab_len(tab));
+	obj = new_plan(data);
+	arg = ft_split(data, tab[0], ",");
+	check_arg(data, arg, 3, "Incorrect Plan point coordinates");
+	obj->point = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	arg = ft_split(data, tab[1], ",");
+	check_arg(data, arg, 3, "Incorrect Plan normal coordinates");
+	obj->normal = vector(dot_3d(0, 0, 0), \
+		dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	arg = ft_split(data, tab[2], ",");
+	check_arg(data, arg, 3, "Incorrect Plan color settings");
+	obj->rgb[0] = ft_atoi(arg[0]);
+	obj->rgb[1] = ft_atoi(arg[1]);
+	obj->rgb[2] = ft_atoi(arg[2]);
+	if (!check_int_color(obj->rgb))
+		exit_message(data, "Incorrect Plan color values", EXIT_FAILURE);
 }
 
 void	populate_sphere(t_data *data, char *line)
 {
 	char		**tab;
-	char		**spc;
-	char		**rgb;
-	t_sphere	*sp;
+	char		**arg;
+	t_sphere	*obj;
 
-	tab = ft_split(data, line, " \t");
-	if (tab_len(tab) != 3)
-		exit_message(data, "Incorrect 'Sphere' parameters", EXIT_FAILURE);
-	sp = new_sphere(data);
-	spc = ft_split(data, tab[0], ",");
-	if (tab_len(spc) != 3)
-		exit_message(data, "Incorrect Sphere center coordinates", EXIT_FAILURE);
-	sp->center = dot_3d(ft_atof(spc[0]), ft_atof(spc[1]), ft_atof(spc[2]));
-	sp->radius = ft_atof(tab[1]) / 2;
-	rgb = ft_split(data, tab[2], ",");
-	if (tab_len(rgb) != 3)
-		exit_message(data, "Incorrect Sphere color settings", EXIT_FAILURE);
-	sp->rgb[0] = ft_atoi(rgb[0]);
-	sp->rgb[1] = ft_atoi(rgb[1]);
-	sp->rgb[2] = ft_atoi(rgb[2]);
-	if (!check_int_color(sp->rgb))
+	tab = ft_split(data, line, SPACES);
+	check_line_args(data, "Sphere", tab_len(tab));
+	obj = new_sphere(data);
+	arg = ft_split(data, tab[0], ",");
+	check_arg(data, arg, 3, "Incorrect Sphere center coordinates");
+	obj->center = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	obj->radius = ft_atof(tab[1]) / 2;
+	arg = ft_split(data, tab[2], ",");
+	check_arg(data, arg, 3, "Incorrect Sphere color settings");
+	obj->rgb[0] = ft_atoi(arg[0]);
+	obj->rgb[1] = ft_atoi(arg[1]);
+	obj->rgb[2] = ft_atoi(arg[2]);
+	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Sphere color values", EXIT_FAILURE);
 }
 
 void	populate_cyl(t_data *data, char *line)
 {
-	(void)data;
-	(void)line;
+	char		**tab;
+	char		**arg;
+	t_cylinder	*obj;
+
+	tab = ft_split(data, line, SPACES);
+	check_line_args(data, "Cylinder", tab_len(tab));
+	obj = new_cylinder(data);
+	arg = ft_split(data, tab[0], ",");
+	check_arg(data, arg, 3, "Incorrect Cylinder point coordinates");
+	obj->point = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	arg = ft_split(data, tab[1], ",");
+	check_arg(data, arg, 3, "Incorrect Cylinder direction coordinates");
+	obj->dir = vector_f(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	if (!check_dir_vector(obj->dir))
+		exit_message(data, "Incorrect Cylinder direction values", EXIT_FAILURE);
+	obj->radius = ft_atof(tab[2]) / 2;
+	obj->height = ft_atof(tab[3]);
+	arg = ft_split(data, tab[4], ",");
+	check_arg(data, arg, 3, "Incorrect Cylinder color settings");
+	obj->rgb[0] = ft_atoi(arg[0]);
+	obj->rgb[1] = ft_atoi(arg[1]);
+	obj->rgb[2] = ft_atoi(arg[2]);
+	if (!check_int_color(obj->rgb))
+		exit_message(data, "Incorrect Cylinder color values", EXIT_FAILURE);
 }
