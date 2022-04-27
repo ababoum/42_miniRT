@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:29:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 18:17:37 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 19:53:00 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,18 @@ t_3D_point	*dot_3d(float x, float y, float z)
 	return (point);
 }
 
-void 	pt3d_mult_mat(t_3D_point *pt, t_m4 mat)
+void	set_3d_point(t_3D_point *pt, float x, float y, float z)
 {
-	float x;
-	float y;
-	float z;
+	pt->x = x;
+	pt->y = y;
+	pt->z = z;
+}
+
+void	pt3d_mult_mat(t_3D_point *pt, t_m4 mat)
+{
+	float	x;
+	float	y;
+	float	z;
 
 	x = pt->x;
 	y = pt->y;

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 18:20:38 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 19:48:47 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_cylinder	*new_cylinder(t_data *data);
 // parsing
 void		parse_input(t_data *data, const char *path);
 int			verify_file(t_data *data, const char *path);
-void		check_line_args(t_data *data, const char *type, int argc);
+void		check_line_args(t_data *data, char *type, int argc);
 void		check_scene_setting(t_data *data, int setting_type);
 void		check_arg(t_data *data, char **arg, int argc, char *msg_if_fail);
 
@@ -82,23 +82,23 @@ void		populate_plan(t_data *data, char *line);
 void		populate_sphere(t_data *data, char *line);
 void		populate_cyl(t_data *data, char *line);
 
-// 2D drawing
+// Screen drawing
 void		pixel_put(t_data *data, int x, int y, int color);
-
-// 2D geometry
-t_2D_point	*dot_2d(float x, float y);
 
 // 3D geometry
 t_3D_point	*dot_3d(float x, float y, float z);
-t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
-t_vec		*vector_f(float x, float y, float z);
-int			check_dir_vector(t_3D_point *vector);
+void 		set_3d_point(t_3D_point *pt, float x, float y, float z);
+int			check_dir_vector(t_vec *vector);
+int			check_dir_vector_p(t_3D_point *point);
 void		normalize(t_3D_point *ray);
 void		ray_mult_mat(t_ray *ray, t_m4 mat);
 
 // vectors maths
+t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
+t_vec		*vector_f(float x, float y, float z);
 float		norm2(t_vec *v);
-
+float		norm(t_3D_point *pt);
+void		normalize(t_3D_point *pt);
 
 // 3D drawing
 int			intersect_sp(t_ray *ray, t_sphere *sp);

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:32:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 11:40:03 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 19:15:23 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,29 +80,6 @@ int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 	pt->z = ray->origin->z + x * ray->dir->z;
 
 	return (1);
-}
-
-
-float norm(t_3D_point *pt)
-{
-	float	n;
-
-	n = 0;
-	n += pt->x * pt->x;
-	n += pt->y * pt->y;
-	n += pt->z * pt->z;
-
-	return (powf(n, 0.5f));
-}
-
-void normalize(t_3D_point *pt)
-{
-	float	n;
-
-	n = norm(pt);
-	pt->x /= n;
-	pt->y /= n;
-	pt->z /= n;
 }
 
 //For optimization res is in arg, it must have size >= 3

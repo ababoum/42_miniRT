@@ -6,20 +6,12 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 16:32:01 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 19:48:53 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 #include "../includes/ft3d.h"
-
-void set_3d_point(t_3D_point *pt, float x, float y, float z)
-{
-	pt->x = x;
-	pt->y = y;
-	pt->z = z;
-}
-
 
 int rgb_factor(int rgb, float factor)
 {
@@ -284,8 +276,6 @@ int main(int ac, char **av)
 	mlx_start(data);
 	img_init(data);
 	draw_data(data);
-//	draw_circle(data, dot_2d(500, 500), 500);
-//	draw_sp(data);
 	mlx_put_image_to_window(data->session, data->win, data->img->ptr, 0, 0);
 	mlx_events(data);
 	mlx_loop(data->session);

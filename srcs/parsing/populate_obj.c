@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 18:14:14 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 19:27:06 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	populate_cam(t_data *data, char *line)
 	check_scene_setting(data, CAMERA);
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Camera", tab_len(tab));
-	pov = ft_split(data, tab[0], ",");
+	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect 'POV' coordinates");
-	data->cam->pov = dot_3d(ft_atof(pov[0]), ft_atof(pov[1]), ft_atof(pov[2]));
-	dir = ft_split(data, tab[1], ",");
+	data->cam->pov = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	arg = ft_split(data, tab[1], ",");
 	check_arg(data, arg, 3, "Incorrect direction vector format");
-	data->cam->dir = dot_3d(ft_atof(dir[0]), ft_atof(dir[1]), ft_atof(dir[2]));
-	if (!check_dir_vector(data->cam->dir))
+	data->cam->dir = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	if (!check_dir_vector_p(data->cam->dir))
 		exit_message(data, "Incorrect direction vector values", EXIT_FAILURE);
 	data->cam->fov = ft_atof(tab[2]);
 	if (data->cam->fov < 0 || data->cam->fov > 180)

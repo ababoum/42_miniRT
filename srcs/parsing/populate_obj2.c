@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 18:27:00 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 19:23:54 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	populate_plan(t_data *data, char *line)
 	obj->point = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[1], ",");
 	check_arg(data, arg, 3, "Incorrect Plan normal coordinates");
-	obj->normal = vector(dot_3d(0, 0, 0), \
-		dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	obj->normal = vector_f(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect Plan color settings");
 	obj->rgb[0] = ft_atoi(arg[0]);
