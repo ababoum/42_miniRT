@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 16:26:10 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/27 10:58:37 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "types.h"
 # include "../minilibx-linux/mlx.h"
-#include "ft3d.h"
+# include "ft3d.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
