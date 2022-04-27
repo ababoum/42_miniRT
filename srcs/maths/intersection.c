@@ -48,17 +48,14 @@ int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 
 
 	disc[0] = powf(dr[0], 2) + powf(dr[1], 2) + powf(dr[2], 2);
-
 	disc[1] = -2 * (dr[0] * (sp->center->x - ray->origin->x)
 			+ dr[1] * (sp->center->y - ray->origin->y)
 			+ dr[2] * (sp->center->z - ray->origin->z)
 			);
-
 	disc[2] = powf(sp->center->x - ray->origin->x, 2) \
 				+ powf(sp->center->y - ray->origin->y, 2) \
 				+ powf(sp->center->z - ray->origin->z, 2) \
 				- powf(sp->radius, 2);
-
 	d = (powf(disc[1], 2) - 4 * disc[0] * disc[2]);
 	if (d < 0)
 		return (0);
@@ -72,9 +69,11 @@ int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 	{
 		x2 = (-disc[1] - sqrtf(d)) / (2 * disc[0]);
 		x = (-disc[1] + sqrtf(d)) / (2 * disc[0]);
-		if (x > x2)
+		if (x > x2 && x2 > 0)
 			x = x2;
 	}
+	if (x < 0)
+		return (0);
 
 	pt->x = ray->origin->x + x * ray->dir->x;
 	pt->y = ray->origin->y + x * ray->dir->y;

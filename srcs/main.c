@@ -56,20 +56,69 @@ int add_color(int rgb1, int rgb2)
 	return (r + g * 256 + b * 65536);
 }
 
-int calc_spot(t_ray *norm, t_light *light, int *rgb)
+float ffabs(float f)
 {
-	t_3D_point pt;
+	if (f < 0)
+		return (-f);
+	return (f);
+}
+
+int test_middle_f(float f1, float f2, float f3)
+{
+	return ((f1 >= f2 && f2 >= f3) || (f1 <= f2 && f2 <= f3));
+}
+
+//test if p2 is beetween p2 and p3
+int test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3)
+{
+	return (test_middle_f(p1->x, p2->x, p3->x)
+		&& test_middle_f(p1->y, p2->y, p3->y)
+		&& test_middle_f(p1->z, p2->z, p3->z));
+}
+
+int object_between(t_3D_point *p1, t_3D_point *p2,t_ray  *ray, t_data *data)
+{
+	(void) p1;
+	(void) p2;
+	(void) data;
+
+	t_obj *objs = data->obj_lst;
+
+	while (objs)
+	{
+		if (objs->type == 0)
+		{
+			t_sphere *sp = (t_sphere *) objs->ptr;
+			t_3D_point pt;
+
+			projection_pt_droite(ray, sp->center, &pt);
+//			if (distance_3d(&pt,sp->center) < sp->radius && test_middle(p1, &pt, p2))
+			if (test_middle(p1, &pt, p2))
+				return (1);
+		}
+		objs = objs->next;
+	}
+
+	return (0);
+}
+
+int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb, t_data *data)
+{
+	t_3D_point vec;
 	float f;
 	int color;
 
-	pt.x = light->src->x - norm->origin->x;
-	pt.y = light->src->y - norm->origin->y;
-	pt.z = light->src->z - norm->origin->z;
+	vec.x = light->src->x - norm->origin->x;
+	vec.y = light->src->y - norm->origin->y;
+	vec.z = light->src->z - norm->origin->z;
 
-	normalize(&pt);
-	f = pt.x * norm->dir->x
-		+ pt.y * norm->dir->y
-		+ pt.z * norm->dir->z;
+	if (object_between(light->src, norm->origin,ray, data))
+		return (0);
+
+	normalize(&vec);
+	f = vec.x * norm->dir->x
+		+ vec.y * norm->dir->y
+		+ vec.z * norm->dir->z;
 
 	if (f < 0)
 		f = 0;
@@ -85,6 +134,40 @@ int calc_spot(t_ray *norm, t_light *light, int *rgb)
 	return (color);
 }
 
+
+
+float getAngle(float dx, float dy)
+{
+	float a;
+
+	a = atanf(ffabs(dy) / ffabs(dx));
+
+	if (dx > 0 && dy > 0)
+		return a;
+
+	if (dx < 0 && dy > 0)
+		return -a + (float) M_PI;
+
+	if (dx < 0 && dy < 0)
+		return a + (float) M_PI;
+
+	if (dx > 0 && dy < 0)
+		return -a + 2 * (float) M_PI;
+
+
+	if (dy == 0)
+		return (float) (dx < 0 ? M_PI : 0);
+	if (dx == 0)
+		return (float) (dy > 0 ? M_PI / 2 : 3 * M_PI / 2);
+
+	//Inutile mais demandé...
+	return 0;
+}
+
+float toDeg(float angle)
+{
+	return ((float) (angle / 2 / M_PI * 180.0));
+}
 
 void draw_data(t_data *data)
 {
@@ -105,24 +188,30 @@ void draw_data(t_data *data)
 				  data->cam->pov->y,
 				  data->cam->pov->z);
 	//TODO calc angle and rotate matrix with
-	i = 0;
 
+	float a1 = getAngle(data->cam->dir->x, data->cam->dir->y);
+	float a2 = getAngle(sqrtf(data->cam->dir->x * data->cam->dir->x +
+									data->cam->dir->y * data->cam->dir->y),
+							  data->cam->dir->z);
+
+	rotate_y_mat(&mat, a1);
+	rotate_x_mat(&mat, a2);
+
+
+	i = 0;
 	while (i < WIN_WIDTH * WIN_HEIGHT)
 	{
-		//calculate ray
-		//position "ecran"
-		//A voir si c'est vraiment utile ou si on peut juste partir de 0,0,0
 		float ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
 		float x_ecran = (i % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
 		float y_ecran =
 				((i / WIN_WIDTH * 1.0f) / WIN_HEIGHT * 2.0f - 1) * ratio;
 
-//TODO check FOV
+		//TODO check FOV
 
 
 
 
-		set_3d_point(ray.origin, x_ecran * 0, 0, y_ecran * 0);
+		set_3d_point(ray.origin, 0, 0, 0);
 		set_3d_point(ray.dir, x_ecran * 1.0f,
 					 1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0),
 					 y_ecran * 1.0f);
@@ -142,11 +231,11 @@ void draw_data(t_data *data)
 
 				if (intersection_pt_sp(&ray, sp, &pt))
 				{
+					//TODO calc distance, backup nearest color, if distance smaller replace color
 
 					//Ambiant light
 					color = rgb_ambiant(arr_toRGB(sp->rgb), data->amb->rgb,
 										data->amb->grad);
-
 					//spot
 					norm.origin->x = pt.x;
 					norm.origin->y = pt.y;
@@ -156,14 +245,11 @@ void draw_data(t_data *data)
 					norm.dir->y = pt.y - sp->center->y;
 					norm.dir->z = pt.z - sp->center->z;
 
-
 					normalize(norm.dir);
 
 					color = add_color(color,
-									  calc_spot(&norm, data->lum, sp->rgb));
-
-
-					//Pour faire les calculs de lumiere il faudrait avoir la position de l'intersection du rayon et de la sphere
+									  calc_spot(&norm,&ray, data->lum, sp->rgb,
+												data));
 
 				}
 			}
