@@ -25,9 +25,11 @@ SRCS		= ./srcs/main.c \
 				./srcs/memory/data_access.c \
 				./srcs/mlx_tools/mlx_utils.c \
 				./srcs/mlx_tools/mlx_events.c \
+				./srcs/maths/math_fns.c \
 				./srcs/maths/distance.c \
 				./srcs/maths/3D_geo.c \
-				./srcs/maths/intersection.c \
+				./srcs/maths/intersect_sp.c \
+				./srcs/maths/intersect_pl.c \
 				./srcs/maths/vectors1.c \
 				./srcs/maths/vectors2.c \
 				./srcs/maths/vision_field.c \

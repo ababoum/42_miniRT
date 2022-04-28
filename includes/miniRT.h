@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 19:48:47 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:16:27 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void		mlx_start(t_data *data);
 void		img_init(t_data *data);
 void		data_init(t_data *data, const char *path);
 void		mlx_events(t_data *data);
+int			add_color(int rgb1, int rgb2);
 
 // colors
 int			check_int_color(int rgb[3]);
@@ -87,7 +88,7 @@ void		pixel_put(t_data *data, int x, int y, int color);
 
 // 3D geometry
 t_3D_point	*dot_3d(float x, float y, float z);
-void 		set_3d_point(t_3D_point *pt, float x, float y, float z);
+void		set_3d_point(t_3D_point *pt, float x, float y, float z);
 int			check_dir_vector(t_vec *vector);
 int			check_dir_vector_p(t_3D_point *point);
 void		normalize(t_3D_point *ray);
@@ -100,14 +101,18 @@ float		norm2(t_vec *v);
 float		norm(t_3D_point *pt);
 void		normalize(t_3D_point *pt);
 
-// 3D drawing
-int			intersect_sp(t_ray *ray, t_sphere *sp);
+// intersections
+	// sphere
 int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
+	// plan
+
 
 // maths
 float		distance_2d(t_2D_point *A, t_2D_point *B);
 float		distance_3d(t_3D_point *A, t_3D_point *B);
+float		ffabs(float f);
+int			rgb_factor(int rgb, float factor);
 
 // vision
 float		max_vision_axis(float fov);

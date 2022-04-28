@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersection.c                                     :+:      :+:    :+:   */
+/*   intersect_sp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:32:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 19:15:23 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 12:15:58 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
 // check if a ray intersects with a sphere
-static float	discriminant_sp(t_ray *ray, t_sphere *sp)
+// to delete
+static float	discriminant_sp(t_ray *ray, t_sphere *sp, float disc[3])
 {
 	float	dr[3];
-	float	disc[3];
 
 	dr[0] = ray->dir->x;
 	dr[1] = ray->dir->y;
@@ -38,29 +38,14 @@ static float	discriminant_sp(t_ray *ray, t_sphere *sp)
 
 int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 {
-	float	dr[3];
 	float	disc[3];
 	float	d;
+	float	x;
+	float	x2;
 
-	dr[0] = ray->dir->x;
-	dr[1] = ray->dir->y;
-	dr[2] = ray->dir->z;
-
-
-	disc[0] = powf(dr[0], 2) + powf(dr[1], 2) + powf(dr[2], 2);
-	disc[1] = -2 * (dr[0] * (sp->center->x - ray->origin->x)
-			+ dr[1] * (sp->center->y - ray->origin->y)
-			+ dr[2] * (sp->center->z - ray->origin->z)
-			);
-	disc[2] = powf(sp->center->x - ray->origin->x, 2) \
-				+ powf(sp->center->y - ray->origin->y, 2) \
-				+ powf(sp->center->z - ray->origin->z, 2) \
-				- powf(sp->radius, 2);
-	d = (powf(disc[1], 2) - 4 * disc[0] * disc[2]);
+	d = discriminant_sp(ray, sp, disc);
 	if (d < 0)
 		return (0);
-	float x;
-	float x2;
 	if (disc[0] == 0 && disc[1] == 0)
 		return (0);
 	else if (disc[0] == 0)
@@ -74,11 +59,8 @@ int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 	}
 	if (x < 0)
 		return (0);
-
-	pt->x = ray->origin->x + x * ray->dir->x;
-	pt->y = ray->origin->y + x * ray->dir->y;
-	pt->z = ray->origin->z + x * ray->dir->z;
-
+	set_3d_point(pt, ray->origin->x + x * ray->dir->x, \
+		ray->origin->y + x * ray->dir->y, ray->origin->z + x * ray->dir->z);
 	return (1);
 }
 
@@ -93,12 +75,4 @@ void	projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res)
 	res->x = ray->origin->x + k * ray->dir->x;
 	res->y = ray->origin->y + k * ray->dir->y;
 	res->z = ray->origin->z + k * ray->dir->z;
-}
-
-
-int	intersect_sp(t_ray *ray, t_sphere *sp)
-{
-	if (discriminant_sp(ray, sp) < 0)
-		return (0);
-	return (1);
 }

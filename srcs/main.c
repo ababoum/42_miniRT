@@ -6,54 +6,11 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 19:48:53 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 11:52:27 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
-#include "../includes/ft3d.h"
-
-int rgb_factor(int rgb, float factor)
-{
-	int r;
-	int g;
-	int b;
-
-	r = rgb % 256;
-	g = (rgb / 256) % 256;
-	b = (rgb / 65536) % 256;
-	r *= factor;
-	g *= factor;
-	b *= factor;
-
-	return (r + g * 256 + b * 65536);
-}
-
-int add_color(int rgb1, int rgb2)
-{
-	int r;
-	int g;
-	int b;
-
-	r = rgb1 % 256 + rgb2 % 256;
-	g = (rgb1 / 256) % 256 + (rgb2 / 256) % 256;
-	b = (rgb1 / 65536) % 256 + (rgb2 / 65536) % 256;
-
-	if (r > 255)
-		r = 255;
-	if (g > 255)
-		g = 255;
-	if (b > 255)
-		b = 255;
-	return (r + g * 256 + b * 65536);
-}
-
-float ffabs(float f)
-{
-	if (f < 0)
-		return (-f);
-	return (f);
-}
 
 int test_middle_f(float f1, float f2, float f3)
 {
@@ -68,7 +25,7 @@ int test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3)
 		&& test_middle_f(p1->z, p2->z, p3->z));
 }
 
-int object_between(t_3D_point *p1, t_3D_point *p2,t_ray  *ray, t_data *data)
+int object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, t_data *data)
 {
 	(void) p1;
 	(void) p2;
@@ -94,11 +51,11 @@ int object_between(t_3D_point *p1, t_3D_point *p2,t_ray  *ray, t_data *data)
 	return (0);
 }
 
-int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb, t_data *data)
+int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb, t_data *data)
 {
-	t_3D_point vec;
-	float f;
-	int color;
+	t_3D_point	vec;
+	float		f;
+	int			color;
 
 	vec.x = light->src->x - norm->origin->x;
 	vec.y = light->src->y - norm->origin->y;
@@ -260,9 +217,9 @@ void draw_data(t_data *data)
 
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	if (ac != 2)
 	{
