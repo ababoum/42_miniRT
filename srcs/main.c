@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/28 11:52:27 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 15:26:27 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,9 @@ void draw_data(t_data *data)
 	int i;
 
 
-	ray.dir = dot_3d(0, 0, 0);
+	ray.dir = vector_f(0, 0, 0);
 	ray.origin = dot_3d(0, 0, 0);
-	norm.dir = dot_3d(0, 0, 0);
+	norm.dir = vector_f(0, 0, 0);
 	norm.origin = dot_3d(0, 0, 0);
 
 	set_identity(&mat);
@@ -146,7 +146,6 @@ void draw_data(t_data *data)
 	rotate_y_mat(&mat, a1);
 	rotate_x_mat(&mat, a2);
 
-
 	i = 0;
 	while (i < WIN_WIDTH * WIN_HEIGHT)
 	{
@@ -161,12 +160,12 @@ void draw_data(t_data *data)
 
 
 		set_3d_point(ray.origin, 0, 0, 0);
-		set_3d_point(ray.dir, x_ecran * 1.0f,
+		set_vector(ray.dir, x_ecran * 1.0f,
 					 1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0),
 					 y_ecran * 1.0f);
 		ray_mult_mat(&ray, mat);
 
-		normalize(ray.dir);
+		normalize_v(ray.dir);
 
 		t_obj *objs = data->obj_lst;
 
@@ -194,7 +193,7 @@ void draw_data(t_data *data)
 					norm.dir->y = pt.y - sp->center->y;
 					norm.dir->z = pt.z - sp->center->z;
 
-					normalize(norm.dir);
+					normalize_v(norm.dir);
 
 					color = add_color(color,
 									  calc_spot(&norm,&ray, data->lum, sp->rgb,

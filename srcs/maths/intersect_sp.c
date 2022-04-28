@@ -6,14 +6,13 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:32:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/28 12:15:58 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 14:24:08 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
 // check if a ray intersects with a sphere
-// to delete
 static float	discriminant_sp(t_ray *ray, t_sphere *sp, float disc[3])
 {
 	float	dr[3];

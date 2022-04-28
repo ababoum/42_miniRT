@@ -30,6 +30,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/maths/3D_geo.c \
 				./srcs/maths/intersect_sp.c \
 				./srcs/maths/intersect_pl.c \
+				./srcs/maths/intersect_cy.c \
 				./srcs/maths/vectors1.c \
 				./srcs/maths/vectors2.c \
 				./srcs/maths/vision_field.c \

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/28 12:16:27 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 15:25:05 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,12 @@ void		ray_mult_mat(t_ray *ray, t_m4 mat);
 // vectors maths
 t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
 t_vec		*vector_f(float x, float y, float z);
-float		norm2(t_vec *v);
+void		set_vector(t_vec *v, float x, float y, float z);
+float		scalar(t_vec *v1, t_vec *v2);
 float		norm(t_3D_point *pt);
+float		norm_v(t_vec *v);
 void		normalize(t_3D_point *pt);
+void		normalize_v(t_vec *v);
 
 // intersections
 	// sphere

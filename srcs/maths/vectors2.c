@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 19:15:44 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 19:22:26 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 15:14:35 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ float	norm(t_3D_point *pt)
 	return (powf(n, 0.5f));
 }
 
+float	norm_v(t_vec *v)
+{
+	float	n;
+
+	n = 0;
+	n += v->x * v->x;
+	n += v->y * v->y;
+	n += v->z * v->z;
+
+	return (powf(n, 0.5f));
+}
+
 void	normalize(t_3D_point *pt)
 {
 	float	n;
@@ -34,14 +46,12 @@ void	normalize(t_3D_point *pt)
 	pt->z /= n;
 }
 
-float	norm2(t_vec *v)
+void	normalize_v(t_vec *v)
 {
 	float	n;
 
-	n = 0;
-	n += v->x * v->x;
-	n += v->y * v->y;
-	n += v->z * v->z;
-
-	return (n);
+	n = norm_v(v);
+	v->x /= n;
+	v->y /= n;
+	v->z /= n;
 }

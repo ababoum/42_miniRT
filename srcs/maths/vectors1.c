@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 11:34:28 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 19:22:06 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 15:24:55 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ t_vec	*vector_f(float x, float y, float z)
 	vec->y = y;
 	vec->z = z;
 	return (vec);
+}
+
+void	set_vector(t_vec *v, float x, float y, float z)
+{
+	v->x = x;
+	v->y = y;
+	v->z = z;
 }
 
 float	scalar(t_vec *v1, t_vec *v2)

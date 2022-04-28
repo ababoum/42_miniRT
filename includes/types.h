@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 16:46:51 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/28 14:27:10 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_data {
 
 typedef struct s_ray {
 	t_3D_point	*origin;
-	t_3D_point	*dir;
+	t_vec		*dir;
 }	t_ray;
 
 typedef struct s_sphere {
