@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/28 15:25:05 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/29 16:31:08 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ void		populate_cyl(t_data *data, char *line);
 // Screen drawing
 void		pixel_put(t_data *data, int x, int y, int color);
 
+// rays
+void		prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat);
+
 // 3D geometry
 t_3D_point	*dot_3d(float x, float y, float z);
 void		set_3d_point(t_3D_point *pt, float x, float y, float z);
@@ -93,6 +96,9 @@ int			check_dir_vector(t_vec *vector);
 int			check_dir_vector_p(t_3D_point *point);
 void		normalize(t_3D_point *ray);
 void		ray_mult_mat(t_ray *ray, t_m4 mat);
+
+// angles
+float		get_angle(float dx, float dy);
 
 // vectors maths
 t_vec		*vector(t_3D_point *p0, t_3D_point *p1);

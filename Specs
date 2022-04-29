@@ -26,7 +26,7 @@
 ( ) Triangle
 
 -> Create a struct for the object
--> Create a function to generate athe object
+-> Create a function to generate the object
 -> Create a function to evaluate if a ray intersects with the object
 
 

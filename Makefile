@@ -20,6 +20,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/image_tools/objects.c \
 				./srcs/image_tools/colors.c \
 				./srcs/image_tools/rgb.c \
+				./srcs/image_tools/rays.c \
 				./srcs/memory/frees.c \
 				./srcs/memory/memory_log.c \
 				./srcs/memory/data_access.c \
@@ -28,6 +29,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/maths/math_fns.c \
 				./srcs/maths/distance.c \
 				./srcs/maths/3D_geo.c \
+				./srcs/maths/angles.c \
 				./srcs/maths/intersect_sp.c \
 				./srcs/maths/intersect_pl.c \
 				./srcs/maths/intersect_cy.c \

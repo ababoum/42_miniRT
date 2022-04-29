@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/28 15:26:27 by mababou          ###   ########.fr       */
+/*   Updated: 2022/04/29 16:48:59 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, t_data *data)
 
 int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb, t_data *data)
 {
-	t_3D_point	vec;
+	t_vec		vec;
 	float		f;
 	int			color;
 
@@ -64,7 +64,7 @@ int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb, t_data *data)
 	if (object_between(light->src, norm->origin,ray, data))
 		return (0);
 
-	normalize(&vec);
+	normalize_v(&vec);
 	f = vec.x * norm->dir->x
 		+ vec.y * norm->dir->y
 		+ vec.z * norm->dir->z;
@@ -81,36 +81,6 @@ int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb, t_data *data)
 	}
 
 	return (color);
-}
-
-
-
-float getAngle(float dx, float dy)
-{
-	float a;
-
-	a = atanf(ffabs(dy) / ffabs(dx));
-
-	if (dx > 0 && dy > 0)
-		return a;
-
-	if (dx < 0 && dy > 0)
-		return -a + (float) M_PI;
-
-	if (dx < 0 && dy < 0)
-		return a + (float) M_PI;
-
-	if (dx > 0 && dy < 0)
-		return -a + 2 * (float) M_PI;
-
-
-	if (dy == 0)
-		return (float) (dx < 0 ? M_PI : 0);
-	if (dx == 0)
-		return (float) (dy > 0 ? M_PI / 2 : 3 * M_PI / 2);
-
-	//Inutile mais demandé...
-	return 0;
 }
 
 float toDeg(float angle)
@@ -138,8 +108,8 @@ void draw_data(t_data *data)
 				  data->cam->pov->z);
 	//TODO calc angle and rotate matrix with
 
-	float a1 = getAngle(data->cam->dir->x, data->cam->dir->y);
-	float a2 = getAngle(sqrtf(data->cam->dir->x * data->cam->dir->x +
+	float a1 = get_angle(data->cam->dir->x, data->cam->dir->y);
+	float a2 = get_angle(sqrtf(data->cam->dir->x * data->cam->dir->x +
 									data->cam->dir->y * data->cam->dir->y),
 							  data->cam->dir->z);
 
@@ -149,23 +119,7 @@ void draw_data(t_data *data)
 	i = 0;
 	while (i < WIN_WIDTH * WIN_HEIGHT)
 	{
-		float ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
-		float x_ecran = (i % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
-		float y_ecran =
-				((i / WIN_WIDTH * 1.0f) / WIN_HEIGHT * 2.0f - 1) * ratio;
-
-		//TODO check FOV
-
-
-
-
-		set_3d_point(ray.origin, 0, 0, 0);
-		set_vector(ray.dir, x_ecran * 1.0f,
-					 1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0),
-					 y_ecran * 1.0f);
-		ray_mult_mat(&ray, mat);
-
-		normalize_v(ray.dir);
+		prepare_initial_ray(&ray, data, i, mat);
 
 		t_obj *objs = data->obj_lst;
 
@@ -173,10 +127,9 @@ void draw_data(t_data *data)
 
 		while (objs)
 		{
-			if (objs->type == 0)
+			if (objs->type == SPHERE)
 			{
-				t_sphere *sp = (t_sphere *) objs->ptr;
-
+				t_sphere *sp = (t_sphere *)objs->ptr;
 				if (intersection_pt_sp(&ray, sp, &pt))
 				{
 					//TODO calc distance, backup nearest color, if distance smaller replace color
@@ -203,7 +156,6 @@ void draw_data(t_data *data)
 			}
 			objs = objs->next;
 		}
-
 
 		(void) ray;
 		pixel_put(data, i % WIN_WIDTH, i / WIN_WIDTH, color);
