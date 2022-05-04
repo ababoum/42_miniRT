@@ -54,6 +54,9 @@ void	populate_sphere(t_data *data, char *line)
 	obj->rgb[0] = ft_atoi(arg[0]);
 	obj->rgb[1] = ft_atoi(arg[1]);
 	obj->rgb[2] = ft_atoi(arg[2]);
+	obj->rgb2[0] = obj->rgb[0] / 2;
+	obj->rgb2[1] = obj->rgb[1] / 2;
+	obj->rgb2[2] = obj->rgb[2] / 2;
 	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Sphere color values", EXIT_FAILURE);
 }

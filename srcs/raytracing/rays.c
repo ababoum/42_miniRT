@@ -12,11 +12,11 @@
 
 #include "../../includes/miniRT.h"
 
-void	prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
+void prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
 {
-	float	ratio;
-	float	x_ecran;
-	float	y_ecran;
+	float ratio;
+	float x_ecran;
+	float y_ecran;
 
 	ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
 	x_ecran = (pos % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
@@ -25,43 +25,56 @@ void	prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
 	// TODO check FOV
 	set_point(&ray->origin, 0, 0, 0);
 	set_vector(&ray->dir, \
-		x_ecran * 1.0f, \
-		1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0), \
-		y_ecran * 1.0f);
+        x_ecran * 1.0f, \
+        1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0), \
+        y_ecran * 1.0f);
 	ray_mult_mat(ray, mat);
 	normalize_v(&ray->dir);
 }
 
-int	compute_pixel_color(t_ray *ray, t_data *data)
+void set_direction_ray_pt(t_ray *ray, float x, float y, float z)
 {
-	int		color;
-	t_obj	*obj;
+	set_vector(&ray->dir, x - ray->origin.x,
+			   y - ray->origin.y,
+			   z - ray->origin.z);
+}
+
+int compute_pixel_color(t_ray *ray, t_data *data)
+{
+	int color;
+	float distance;
+	t_obj *obj;
 
 	color = 0;
 	obj = data->obj_lst;
+
+	distance = -1;
+
 	while (obj)
 	{
 		if (obj->type == SPHERE)
-			analyze_ray_for_sphere(ray, (t_sphere *)(obj->ptr), &color);
+			analyze_ray_for_sphere(ray, (t_sphere *) (obj->ptr), &color, &distance);
 		else if (obj->type == PLAN)
-			analyze_ray_for_plan(ray, (t_plan *)(obj->ptr), &color);
+			analyze_ray_for_plan(ray, (t_plan *) (obj->ptr), &color, &distance);
 		obj = obj->next;
 	}
+
 	return (color);
 }
 
-int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
+int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 {
-	t_vec	vec;
-	float	f;
-	int		color;
-	t_data	*data;
+	(void) ray;
+	t_vec vec;
+	float f;
+	int color;
+	t_data *data;
 
 	data = get_data(0, 0);
 	set_vector(&vec, light->src.x - norm->origin.x, \
-		light->src.y - norm->origin.y, \
-		light->src.z - norm->origin.z);
-	if (object_between(&light->src, &norm->origin, ray, data))
+        light->src.y - norm->origin.y, \
+        light->src.z - norm->origin.z);
+	if (object_between(&light->src, &norm->origin, data))
 		return (0);
 	normalize_v(&vec);
 	f = scalar(vec, norm->dir);
@@ -73,7 +86,7 @@ int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 	{
 		f = (f - 0.98f) / 0.02f;
 		color = add_color(color, \
-			rgb_ambiant(arr_to_rgb(light->rgb), light->rgb, f * light->pow));
+            rgb_ambiant(arr_to_rgb(light->rgb), light->rgb, f * light->pow));
 	}
 	return (color);
 }

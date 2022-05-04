@@ -48,6 +48,7 @@
 # define LIGHT			11
 # define CAMERA			12
 
+# define DAMIER_FACTOR	20
 
 typedef struct s_memlog {
 	void			*ptr;
@@ -123,6 +124,7 @@ typedef struct s_sphere {
 	t_3D_point	center;
 	float		radius;
 	int			rgb[3];
+	int			rgb2[3];
 }	t_sphere;
 
 typedef struct s_plan {

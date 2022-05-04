@@ -12,26 +12,26 @@
 
 #include "../../includes/miniRT.h"
 
-int	test_middle_f(float f1, float f2, float f3)
+int test_middle_f(float f1, float f2, float f3)
 {
 	return ((f1 >= f2 && f2 >= f3) || (f1 <= f2 && f2 <= f3));
 }
 
 //test if p2 is beetween p2 and p3
-int	test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3)
+int test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3)
 {
 	return (test_middle_f(p1->x, p2->x, p3->x)
-		&& test_middle_f(p1->y, p2->y, p3->y)
-		&& test_middle_f(p1->z, p2->z, p3->z));
+			&& test_middle_f(p1->y, p2->y, p3->y)
+			&& test_middle_f(p1->z, p2->z, p3->z));
 }
 
-int	object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, t_data *data)
+int object_between(t_3D_point *p1, t_3D_point *p2, t_data *data)
 {
-	(void) p1;
-	(void) p2;
-	(void) data;
-
 	t_obj *objs = data->obj_lst;
+	t_ray ray;
+
+	set_point(&(&ray)->origin, p1->x, p1->y, p1->z);
+	set_direction_ray_pt(&ray, p2->x, p2->y, p2->z);
 
 	while (objs)
 	{
@@ -40,13 +40,13 @@ int	object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, t_data *data)
 			t_sphere *sp = (t_sphere *) objs->ptr;
 			t_3D_point pt;
 
-			projection_pt_droite(ray, &sp->center, &pt);
-//			if (distance_3d(&pt,sp->center) < sp->radius && test_middle(p1, &pt, p2))
-			if (test_middle(p1, &pt, p2))
-				return (1);
+			if (intersection_pt_sp(&ray, sp, &pt))
+			{
+				if (test_middle(p1, &pt, p2) && distance_3d(*p2, pt) > EPSILON* 10)
+					return (1);
+			}
 		}
 		objs = objs->next;
 	}
-
 	return (0);
 }
