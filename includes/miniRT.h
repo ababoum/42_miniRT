@@ -94,6 +94,8 @@ void		pixel_put(t_data *data, int x, int y, int color);
 void		prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat);
 int			compute_pixel_color(t_ray *ray, t_data *data);
 int			calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb);
+void 		set_direction_ray_pt(t_ray *ray, float x, float y, float z);
+
 
 // 3D geometry
 t_3D_point	*new_point(float x, float y, float z);
@@ -122,16 +124,18 @@ void		normalize_v(t_vec *v);
 // sorting objects
 int			test_middle_f(float f1, float f2, float f3);
 int			test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3);
-int			object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, \
+int			object_between(t_3D_point *p1, t_3D_point *p2, \
 				t_data *data);
 
 // intersections
 	// sphere
 void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
 void		analyze_ray_for_sphere(t_ray *ray, \
-				t_sphere *sp, int *color);
-	// plan
-void		analyze_ray_for_plan(t_ray *ray, t_plan *pl, int *color);
+				t_sphere *sp, int *color, float *distance);
+int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
+
+// plan
+void		analyze_ray_for_plan(t_ray *ray, t_plan *pl, int *color, float *distance);
 
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);
