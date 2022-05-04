@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/29 16:31:08 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/03 21:43:22 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ void		pixel_put(t_data *data, int x, int y, int color);
 
 // rays
 void		prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat);
+int			compute_pixel_color(t_ray *ray, t_data *data);
+int			calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb);
+
 
 // 3D geometry
 t_3D_point	*dot_3d(float x, float y, float z);
@@ -99,6 +102,7 @@ void		ray_mult_mat(t_ray *ray, t_m4 mat);
 
 // angles
 float		get_angle(float dx, float dy);
+float		rad_to_deg(float angle_in_rad);
 
 // vectors maths
 t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
@@ -110,10 +114,18 @@ float		norm_v(t_vec *v);
 void		normalize(t_3D_point *pt);
 void		normalize_v(t_vec *v);
 
+// sorting objects
+int			test_middle_f(float f1, float f2, float f3);
+int			test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3);
+int			object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, \
+				t_data *data);
+
 // intersections
 	// sphere
 int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
+void		analyze_ray_for_sphere(t_ray *ray, \
+				t_sphere *sp, int *color);
 	// plan
 
 

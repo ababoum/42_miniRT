@@ -20,7 +20,6 @@ SRCS		= ./srcs/main.c \
 				./srcs/image_tools/objects.c \
 				./srcs/image_tools/colors.c \
 				./srcs/image_tools/rgb.c \
-				./srcs/image_tools/rays.c \
 				./srcs/memory/frees.c \
 				./srcs/memory/memory_log.c \
 				./srcs/memory/data_access.c \
@@ -30,12 +29,14 @@ SRCS		= ./srcs/main.c \
 				./srcs/maths/distance.c \
 				./srcs/maths/3D_geo.c \
 				./srcs/maths/angles.c \
-				./srcs/maths/intersect_sp.c \
-				./srcs/maths/intersect_pl.c \
-				./srcs/maths/intersect_cy.c \
+				./srcs/raytracing/rays.c \
+				./srcs/raytracing/intersect_sp.c \
+				./srcs/raytracing/intersect_pl.c \
+				./srcs/raytracing/intersect_cy.c \
+				./srcs/raytracing/vision_field.c \
+				./srcs/raytracing/sorting.c \
 				./srcs/maths/vectors1.c \
 				./srcs/maths/vectors2.c \
-				./srcs/maths/vision_field.c \
 				./srcs/misc_tools/str_display.c \
 				./srcs/misc_tools/inits.c \
 				./srcs/misc_tools/tab_len.c \

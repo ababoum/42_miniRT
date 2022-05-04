@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:29:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/28 15:27:21 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:42:32 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void	pt3d_mult_mat(t_3D_point *pt, t_m4 mat)
 void	ray_mult_mat(t_ray *ray, t_m4 mat)
 {
 	//transform direction to looking at
-	ray->dir->x += ray->origin->x;
-	ray->dir->y += ray->origin->y;
-	ray->dir->z += ray->origin->z;
+	ray->dir.x += ray->origin.x;
+	ray->dir.y += ray->origin.y;
+	ray->dir.z += ray->origin.z;
 
-	pt3d_mult_mat((t_3D_point *)ray->dir, mat);
-	pt3d_mult_mat(ray->origin, mat);
+	pt3d_mult_mat((t_3D_point *)(&ray->dir), mat);
+	pt3d_mult_mat(&ray->origin, mat);
 
-	ray->dir->x -= ray->origin->x;
-	ray->dir->y -= ray->origin->y;
-	ray->dir->z -= ray->origin->z;
+	ray->dir.x -= ray->origin.x;
+	ray->dir.y -= ray->origin.y;
+	ray->dir.z -= ray->origin.z;
 }

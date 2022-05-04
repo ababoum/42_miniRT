@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/28 14:27:10 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 11:39:06 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define MEM_TYPE	1
 # define IMG_TYPE	2
 
-# define WIN_WIDTH	1920
-# define WIN_HEIGHT	1080
+# define WIN_WIDTH	1080
+# define WIN_HEIGHT	1080 // width and height should be equal if fov is unique
 
 # define RED		0x00FF0000
 # define GREEN		0x0000FF00
@@ -115,8 +115,8 @@ typedef struct s_data {
 }	t_data;
 
 typedef struct s_ray {
-	t_3D_point	*origin;
-	t_vec		*dir;
+	t_3D_point	origin;
+	t_vec		dir;
 }	t_ray;
 
 typedef struct s_sphere {
