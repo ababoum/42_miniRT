@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:04:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/03 21:39:33 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 20:40:17 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,9 @@ float	get_angle(float dx, float dy)
 float	rad_to_deg(float angle_in_rad)
 {
 	return ((float)(angle_in_rad / 2 / M_PI * 180.0));
+}
+
+float	deg_to_rad(float angle_in_deg)
+{
+	return (angle_in_deg * M_PI / 180.0f);
 }

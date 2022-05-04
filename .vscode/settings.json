@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"miniRT.h": "c"
+		"miniRT.h": "c",
+		"limits": "c"
 	}
 }

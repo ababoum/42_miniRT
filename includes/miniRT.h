@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:54:45 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 20:40:42 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int			rgb_to_int(int rgb[3]);
 void		set_rgb(int *rgb, int r, int g, int b);
 int			rgb_ambiant(int rgb, int *lrgb, float grad);
 int			arr_to_rgb(int *rgb);
-
 
 // memory & frees
 void		*malloc_log(t_data *data, int size);
@@ -94,8 +93,7 @@ void		pixel_put(t_data *data, int x, int y, int color);
 void		prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat);
 int			compute_pixel_color(t_ray *ray, t_data *data);
 int			calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb);
-void 		set_direction_ray_pt(t_ray *ray, float x, float y, float z);
-
+void		set_direction_ray_pt(t_ray *ray, float x, float y, float z);
 
 // 3D geometry
 t_3D_point	*new_point(float x, float y, float z);
@@ -108,6 +106,7 @@ void		ray_mult_mat(t_ray *ray, t_m4 mat);
 // angles
 float		get_angle(float dx, float dy);
 float		rad_to_deg(float angle_in_rad);
+float		deg_to_rad(float angle_in_deg);
 
 // vectors maths
 t_vec		*new_vector(t_3D_point p0, t_3D_point p1);
@@ -132,15 +131,21 @@ int			object_between(t_3D_point *p1, t_3D_point *p2, \
 void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
 void		analyze_ray_for_sphere(t_ray *ray, \
 				t_sphere *sp, int *color, float *distance);
-int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
-
-// plan
-void		analyze_ray_for_plan(t_ray *ray, t_plan *pl, int *color, float *distance);
+int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
+	// plan
+void		analyze_ray_for_plan(t_ray *ray, \
+				t_plan *pl, int *color, float *distance);
+	// cylinder
+int			intersection_pt_cy(t_ray *ray, t_cylinder *cy, t_3D_point *pt);
 
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);
 float		ffabs(float f);
+float		max(float n1, float n2);
+float		min(float n1, float n2);
 int			rgb_factor(int rgb, float factor);
+float		switch_val(float n, float n1, float n2);
+int			is_between(float nb, float min, float max);
 
 // vision
 float		max_vision_axis(float fov);
@@ -148,6 +153,5 @@ float		max_vision_axis(float fov);
 // tests
 void		draw_circle(t_data *data, t_2D_point *center, float radius);
 void		draw_sp(t_data *data);
-
 
 #endif

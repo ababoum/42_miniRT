@@ -5,7 +5,7 @@
 
 ===== CAMERA ======
 
-( ) Translate and rotate all objects to bring camera to the origin of the scene (0, 0, 0)
+(X) Translate and rotate all objects to bring camera to the origin of the scene (0, 0, 0)
 	with a direction (0, 0, -1)
 
 
@@ -17,8 +17,8 @@
 
 ===== OBJECTS ======
 
-( ) Plan
-( ) Cylinder
+(X) Plan
+(X) Cylinder
 ( ) Cone
 ( ) Hyperboloid
 ( ) Paraboloid
@@ -32,23 +32,23 @@
 
 ===== DISPLAY ======
 
-( ) Add the "objects overlap" handling in the display
+(X) Add the "objects overlap" handling in the display
 	(for example by storing the distance to the intersection, in addition to the color,
 	and updating it only if a distance is found to be smaller)
 
-( ) Create a display function that takes the FOV into account, and excludes 
+(X) Create a display function that takes the FOV into account, and excludes 
 	objects located behind the camera
 
 ( ) Handle the Phong reflexion display
 
-( ) Handle the "chessboard" pattern on objects
+(X) Handle the "chessboard" pattern on objects
 	(should it be indicated in the input file?)
 
 ( ) Handle the bump map texture
 
-( ) depth
+(X) depth
 
-( ) shadow
+(X) shadow
 
 
 

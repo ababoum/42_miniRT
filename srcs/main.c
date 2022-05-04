@@ -6,31 +6,35 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:00:02 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:14:48 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 
-void draw_data(t_data *data)
+// the matrix is used to set the casted rays as coming from the camera
+static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 {
-	t_ray	ray;
-	t_m4	mat;
-	int		i;
 	float	rot_angles[2];
 
-	// ray.dir = vector_f(0, 0, 0);
-	// ray.origin = point(0, 0, 0);
-	set_identity(&mat);
-	translate_mat(&mat, data->cam->pov.x, \
+	set_identity(mat);
+	translate_mat(mat, data->cam->pov.x, \
 		data->cam->pov.y, data->cam->pov.z);
-	//TODO calc angle and rotate matrix with
 	rot_angles[0] = get_angle(data->cam->dir.x, data->cam->dir.y);
 	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
 						data->cam->dir.y * data->cam->dir.y), \
 						data->cam->dir.z);
-	rotate_y_mat(&mat, rot_angles[0]);
-	rotate_x_mat(&mat, rot_angles[1]);
+	rotate_y_mat(mat, rot_angles[0]);
+	rotate_x_mat(mat, rot_angles[1]);
+}
+
+void	draw_data(t_data *data)
+{
+	t_ray	ray;
+	t_m4	mat;
+	int		i;
+
+	prepare_camera_mat(data, &mat);
 	i = 0;
 	while (i < WIN_WIDTH * WIN_HEIGHT)
 	{

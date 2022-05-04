@@ -6,17 +6,17 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:18:57 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:06:41 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 17:58:16 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-void prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
+void	prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
 {
-	float ratio;
-	float x_ecran;
-	float y_ecran;
+	float	ratio;
+	float	x_ecran;
+	float	y_ecran;
 
 	ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
 	x_ecran = (pos % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
@@ -53,16 +53,16 @@ int compute_pixel_color(t_ray *ray, t_data *data)
 	while (obj)
 	{
 		if (obj->type == SPHERE)
-			analyze_ray_for_sphere(ray, (t_sphere *) (obj->ptr), &color, &distance);
+			analyze_ray_for_sphere(ray, (t_sphere *)(obj->ptr), &color, &distance);
 		else if (obj->type == PLAN)
-			analyze_ray_for_plan(ray, (t_plan *) (obj->ptr), &color, &distance);
+			analyze_ray_for_plan(ray, (t_plan *)(obj->ptr), &color, &distance);
 		obj = obj->next;
 	}
 
 	return (color);
 }
 
-int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
+int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 {
 	(void) ray;
 	t_vec vec;

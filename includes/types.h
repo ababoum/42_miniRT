@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 17:00:19 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 20:30:57 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 # define BUFFER_SIZE	42
 
-# define EPSILON		0.00005
+# define EPSILON		0.0005
 
 # define SPHERE			0
 # define PLAN			1
@@ -140,6 +140,14 @@ typedef struct s_cylinder {
 	float		height;
 	int			rgb[3];
 }	t_cylinder;
+
+typedef struct s_cone {
+	t_3D_point	center;
+	t_vec		dir;
+	float		angle;
+	int			rgb[3];
+}	t_cone;
+
 
 typedef struct s_eq_param {
 	float	a;
