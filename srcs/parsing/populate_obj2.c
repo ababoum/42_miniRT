@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 19:23:54 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:44:48 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	populate_plan(t_data *data, char *line)
 	obj = new_plan(data);
 	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect Plan point coordinates");
-	obj->point = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	obj->point = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[1], ",");
 	check_arg(data, arg, 3, "Incorrect Plan normal coordinates");
 	obj->normal = vector_f(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
@@ -47,7 +47,7 @@ void	populate_sphere(t_data *data, char *line)
 	obj = new_sphere(data);
 	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect Sphere center coordinates");
-	obj->center = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	obj->center = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	obj->radius = ft_atof(tab[1]) / 2;
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect Sphere color settings");
@@ -69,7 +69,7 @@ void	populate_cyl(t_data *data, char *line)
 	obj = new_cylinder(data);
 	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect Cylinder point coordinates");
-	obj->point = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	obj->point = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[1], ",");
 	check_arg(data, arg, 3, "Incorrect Cylinder direction coordinates");
 	obj->dir = vector_f(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));

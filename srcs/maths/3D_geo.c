@@ -6,14 +6,14 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:29:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 11:42:32 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:01:54 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 #include "../../includes/ft3d.h"
 
-t_3D_point	*dot_3d(float x, float y, float z)
+t_3D_point	*new_point(float x, float y, float z)
 {
 	t_3D_point	*point;
 	t_data		*data;
@@ -26,7 +26,17 @@ t_3D_point	*dot_3d(float x, float y, float z)
 	return (point);
 }
 
-void	set_3d_point(t_3D_point *pt, float x, float y, float z)
+t_3D_point	point(float x, float y, float z)
+{
+	t_3D_point	point;
+
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	return (point);
+}
+
+void	set_point(t_3D_point *pt, float x, float y, float z)
 {
 	pt->x = x;
 	pt->y = y;

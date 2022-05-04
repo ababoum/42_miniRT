@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/03 21:43:22 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:06:41 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,11 @@ void		prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat);
 int			compute_pixel_color(t_ray *ray, t_data *data);
 int			calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb);
 
-
 // 3D geometry
-t_3D_point	*dot_3d(float x, float y, float z);
-void		set_3d_point(t_3D_point *pt, float x, float y, float z);
-int			check_dir_vector(t_vec *vector);
-int			check_dir_vector_p(t_3D_point *point);
+t_3D_point	*new_point(float x, float y, float z);
+t_3D_point	point(float x, float y, float z);
+void		set_point(t_3D_point *pt, float x, float y, float z);
+int			check_dir_vector(t_vec vector);
 void		normalize(t_3D_point *ray);
 void		ray_mult_mat(t_ray *ray, t_m4 mat);
 
@@ -105,10 +104,12 @@ float		get_angle(float dx, float dy);
 float		rad_to_deg(float angle_in_rad);
 
 // vectors maths
-t_vec		*vector(t_3D_point *p0, t_3D_point *p1);
-t_vec		*vector_f(float x, float y, float z);
+t_vec		*new_vector(t_3D_point p0, t_3D_point p1);
+t_vec		vector(t_3D_point p0, t_3D_point p1);
+t_vec		*new_vector_f(float x, float y, float z);
+t_vec		vector_f(float x, float y, float z);
 void		set_vector(t_vec *v, float x, float y, float z);
-float		scalar(t_vec *v1, t_vec *v2);
+float		scalar(t_vec v1, t_vec v2);
 float		norm(t_3D_point *pt);
 float		norm_v(t_vec *v);
 void		normalize(t_3D_point *pt);
@@ -122,16 +123,14 @@ int			object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, \
 
 // intersections
 	// sphere
-int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
 void		analyze_ray_for_sphere(t_ray *ray, \
 				t_sphere *sp, int *color);
 	// plan
-
+void		analyze_ray_for_plan(t_ray *ray, t_plan *pl, int *color);
 
 // maths
-float		distance_2d(t_2D_point *A, t_2D_point *B);
-float		distance_3d(t_3D_point *A, t_3D_point *B);
+float		distance_3d(t_3D_point A, t_3D_point B);
 float		ffabs(float f);
 int			rgb_factor(int rgb, float factor);
 
@@ -144,6 +143,6 @@ void		draw_sp(t_data *data);
 
 // RGB
 int			rgb_ambiant(int rgb, int *lrgb, float grad);
-int			arr_toRGB(int *rgb);
+int			arr_to_rgb(int *rgb);
 
 #endif

@@ -15,9 +15,9 @@ CFLAGS		= -Wall -Wextra -Werror -g -lm
 
 
 SRCS		= ./srcs/main.c \
+				./srcs/objects/obj_lst.c \
+				./srcs/objects/objects.c \
 				./srcs/image_tools/2D_drawing.c \
-				./srcs/image_tools/obj_lst.c \
-				./srcs/image_tools/objects.c \
 				./srcs/image_tools/colors.c \
 				./srcs/image_tools/rgb.c \
 				./srcs/memory/frees.c \

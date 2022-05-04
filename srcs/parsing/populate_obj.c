@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/29 16:42:45 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:00:37 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	populate_light(t_data *data, char *line)
 	check_line_args(data, "Light", tab_len(tab));
 	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect light source coordinates");
-	data->lum->src = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	data->lum->src = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	data->lum->pow = ft_atof(tab[1]);
 	if (data->lum->pow < 0 || data->lum->pow > 1)
 		exit_message(data, "Incorrect luminosity value", EXIT_FAILURE);
@@ -65,11 +65,12 @@ void	populate_cam(t_data *data, char *line)
 	check_line_args(data, "Camera", tab_len(tab));
 	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect 'POV' coordinates");
-	data->cam->pov = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	data->cam->pov = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[1], ",");
 	check_arg(data, arg, 3, "Incorrect direction vector format");
-	data->cam->dir = dot_3d(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
-	if (!check_dir_vector_p(data->cam->dir))
+	data->cam->dir = vector_f(ft_atof(arg[0]), \
+							ft_atof(arg[1]), ft_atof(arg[2]));
+	if (!check_dir_vector(data->cam->dir))
 		exit_message(data, "Incorrect direction vector values", EXIT_FAILURE);
 	data->cam->fov = ft_atof(tab[2]);
 	if (data->cam->fov < 0 || data->cam->fov > 180)

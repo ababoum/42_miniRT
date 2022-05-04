@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 19:39:43 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:03:54 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,11 @@ void	check_arg(t_data *data, char **arg, int argc, char *msg_if_fail)
 		exit_message(data, msg_if_fail, EXIT_FAILURE);
 }
 
-// to delete once everything is vector or point
-int	check_dir_vector_p(t_3D_point *point)
+int	check_dir_vector(t_vec vector)
 {
-	if (point->x < -1 || point->x > 1 || \
-		point->y < -1 || point->y > 1 || \
-		point->z < -1 || point->z > 1)
-		return (0);
-	return (1);
-}
-
-int	check_dir_vector(t_vec *vector)
-{
-	if (vector->x < -1 || vector->x > 1 || \
-		vector->y < -1 || vector->y > 1 || \
-		vector->z < -1 || vector->z > 1)
+	if (vector.x < -1 || vector.x > 1 || \
+		vector.y < -1 || vector.y > 1 || \
+		vector.z < -1 || vector.z > 1)
 		return (0);
 	return (1);
 }

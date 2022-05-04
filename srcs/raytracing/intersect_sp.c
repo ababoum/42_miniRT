@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:32:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 11:47:02 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:06:41 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ static float	discriminant_sp(t_ray *ray, t_sphere *sp, float disc[3])
 	dr[2] = ray->dir.z;
 	disc[0] = powf(dr[0], 2) + powf(dr[1], 2) + powf(dr[2], 2);
 
-	disc[1] = -2 * (dr[0] * (sp->center->x - ray->origin.x) \
-					+ dr[1] * (sp->center->y - ray->origin.y) \
-					+ dr[2] * (sp->center->z - ray->origin.z) \
+	disc[1] = -2 * (dr[0] * (sp->center.x - ray->origin.x) \
+					+ dr[1] * (sp->center.y - ray->origin.y) \
+					+ dr[2] * (sp->center.z - ray->origin.z) \
 	);
 
-	disc[2] = powf(sp->center->x - ray->origin.x, 2) \
-				+ powf(sp->center->y - ray->origin.y, 2) \
-				+ powf(sp->center->z - ray->origin.z, 2) \
+	disc[2] = powf(sp->center.x - ray->origin.x, 2) \
+				+ powf(sp->center.y - ray->origin.y, 2) \
+				+ powf(sp->center.z - ray->origin.z, 2) \
 				- powf(sp->radius, 2);
 
 	return (powf(disc[1], 2) - 4 * disc[0] * disc[2]);
 }
 
-int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
+static int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 {
 	float	disc[3];
 	float	d;
@@ -58,7 +58,7 @@ int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 	}
 	if (x < 0)
 		return (0);
-	set_3d_point(pt, ray->origin.x + x * ray->dir.x, \
+	set_point(pt, ray->origin.x + x * ray->dir.x, \
 		ray->origin.y + x * ray->dir.y, ray->origin.z + x * ray->dir.z);
 	return (1);
 }
@@ -77,14 +77,13 @@ void	projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res)
 }
 
 // get info about intersection with a given object (sphere here)
-
 void	analyze_ray_for_sphere(t_ray *ray, t_sphere *sp, int *color)
 {
 	t_data		*data;
 	t_ray		norm;
 	t_3D_point	pt;
 
-	set_3d_point(&pt, 0, 0, 0);
+	set_point(&pt, 0, 0, 0);
 	data = get_data(0, 0);
 	if (intersection_pt_sp(ray, sp, &pt))
 	{
@@ -92,13 +91,13 @@ void	analyze_ray_for_sphere(t_ray *ray, t_sphere *sp, int *color)
 		// if distance smaller replace color
 
 		//Ambiant light
-		*color = rgb_ambiant(arr_toRGB(sp->rgb), \
+		*color = rgb_ambiant(arr_to_rgb(sp->rgb), \
 			data->amb->rgb, data->amb->grad);
 		//spot
-		set_3d_point(&norm.origin, pt.x, pt.y, pt.z);
-		set_vector(&norm.dir, pt.x - sp->center->x, \
-			pt.y - sp->center->y, \
-			pt.z - sp->center->z);
+		set_point(&norm.origin, pt.x, pt.y, pt.z);
+		set_vector(&norm.dir, pt.x - sp->center.x, \
+			pt.y - sp->center.y, \
+			pt.z - sp->center.z);
 		normalize_v(&norm.dir);
 		*color = add_color(*color, \
 						calc_spot(&norm, ray, data->lum, sp->rgb));

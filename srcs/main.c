@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 11:40:11 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:00:02 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void draw_data(t_data *data)
 	float	rot_angles[2];
 
 	// ray.dir = vector_f(0, 0, 0);
-	// ray.origin = dot_3d(0, 0, 0);
+	// ray.origin = point(0, 0, 0);
 	set_identity(&mat);
-	translate_mat(&mat, data->cam->pov->x, \
-		data->cam->pov->y, data->cam->pov->z);
+	translate_mat(&mat, data->cam->pov.x, \
+		data->cam->pov.y, data->cam->pov.z);
 	//TODO calc angle and rotate matrix with
-	rot_angles[0] = get_angle(data->cam->dir->x, data->cam->dir->y);
-	rot_angles[1] = get_angle(sqrtf(data->cam->dir->x * data->cam->dir->x + \
-						data->cam->dir->y * data->cam->dir->y), \
-						data->cam->dir->z);
+	rot_angles[0] = get_angle(data->cam->dir.x, data->cam->dir.y);
+	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
+						data->cam->dir.y * data->cam->dir.y), \
+						data->cam->dir.z);
 	rotate_y_mat(&mat, rot_angles[0]);
 	rotate_x_mat(&mat, rot_angles[1]);
 	i = 0;

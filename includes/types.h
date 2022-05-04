@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 11:39:06 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:59:30 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ typedef struct s_ambiance {
 }	t_ambiance;
 
 typedef struct s_camera {
-	t_3D_point	*pov;
-	t_3D_point	*dir;
+	t_3D_point	pov;
+	t_vec		dir;
 	float		fov;
 }	t_camera;
 
 typedef struct s_light {
-	t_3D_point	*src;
+	t_3D_point	src;
 	float		pow;
 	int			rgb[3];
 }	t_light;
@@ -120,20 +120,20 @@ typedef struct s_ray {
 }	t_ray;
 
 typedef struct s_sphere {
-	t_3D_point	*center;
+	t_3D_point	center;
 	float		radius;
 	int			rgb[3];
 }	t_sphere;
 
 typedef struct s_plan {
-	t_3D_point	*point;
-	t_vec		*normal;
+	t_3D_point	point;
+	t_vec		normal;
 	int			rgb[3];
 }	t_plan;
 
 typedef struct s_cylinder {
-	t_3D_point	*point;
-	t_vec		*dir;
+	t_3D_point	point;
+	t_vec		dir;
 	float		radius;
 	float		height;
 	int			rgb[3];

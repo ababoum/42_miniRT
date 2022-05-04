@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 19:45:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/03 19:46:13 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:55:14 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	object_between(t_3D_point *p1, t_3D_point *p2, t_ray *ray, t_data *data)
 			t_sphere *sp = (t_sphere *) objs->ptr;
 			t_3D_point pt;
 
-			projection_pt_droite(ray, sp->center, &pt);
+			projection_pt_droite(ray, &sp->center, &pt);
 //			if (distance_3d(&pt,sp->center) < sp->radius && test_middle(p1, &pt, p2))
 			if (test_middle(p1, &pt, p2))
 				return (1);
