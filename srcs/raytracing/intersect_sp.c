@@ -6,13 +6,12 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:32:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:06:41 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:35:17 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// check if a ray intersects with a sphere
 static float	discriminant_sp(t_ray *ray, t_sphere *sp, float disc[3])
 {
 	float	dr[3];
@@ -21,17 +20,13 @@ static float	discriminant_sp(t_ray *ray, t_sphere *sp, float disc[3])
 	dr[1] = ray->dir.y;
 	dr[2] = ray->dir.z;
 	disc[0] = powf(dr[0], 2) + powf(dr[1], 2) + powf(dr[2], 2);
-
 	disc[1] = -2 * (dr[0] * (sp->center.x - ray->origin.x) \
 					+ dr[1] * (sp->center.y - ray->origin.y) \
-					+ dr[2] * (sp->center.z - ray->origin.z) \
-	);
-
+					+ dr[2] * (sp->center.z - ray->origin.z));
 	disc[2] = powf(sp->center.x - ray->origin.x, 2) \
 				+ powf(sp->center.y - ray->origin.y, 2) \
 				+ powf(sp->center.z - ray->origin.z, 2) \
 				- powf(sp->radius, 2);
-
 	return (powf(disc[1], 2) - 4 * disc[0] * disc[2]);
 }
 
@@ -39,8 +34,7 @@ static int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 {
 	float	disc[3];
 	float	d;
-	float	x;
-	float	x2;
+	float	t[2];
 
 	d = discriminant_sp(ray, sp, disc);
 	if (d < 0)
@@ -48,18 +42,18 @@ static int	intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt)
 	if (disc[0] == 0 && disc[1] == 0)
 		return (0);
 	else if (disc[0] == 0)
-		x = -disc[2] / disc[1];
+		t[0] = -disc[2] / disc[1];
 	else
 	{
-		x2 = (-disc[1] - sqrtf(d)) / (2 * disc[0]);
-		x = (-disc[1] + sqrtf(d)) / (2 * disc[0]);
-		if (x > x2 && x2 > 0)
-			x = x2;
+		t[1] = (-disc[1] - sqrtf(d)) / (2 * disc[0]);
+		t[0] = (-disc[1] + sqrtf(d)) / (2 * disc[0]);
+		if (t[0] > t[1] && t[1] > 0)
+			t[0] = t[1];
 	}
-	if (x < 0)
+	if (t[0] < 0)
 		return (0);
-	set_point(pt, ray->origin.x + x * ray->dir.x, \
-		ray->origin.y + x * ray->dir.y, ray->origin.z + x * ray->dir.z);
+	set_point(pt, ray->origin.x + t[0] * ray->dir.x, \
+		ray->origin.y + t[0] * ray->dir.y, ray->origin.z + t[0] * ray->dir.z);
 	return (1);
 }
 

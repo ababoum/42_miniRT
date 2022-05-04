@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 14:59:30 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 17:00:19 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,13 @@ typedef struct s_cylinder {
 	float		height;
 	int			rgb[3];
 }	t_cylinder;
+
+typedef struct s_eq_param {
+	float	a;
+	float	b;
+	float	c;
+	float	delta;
+}	t_eq_param;
 
 typedef void	(*t_pop_fn)(t_data *, char *);
 

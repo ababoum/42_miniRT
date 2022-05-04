@@ -6,13 +6,20 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:38:39 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 14:39:57 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:54:01 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //
 // Created by plefevre on 4/25/22.
 //
+
+void	set_rgb(int *rgb, int r, int g, int b)
+{
+	rgb[0] = r;
+	rgb[1] = g;
+	rgb[2] = b;
+}
 
 int	arr_to_rgb(int *rgb)
 {

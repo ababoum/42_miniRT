@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:06:41 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:54:45 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ int			add_color(int rgb1, int rgb2);
 // colors
 int			check_int_color(int rgb[3]);
 int			rgb_to_int(int rgb[3]);
+void		set_rgb(int *rgb, int r, int g, int b);
+int			rgb_ambiant(int rgb, int *lrgb, float grad);
+int			arr_to_rgb(int *rgb);
+
 
 // memory & frees
 void		*malloc_log(t_data *data, int size);
@@ -141,8 +145,5 @@ float		max_vision_axis(float fov);
 void		draw_circle(t_data *data, t_2D_point *center, float radius);
 void		draw_sp(t_data *data);
 
-// RGB
-int			rgb_ambiant(int rgb, int *lrgb, float grad);
-int			arr_to_rgb(int *rgb);
 
 #endif

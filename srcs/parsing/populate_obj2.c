@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 14:44:48 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:57:04 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ void	populate_cyl(t_data *data, char *line)
 	if (!check_dir_vector(obj->dir))
 		exit_message(data, "Incorrect Cylinder direction values", EXIT_FAILURE);
 	obj->radius = ft_atof(tab[2]) / 2;
+	if (obj->radius <= 0)
+		exit_message(data, "Cylinder radius must be > 0", EXIT_FAILURE);
 	obj->height = ft_atof(tab[3]);
 	arg = ft_split(data, tab[4], ",");
 	check_arg(data, arg, 3, "Incorrect Cylinder color settings");
-	obj->rgb[0] = ft_atoi(arg[0]);
-	obj->rgb[1] = ft_atoi(arg[1]);
-	obj->rgb[2] = ft_atoi(arg[2]);
+	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
 	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Cylinder color values", EXIT_FAILURE);
 }
