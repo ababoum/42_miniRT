@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:13:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 11:45:03 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:33:36 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ t_cyl	*new_cylinder(t_data *data)
 	obj_add_back(&(data->obj_lst), new_obj(data, cylinder, CYLINDER));
 	return (cylinder);
 }
-

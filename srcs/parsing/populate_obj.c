@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:00:37 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:50:35 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ void	populate_light(t_data *data, char *line)
 {
 	char	**tab;
 	char	**arg;
+	t_light	*lux;
 
 	check_scene_setting(data, LIGHT);
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Light", tab_len(tab));
 	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect light source coordinates");
-	data->lum->src = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
-	data->lum->pow = ft_atof(tab[1]);
-	if (data->lum->pow < 0 || data->lum->pow > 1)
+	lux = new_light_src(data);
+	lux->src = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
+	lux->pow = ft_atof(tab[1]);
+	if (!is_between(lux->pow, 0, 1))
 		exit_message(data, "Incorrect luminosity value", EXIT_FAILURE);
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect 'Light' color settings");
-	data->lum->rgb[0] = ft_atoi(arg[0]);
-	data->lum->rgb[1] = ft_atoi(arg[1]);
-	data->lum->rgb[2] = ft_atoi(arg[2]);
-	if (!check_int_color(data->lum->rgb))
+	set_rgb(lux->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	if (!check_int_color(lux->rgb))
 		exit_message(data, "Incorrect 'Light' color values", EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:47:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 12:00:29 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:24:13 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 									powf(pt.y - sp->center.y, 2)), \
             pt.z - sp->center.z) * DAMIER_FACTOR / M_PI, 1.0) > 0.5))
 			*color = add_color(*color, \
-                        calc_spot(&norm, ray, data->lum, sp->rgb));
+                        calc_spot(&norm, ray, data->light_lst, sp->rgb));
 		else
 			*color = add_color(*color, \
-                        calc_spot(&norm, ray, data->lum, sp->rgb2));
+                        calc_spot(&norm, ray, data->light_lst, sp->rgb2));
 	}
 }
 

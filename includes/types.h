@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 11:57:26 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:43:05 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define SPHERE			0
 # define PLAN			1
 # define CYLINDER		2
+# define CONE			3
 
 # define AMBIANCE		10
 # define LIGHT			11
@@ -99,9 +100,10 @@ typedef struct s_camera {
 }	t_camera;
 
 typedef struct s_light {
-	t_3D_point	src;
-	float		pow;
-	int			rgb[3];
+	t_3D_point		src;
+	float			pow;
+	int				rgb[3];
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_data {
@@ -112,7 +114,7 @@ typedef struct s_data {
 	t_obj		*obj_lst;
 	t_ambiance	*amb;
 	t_camera	*cam;
-	t_light		*lum;
+	t_light		*light_lst;
 }	t_data;
 
 typedef struct s_ray {

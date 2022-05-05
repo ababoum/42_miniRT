@@ -17,6 +17,7 @@ CFLAGS		= -Wall -Wextra -Werror -g -lm
 SRCS		= ./srcs/main.c \
 				./srcs/objects/obj_lst.c \
 				./srcs/objects/objects.c \
+				./srcs/objects/light_lst.c \
 				./srcs/image_tools/2D_drawing.c \
 				./srcs/image_tools/colors.c \
 				./srcs/image_tools/rgb.c \
@@ -39,6 +40,7 @@ SRCS		= ./srcs/main.c \
 				./srcs/raytracing/sorting.c \
 				./srcs/maths/vectors1.c \
 				./srcs/maths/vectors2.c \
+				./srcs/maths/vectors3.c \
 				./srcs/misc_tools/str_display.c \
 				./srcs/misc_tools/inits.c \
 				./srcs/misc_tools/tab_len.c \

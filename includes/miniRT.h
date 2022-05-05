@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 11:50:37 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 16:10:14 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,13 @@ float		ft_atof(char *str);
 // strings display
 void		ft_putstr_fd(char *str, int fd);
 
-// objects
+// objects & lights
+t_light		*new_light_src(t_data *data);
 t_obj		*new_obj(t_data *data, void *ptr, int type);
 void		obj_add_back(t_obj **alst, t_obj *new);
 t_sphere	*new_sphere(t_data *data);
 t_plan		*new_plan(t_data *data);
-t_cyl	*new_cylinder(t_data *data);
+t_cyl		*new_cylinder(t_data *data);
 
 // parsing
 void		parse_input(t_data *data, const char *path);
@@ -119,6 +120,7 @@ float		norm(t_3D_point *pt);
 float		norm_v(t_vec *v);
 void		normalize(t_3D_point *pt);
 void		normalize_v(t_vec *v);
+t_vec		vec_prod(t_vec v1, t_vec v2);
 
 // sorting objects
 int			test_middle_f(float f1, float f2, float f3);
@@ -140,6 +142,7 @@ void		get_color_plan(t_ray *ray, \
 int			intersection_pt_cy(t_ray *ray, t_cyl *cy, t_3D_point *pt);
 void		get_color_cyl(t_ray *ray, \
 				t_cyl *cy, int *color, float *distance);
+int			cy_switch_val(t_ray *ray, t_cyl *cy, float *t_);
 
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);

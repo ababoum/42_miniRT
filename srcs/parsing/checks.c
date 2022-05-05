@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:03:54 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:41:06 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,13 @@ void	check_scene_setting(t_data *data, int setting_type)
 		else
 			exit_message(data, "Only one ambiance is allowed", EXIT_FAILURE);
 	}
-	else if (setting_type == LIGHT)
-	{
-		if (!data->lum)
-			data->lum = malloc_log(data, sizeof(t_light));
-		else
-			exit_message(data, "Only one light source is allowed", \
-				EXIT_FAILURE);
-	}
+	// else if (setting_type == LIGHT)
+	// {
+	// 	if (!data->light_lst)
+	// 		data->light_lst = malloc_log(data, sizeof(t_light));
+	// 	else
+	// 		exit_message(data, "One light source allowed", EXIT_FAILURE);
+	// }
 }
 
 void	check_line_args(t_data *data, char *type, int argc)
@@ -91,4 +90,3 @@ int	check_dir_vector(t_vec vector)
 		return (0);
 	return (1);
 }
-

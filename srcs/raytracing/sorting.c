@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 19:45:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 19:36:30 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 15:09:35 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	object_between(t_3D_point *p1, t_3D_point *p2, t_data *data)
 		{
 			t_sphere *sp = (t_sphere *) objs->ptr;
 			t_3D_point pt;
-
 			if (intersection_pt_sp(&ray, sp, &pt))
 			{
 				if (test_middle(p1, &pt, p2) && distance_3d(*p2, pt) > EPSILON)

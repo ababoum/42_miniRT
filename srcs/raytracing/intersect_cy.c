@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:23:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 12:11:50 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 14:21:53 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,13 @@ static void	prepare_ray_for_cy(t_ray *ray, t_cyl *cy)
 
 static int	intersection_cy_caps(t_ray *ray, t_cyl *cy, t_3D_point *pt)
 {
-	float	t_top;
-	float	t_bot;
 	float	t_;
 
-	t_top = ((cy->height / 2) - ray->origin.z) / ray->dir.z;
-	t_bot = ((-cy->height / 2) - ray->origin.z) / ray->dir.z;
-	if (powf(ray->origin.x + t_top * ray->dir.x, 2) + \
-		powf(ray->origin.y + t_top * ray->dir.y, 2) <= powf(cy->radius, 2) && \
-		powf(ray->origin.x + t_bot * ray->dir.x, 2) + \
-		powf(ray->origin.y + t_bot * ray->dir.y, 2) <= powf(cy->radius, 2))
-	{
-		if (t_top * t_bot < 0)
-			t_ = max(t_top, t_bot);
-		else if (t_top < 0)
-			return (0);
-		else
-			t_ = min(t_top, t_bot);
-	}
-	else if (powf(ray->origin.x + t_bot * ray->dir.x, 2) + \
-		powf(ray->origin.y + t_bot * ray->dir.y, 2) <= powf(cy->radius, 2))
-	{
-		set_point(pt, ray->origin.x + t_bot * ray->dir.x, \
-		ray->origin.y + t_bot * ray->dir.y, ray->origin.z + t_bot * ray->dir.z);
-		return (1);
-	}
-	else
+	if (!cy_switch_val(ray, cy, &t_))
 		return (0);
+	set_point(pt, ray->origin.x + t_ * ray->dir.x, \
+		ray->origin.y + t_ * ray->dir.y, ray->origin.z + t_ * ray->dir.z);
+	return (1);
 }
 
 static int	dbl_intersection_pt_cy(t_ray *ray, t_cyl *cy, t_3D_point *pt, \
