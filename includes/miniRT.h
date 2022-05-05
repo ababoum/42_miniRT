@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 20:40:42 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:50:37 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_obj		*new_obj(t_data *data, void *ptr, int type);
 void		obj_add_back(t_obj **alst, t_obj *new);
 t_sphere	*new_sphere(t_data *data);
 t_plan		*new_plan(t_data *data);
-t_cylinder	*new_cylinder(t_data *data);
+t_cyl	*new_cylinder(t_data *data);
 
 // parsing
 void		parse_input(t_data *data, const char *path);
@@ -127,16 +127,19 @@ int			object_between(t_3D_point *p1, t_3D_point *p2, \
 				t_data *data);
 
 // intersections
-	// sphere
 void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
-void		analyze_ray_for_sphere(t_ray *ray, \
-				t_sphere *sp, int *color, float *distance);
+	// sphere
 int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
+void		get_color_sphere(t_ray *ray, \
+				t_sphere *sp, int *color, float *distance);
 	// plan
-void		analyze_ray_for_plan(t_ray *ray, \
+int			intersection_pt_pl(t_ray *ray, t_plan *pl, t_3D_point *pt);
+void		get_color_plan(t_ray *ray, \
 				t_plan *pl, int *color, float *distance);
 	// cylinder
-int			intersection_pt_cy(t_ray *ray, t_cylinder *cy, t_3D_point *pt);
+int			intersection_pt_cy(t_ray *ray, t_cyl *cy, t_3D_point *pt);
+void		get_color_cyl(t_ray *ray, \
+				t_cyl *cy, int *color, float *distance);
 
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);

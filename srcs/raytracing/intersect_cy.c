@@ -6,13 +6,13 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:23:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 20:56:29 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:11:50 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-static float	discriminant_cy(t_ray *ray, t_cylinder *cy, t_eq_param *eq_sys)
+static float	discriminant_cy(t_ray *ray, t_cyl *cy, t_eq_param *eq_sys)
 {
 	float	dr[3];
 
@@ -29,7 +29,7 @@ static float	discriminant_cy(t_ray *ray, t_cylinder *cy, t_eq_param *eq_sys)
 	return (powf(eq_sys->b, 2) - 4 * eq_sys->a * eq_sys->c);
 }
 
-static void	prepare_ray_for_cy(t_ray *ray, t_cylinder *cy)
+static void	prepare_ray_for_cy(t_ray *ray, t_cyl *cy)
 {
 	t_m4	mat;
 	float	rot_angles[2];
@@ -45,19 +45,25 @@ static void	prepare_ray_for_cy(t_ray *ray, t_cylinder *cy)
 	ray_mult_mat(ray, mat);
 }
 
-static int	intersection_cy_caps(t_ray *ray, t_cylinder *cy, t_3D_point *pt)
+static int	intersection_cy_caps(t_ray *ray, t_cyl *cy, t_3D_point *pt)
 {
 	float	t_top;
 	float	t_bot;
+	float	t_;
 
 	t_top = ((cy->height / 2) - ray->origin.z) / ray->dir.z;
 	t_bot = ((-cy->height / 2) - ray->origin.z) / ray->dir.z;
 	if (powf(ray->origin.x + t_top * ray->dir.x, 2) + \
-		powf(ray->origin.y + t_top * ray->dir.y, 2) <= powf(cy->radius, 2))
+		powf(ray->origin.y + t_top * ray->dir.y, 2) <= powf(cy->radius, 2) && \
+		powf(ray->origin.x + t_bot * ray->dir.x, 2) + \
+		powf(ray->origin.y + t_bot * ray->dir.y, 2) <= powf(cy->radius, 2))
 	{
-		set_point(pt, ray->origin.x + t_top * ray->dir.x, \
-		ray->origin.y + t_top * ray->dir.y, ray->origin.z + t_top * ray->dir.z);
-		return (1);
+		if (t_top * t_bot < 0)
+			t_ = max(t_top, t_bot);
+		else if (t_top < 0)
+			return (0);
+		else
+			t_ = min(t_top, t_bot);
 	}
 	else if (powf(ray->origin.x + t_bot * ray->dir.x, 2) + \
 		powf(ray->origin.y + t_bot * ray->dir.y, 2) <= powf(cy->radius, 2))
@@ -70,7 +76,7 @@ static int	intersection_cy_caps(t_ray *ray, t_cylinder *cy, t_3D_point *pt)
 		return (0);
 }
 
-static int	dbl_intersection_pt_cy(t_ray *ray, t_cylinder *cy, t_3D_point *pt, \
+static int	dbl_intersection_pt_cy(t_ray *ray, t_cyl *cy, t_3D_point *pt, \
 	t_eq_param eq_sys)
 {
 	float	t[2];
@@ -98,7 +104,7 @@ static int	dbl_intersection_pt_cy(t_ray *ray, t_cylinder *cy, t_3D_point *pt, \
 	return (0);
 }
 
-int	intersection_pt_cy(t_ray *ray, t_cylinder *cy, t_3D_point *pt)
+int	intersection_pt_cy(t_ray *ray, t_cyl *cy, t_3D_point *pt)
 {
 	t_eq_param	eq_sys;
 	float		t[2];
@@ -106,12 +112,11 @@ int	intersection_pt_cy(t_ray *ray, t_cylinder *cy, t_3D_point *pt)
 	prepare_ray_for_cy(ray, cy);
 	eq_sys.delta = discriminant_cy(ray, cy, &eq_sys);
 	if (eq_sys.delta < 0)
-		return (0); // can also intersect with caps :-(
+		return (intersection_cy_caps(ray, cy, pt));
 	else if (eq_sys.delta == 0)
 	{
 		t[0] = -eq_sys.b / (2 * eq_sys.a);
-		if (ray->origin.z + ray->dir.z * t[0] > cy->height / 2 || \
-			ray->origin.z + ray->dir.z * t[0] < -cy->height / 2)
+		if (ffabs(ray->origin.z + ray->dir.z * t[0]) > cy->height / 2)
 			return (0);
 		else if (t[0] < 0)
 			return (0);

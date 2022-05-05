@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersect_pl.c                                     :+:      :+:    :+:   */
+/*   intersect_cy2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/28 12:02:08 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 11:48:21 by mababou          ###   ########.fr       */
+/*   Created: 2022/05/05 12:12:49 by mababou           #+#    #+#             */
+/*   Updated: 2022/05/05 12:15:48 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-// warning: the ray needs to be normalized
-int	intersection_pt_pl(t_ray *ray, t_plan *pl, t_3D_point *pt)
+int	is_cap_intersected(t_ray *ray, t_cyl *cy, float t)
 {
-	float	disc[2];
-
-	disc[0] = scalar(pl->normal, vector(pl->point, ray->origin));
-	disc[1] = scalar(pl->normal, ray->dir);
-	if (disc[1] == 0 || disc[0] == 0)
+	if (powf(ray->origin.x + t * ray->dir.x, 2) + \
+		powf(ray->origin.y + t * ray->dir.y, 2) <= powf(cy->radius, 2))
+		return (1);
+	else
 		return (0);
-	set_point(pt, ray->origin.x + (disc[0] / disc[1]) * ray->dir.x,
-		ray->origin.y + (disc[0] / disc[1]) * ray->dir.y,
-		ray->origin.z + (disc[0] / disc[1]) * ray->dir.z);
-	return (1);
 }

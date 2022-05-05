@@ -31,8 +31,10 @@ SRCS		= ./srcs/main.c \
 				./srcs/maths/angles.c \
 				./srcs/raytracing/rays.c \
 				./srcs/raytracing/intersect_sp.c \
+				./srcs/raytracing/ray_on_obj.c \
 				./srcs/raytracing/intersect_pl.c \
 				./srcs/raytracing/intersect_cy.c \
+				./srcs/raytracing/intersect_cy2.c \
 				./srcs/raytracing/vision_field.c \
 				./srcs/raytracing/sorting.c \
 				./srcs/maths/vectors1.c \

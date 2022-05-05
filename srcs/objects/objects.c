@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 17:13:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/27 18:14:59 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:45:03 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ t_plan	*new_plan(t_data *data)
 	return (plan);
 }
 
-t_cylinder	*new_cylinder(t_data *data)
+t_cyl	*new_cylinder(t_data *data)
 {
-	t_cylinder	*cylinder;
+	t_cyl	*cylinder;
 
-	cylinder = malloc_log(data, sizeof(t_cylinder));
+	cylinder = malloc_log(data, sizeof(t_cyl));
 	obj_add_back(&(data->obj_lst), new_obj(data, cylinder, CYLINDER));
 	return (cylinder);
 }

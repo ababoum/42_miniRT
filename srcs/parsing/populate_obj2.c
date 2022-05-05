@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:57:04 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:15:10 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	populate_sphere(t_data *data, char *line)
 
 void	populate_cyl(t_data *data, char *line)
 {
-	char		**tab;
-	char		**arg;
-	t_cylinder	*obj;
+	char	**tab;
+	char	**arg;
+	t_cyl	*obj;
 
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Cylinder", tab_len(tab));

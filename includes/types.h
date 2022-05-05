@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 20:30:57 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:57:26 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ typedef struct s_cylinder {
 	float		radius;
 	float		height;
 	int			rgb[3];
-}	t_cylinder;
+}	t_cyl;
 
 typedef struct s_cone {
 	t_3D_point	center;
@@ -148,13 +148,18 @@ typedef struct s_cone {
 	int			rgb[3];
 }	t_cone;
 
-
 typedef struct s_eq_param {
 	float	a;
 	float	b;
 	float	c;
 	float	delta;
 }	t_eq_param;
+
+typedef struct s_impact {
+	float		distance;
+	t_3D_point	point;
+	t_vec		normal;
+}	t_impact;
 
 typedef void	(*t_pop_fn)(t_data *, char *);
 

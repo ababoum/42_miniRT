@@ -1,0 +1,5 @@
+A	0.5									200,200,200
+C	0,0,0		0,0,-1		70
+L	-40,0,30					0.7		100,100,100
+# cylinder / center / direction / diametre / hauteur / rgb
+cy	0,0,-15		0,1,1		6 	10	10,30,255

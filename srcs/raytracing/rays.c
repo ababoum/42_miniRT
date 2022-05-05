@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:18:57 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 17:58:16 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/05 11:59:29 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,17 @@ int compute_pixel_color(t_ray *ray, t_data *data)
 
 	color = 0;
 	obj = data->obj_lst;
-
 	distance = -1;
-
 	while (obj)
 	{
 		if (obj->type == SPHERE)
-			analyze_ray_for_sphere(ray, (t_sphere *)(obj->ptr), &color, &distance);
+			get_color_sphere(ray, (t_sphere *)(obj->ptr), &color, &distance);
 		else if (obj->type == PLAN)
-			analyze_ray_for_plan(ray, (t_plan *)(obj->ptr), &color, &distance);
+			get_color_plan(ray, (t_plan *)(obj->ptr), &color, &distance);
+		else if (obj->type == CYLINDER)
+			get_color_cyl(ray, (t_cyl *)(obj->ptr), &color, &distance);
 		obj = obj->next;
 	}
-
 	return (color);
 }
 
