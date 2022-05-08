@@ -1,9 +1,11 @@
 A	0.5									200,200,200
-C	0,0,0		0,0,-1		70
+C	0,0,0		0,0,-1		30
 L	-40,0,30					0.7		100,100,100
 # orange plan
 pl	0,0,-50				0,0,1			235,210,52
 # red sphere in the middle 
 sp	0,0,-10					5			255,0,0
-sp	10,10,-10				5			0,255,0
-sp	-10,-10,-10				5			0,0,255
+# green sphere in the top-right
+sp	2,2,-10				3			0,255,0
+# blue sphere in the bottom-left
+sp	-2,-2,-10				3			0,0,255

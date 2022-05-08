@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:23:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 14:21:53 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/08 16:03:25 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static float	discriminant_cy(t_ray *ray, t_cyl *cy, t_eq_param *eq_sys)
 	return (powf(eq_sys->b, 2) - 4 * eq_sys->a * eq_sys->c);
 }
 
+// I need cy->dir to be aligned with (OY)
 static void	prepare_ray_for_cy(t_ray *ray, t_cyl *cy)
 {
 	t_m4	mat;

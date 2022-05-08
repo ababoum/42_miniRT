@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 16:10:14 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/08 16:19:27 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void		obj_add_back(t_obj **alst, t_obj *new);
 t_sphere	*new_sphere(t_data *data);
 t_plan		*new_plan(t_data *data);
 t_cyl		*new_cylinder(t_data *data);
+t_cone		*new_cone(t_data *data); // BONUS
 
 // parsing
 void		parse_input(t_data *data, const char *path);
@@ -78,6 +79,7 @@ int			verify_file(t_data *data, const char *path);
 void		check_line_args(t_data *data, char *type, int argc);
 void		check_scene_setting(t_data *data, int setting_type);
 void		check_arg(t_data *data, char **arg, int argc, char *msg_if_fail);
+void		check_line_args_bonus(t_data *data, char *type, int argc); // BONUS
 
 // populate data
 void		populate_amb(t_data *data, char *line);
@@ -86,6 +88,7 @@ void		populate_cam(t_data *data, char *line);
 void		populate_plan(t_data *data, char *line);
 void		populate_sphere(t_data *data, char *line);
 void		populate_cyl(t_data *data, char *line);
+void		populate_cn(t_data *data, char *line); // BONUS
 
 // Screen drawing
 void		pixel_put(t_data *data, int x, int y, int color);

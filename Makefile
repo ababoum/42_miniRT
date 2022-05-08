@@ -14,53 +14,56 @@ CC			= @gcc
 CFLAGS		= -Wall -Wextra -Werror -g -lm
 
 
-SRCS		= ./srcs/main.c \
-				./srcs/objects/obj_lst.c \
-				./srcs/objects/objects.c \
-				./srcs/objects/light_lst.c \
-				./srcs/image_tools/2D_drawing.c \
-				./srcs/image_tools/colors.c \
-				./srcs/image_tools/rgb.c \
-				./srcs/memory/frees.c \
-				./srcs/memory/memory_log.c \
-				./srcs/memory/data_access.c \
-				./srcs/mlx_tools/mlx_utils.c \
-				./srcs/mlx_tools/mlx_events.c \
-				./srcs/maths/math_fns.c \
-				./srcs/maths/distance.c \
-				./srcs/maths/3D_geo.c \
-				./srcs/maths/angles.c \
-				./srcs/raytracing/rays.c \
-				./srcs/raytracing/intersect_sp.c \
-				./srcs/raytracing/ray_on_obj.c \
-				./srcs/raytracing/intersect_pl.c \
-				./srcs/raytracing/intersect_cy.c \
-				./srcs/raytracing/intersect_cy2.c \
-				./srcs/raytracing/vision_field.c \
-				./srcs/raytracing/sorting.c \
-				./srcs/maths/vectors1.c \
-				./srcs/maths/vectors2.c \
-				./srcs/maths/vectors3.c \
-				./srcs/misc_tools/str_display.c \
-				./srcs/misc_tools/inits.c \
-				./srcs/misc_tools/tab_len.c \
-				./srcs/misc_tools/atof.c \
-				./srcs/misc_tools/atoi.c \
-				./srcs/parsing/get_next_line.c \
-				./srcs/parsing/get_next_line_utils.c \
-				./srcs/parsing/parse_file.c \
-				./srcs/parsing/checks.c \
-				./srcs/parsing/strings_functions.c \
-				./srcs/parsing/split.c \
-				./srcs/parsing/populate_obj.c \
-				./srcs/parsing/populate_obj2.c \
-				./srcs/ft3d/ft3d_perspective.c \
-				./srcs/ft3d/ft3d_resize.c \
-				./srcs/ft3d/ft3d_rotate.c \
-				./srcs/ft3d/ft3d_set.c \
-				./srcs/ft3d/ft3d_setrot.c \
-				./srcs/ft3d/ft3d_translate.c \
-				./srcs/ft3d/ft3d.c \
+SRCS		= srcs/main.c \
+				srcs/objects/obj_lst.c \
+				srcs/objects/objects.c \
+				srcs/objects/light_lst.c \
+				srcs/objects/objects_bonus.c \
+				srcs/image_tools/screen.c \
+				srcs/image_tools/colors.c \
+				srcs/image_tools/rgb.c \
+				srcs/memory/frees.c \
+				srcs/memory/memory_log.c \
+				srcs/memory/data_access.c \
+				srcs/mlx_tools/mlx_utils.c \
+				srcs/mlx_tools/mlx_events.c \
+				srcs/maths/math_fns.c \
+				srcs/maths/distance.c \
+				srcs/maths/3D_geo.c \
+				srcs/maths/angles.c \
+				srcs/raytracing/rays.c \
+				srcs/raytracing/intersect_sp.c \
+				srcs/raytracing/ray_on_obj.c \
+				srcs/raytracing/intersect_pl.c \
+				srcs/raytracing/intersect_cy.c \
+				srcs/raytracing/intersect_cy2.c \
+				srcs/raytracing/vision_field.c \
+				srcs/raytracing/sorting.c \
+				srcs/maths/vectors1.c \
+				srcs/maths/vectors2.c \
+				srcs/maths/vectors3.c \
+				srcs/misc_tools/str_display.c \
+				srcs/misc_tools/inits.c \
+				srcs/misc_tools/tab_len.c \
+				srcs/misc_tools/atof.c \
+				srcs/misc_tools/atoi.c \
+				srcs/parsing/get_next_line.c \
+				srcs/parsing/get_next_line_utils.c \
+				srcs/parsing/parse_file.c \
+				srcs/parsing/checks.c \
+				srcs/parsing/checks_bonus.c \
+				srcs/parsing/strings_functions.c \
+				srcs/parsing/split.c \
+				srcs/parsing/populate_obj.c \
+				srcs/parsing/populate_obj2.c \
+				srcs/parsing/populate_bonus.c \
+				srcs/ft3d/ft3d_perspective.c \
+				srcs/ft3d/ft3d_resize.c \
+				srcs/ft3d/ft3d_rotate.c \
+				srcs/ft3d/ft3d_set.c \
+				srcs/ft3d/ft3d_setrot.c \
+				srcs/ft3d/ft3d_translate.c \
+				srcs/ft3d/ft3d.c
 
 
 INCLUDES	= ./includes/miniRT.h \

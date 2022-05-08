@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 19:33:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 20:59:43 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/08 16:04:43 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static float	discriminant_cn(t_ray *ray, t_cone *cn, t_eq_param *eq_sys)
 	return (powf(eq_sys->b, 2) - 4 * eq_sys->a * eq_sys->c);
 }
 
+// We need cn->dir to be aligned with (OY)
 static void	prepare_ray_for_cn(t_ray *ray, t_cone *cn)
 {
 	t_m4	mat;

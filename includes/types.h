@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 15:43:05 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/08 16:17:50 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define SPHERE			0
 # define PLAN			1
 # define CYLINDER		2
+// BONUS OBJECTS
 # define CONE			3
 
 # define AMBIANCE		10
@@ -143,6 +144,7 @@ typedef struct s_cylinder {
 	int			rgb[3];
 }	t_cyl;
 
+// BONUS
 typedef struct s_cone {
 	t_3D_point	center;
 	t_vec		dir;
