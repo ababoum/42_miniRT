@@ -106,6 +106,8 @@ void		set_point(t_3D_point *pt, float x, float y, float z);
 int			check_dir_vector(t_vec vector);
 void		normalize(t_3D_point *ray);
 void		ray_mult_mat(t_ray *ray, t_m4 mat);
+void		pt3d_mult_mat(t_3D_point *pt, t_m4 mat);
+void		vec_mult_mat(t_vec *vec, t_m4 mat);
 
 // angles
 float		get_angle(float dx, float dy);
@@ -124,6 +126,7 @@ float		norm_v(t_vec *v);
 void		normalize(t_3D_point *pt);
 void		normalize_v(t_vec *v);
 t_vec		vec_prod(t_vec v1, t_vec v2);
+float		vec_dot(t_vec v1, t_vec v2);
 
 // sorting objects
 int			test_middle_f(float f1, float f2, float f3);

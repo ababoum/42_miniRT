@@ -25,16 +25,16 @@ void	set_rotation_y_mat(t_m4 *mat, float angle)
 {
 	set_identity(mat);
 	(*mat)[0] = cosf(angle);
-	(*mat)[1] = sinf(angle);
-	(*mat)[4] = -sinf(angle);
-	(*mat)[5] = cosf(angle);
+	(*mat)[2] = sinf(angle);
+	(*mat)[8] = -sinf(angle);
+	(*mat)[10] = cosf(angle);
 }
 
 void	set_rotation_z_mat(t_m4 *mat, float angle)
 {
 	set_identity(mat);
 	(*mat)[0] = cosf(angle);
-	(*mat)[2] = -sinf(angle);
-	(*mat)[8] = sinf(angle);
-	(*mat)[10] = cosf(angle);
+	(*mat)[1] = -sinf(angle);
+	(*mat)[4] = sinf(angle);
+	(*mat)[5] = cosf(angle);
 }

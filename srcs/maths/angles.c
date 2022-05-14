@@ -14,9 +14,9 @@
 
 float	get_angle(float dx, float dy)
 {
-	float	a;
+	double	a;
 
-	a = atanf(ffabs(dy) / ffabs(dx));
+	a = atan(fabs(dy) / fabs(dx));
 	if (dx > 0 && dy > 0)
 		return (a);
 	if (dx < 0 && dy > 0)

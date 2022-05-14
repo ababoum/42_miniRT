@@ -21,3 +21,13 @@ t_vec	vec_prod(t_vec u, t_vec v)
 	prod.z = u.x * v.y - u.y * v.x;
 	return (prod);
 }
+
+float	vec_dot(t_vec u, t_vec v)
+{
+	float	dot;
+
+	dot = u.x * v.x;
+	dot += u.y * v.y;
+	dot += u.z * v.z;
+	return (dot);
+}

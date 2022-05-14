@@ -58,6 +58,22 @@ void	pt3d_mult_mat(t_3D_point *pt, t_m4 mat)
 	pt->z = mat[8] * x + mat[9] * y + mat[10] * z + mat[11];
 }
 
+void	vec_mult_mat(t_vec *vec, t_m4 mat)
+{
+	float	x;
+	float	y;
+	float	z;
+
+	x = vec->x;
+	y = vec->y;
+	z = vec->z;
+
+	vec->x = mat[0] * x + mat[1] * y + mat[2] * z + mat[3];
+	vec->y = mat[4] * x + mat[5] * y + mat[6] * z + mat[7];
+	vec->z = mat[8] * x + mat[9] * y + mat[10] * z + mat[11];
+	(void)x;
+}
+
 void	ray_mult_mat(t_ray *ray, t_m4 mat)
 {
 	//transform direction to looking at

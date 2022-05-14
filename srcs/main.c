@@ -24,7 +24,7 @@ static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
 						data->cam->dir.y * data->cam->dir.y), \
 						data->cam->dir.z);
-	rotate_y_mat(mat, rot_angles[0]);
+	rotate_z_mat(mat, rot_angles[0]);
 	rotate_x_mat(mat, rot_angles[1]);
 }
 

@@ -80,6 +80,9 @@ void	get_color_cyl(t_ray *ray, t_cyl *cy, int *color, float *distance)
 {
 	t_data		*data;
 	t_3D_point	pt;
+	t_ray norm;
+
+	float v;
 	float		dist;
 
 	data = get_data(0, 0);
@@ -91,6 +94,19 @@ void	get_color_cyl(t_ray *ray, t_cyl *cy, int *color, float *distance)
 		*distance = dist;
 		*color = rgb_ambiant(arr_to_rgb(cy->rgb), \
 			data->amb->rgb, data->amb->grad);
+
+		set_point(&norm.origin, pt.x, pt.y, pt.z);
+		set_vector(&norm.dir, pt.x - cy->point.x, \
+            pt.y - cy->point.y, \
+            pt.z - cy->point.z);
+	    v = vec_dot(cy->dir, norm.dir);
+		norm.dir.x -= v * cy->dir.x;
+		norm.dir.y -= v * cy->dir.y;
+		norm.dir.z -= v * cy->dir.z;
+
+		normalize_v(&norm.dir);
+		*color = add_color(*color, \
+                        calc_spot(&norm, ray, data->light_lst, cy->rgb));
 		// spot ?
 	}
 }

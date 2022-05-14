@@ -1,4 +1,4 @@
-===== MAKEFILE ======
+    ===== MAKEFILE ======
 
 ( ) Find a way to compile minilibx and the project without relinks or ugly messages
 
@@ -31,6 +31,8 @@
 
 ===== DISPLAY ======
 
+( ) Exit when esc while loading image
+
 (X) Add the "objects overlap" handling in the display
 	(for example by storing the distance to the intersection, in addition to the color,
 	and updating it only if a distance is found to be smaller)
@@ -62,7 +64,7 @@
 -> Should we separate the mandatory specs from the bonus?
 	(for example, should we allow the light to have multiple sources?)
 
-
+-> Verifier l'ordre de la multiplication matricielle: A.B != B.A
 
 
 
