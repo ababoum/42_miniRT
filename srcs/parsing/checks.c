@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/18 12:35:01 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/18 13:55:58 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,19 @@ void	check_scene_setting(t_data *data, int setting_type)
 void	check_line_args(t_data *data, char *type, int argc)
 {
 	if (!ft_strcmp(type, "Ambiance") && argc != 2)
-	{
-		ft_putstr_fd("Ambiance: ", 2);
-		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
-	}
+		exit_message(data, "Ambiance: Incorrect number of parameters", \
+		EXIT_FAILURE);
 	else if (!ft_strcmp(type, "Cylinder") && argc != 5)
-	{
-		ft_putstr_fd("Cylinder: ", 2);
-		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
-	}
+		exit_message(data, "Cylinder: Incorrect number of parameters", EXIT_FAILURE);
+	else if ((!ft_strcmp(type, "Sphere") && BONUS_ON && argc != 4) || 
+		(!ft_strcmp(type, "Sphere") && !BONUS_ON && argc != 3))
+		exit_message(data, "Sphere: Incorrect number of parameters", \
+		EXIT_FAILURE);
 	else if (ft_strcmp(type, "Ambiance") && ft_strcmp(type, "Cylinder") && \
-		argc != 3)
+		ft_strcmp(type, "Sphere") && argc != 3)
 	{
 		ft_putstr_fd(type, 2);
-		ft_putstr_fd(": ", 2);
-		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
+		exit_message(data, ": Incorrect number of parameters", EXIT_FAILURE);
 	}
 }
 
