@@ -57,7 +57,7 @@
 
 
 # ifndef BONUS
-#  define BONUS_ON 0
+#  define BONUS_ON 1
 # endif
 
 # ifdef BONUS
@@ -146,6 +146,7 @@ typedef struct s_plan {
 	t_3D_point	point;
 	t_vec		normal;
 	int			rgb[3];
+	int			rgb2[3];
 }	t_plan;
 
 typedef struct s_cylinder {
@@ -154,6 +155,7 @@ typedef struct s_cylinder {
 	float		radius;
 	float		height;
 	int			rgb[3];
+	int			rgb2[3];
 }	t_cyl;
 
 // BONUS
@@ -173,8 +175,9 @@ typedef struct s_eq_param {
 
 typedef struct s_impact {
 	float		distance;
-	t_3D_point	point;
+	t_3D_point	pt;
 	t_vec		normal;
+	int			*rgb;
 }	t_impact;
 
 typedef void	(*t_pop_fn)(t_data *, char *);
