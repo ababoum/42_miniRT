@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 15:41:06 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/18 13:55:58 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	verify_file(t_data *data, const char *path)
 
 	if (ft_strlen(path) < 3 || ft_strcmp(path + ft_strlen(path) - 3, ".rt"))
 	{
-		ft_putstr_fd("Incorrect filename (extension should be .rt)\n", 2);
-		clear_exit(data, 1);
+		exit_message(data, "Incorrect filename (extension should be .rt)\n", \
+			EXIT_FAILURE);
 	}
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -46,33 +46,29 @@ void	check_scene_setting(t_data *data, int setting_type)
 		else
 			exit_message(data, "Only one ambiance is allowed", EXIT_FAILURE);
 	}
-	// else if (setting_type == LIGHT)
-	// {
-	// 	if (!data->light_lst)
-	// 		data->light_lst = malloc_log(data, sizeof(t_light));
-	// 	else
-	// 		exit_message(data, "One light source allowed", EXIT_FAILURE);
-	// }
+	else if (setting_type == LIGHT)
+	{
+		if (data->light_lst && !BONUS_ON)
+			exit_message(data, "One light source allowed", EXIT_FAILURE);
+	}
 }
 
 void	check_line_args(t_data *data, char *type, int argc)
 {
 	if (!ft_strcmp(type, "Ambiance") && argc != 2)
-	{
-		ft_putstr_fd("Ambiance: ", 2);
-		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
-	}
+		exit_message(data, "Ambiance: Incorrect number of parameters", \
+		EXIT_FAILURE);
 	else if (!ft_strcmp(type, "Cylinder") && argc != 5)
-	{
-		ft_putstr_fd("Cylinder: ", 2);
-		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
-	}
+		exit_message(data, "Cylinder: Incorrect number of parameters", EXIT_FAILURE);
+	else if ((!ft_strcmp(type, "Sphere") && BONUS_ON && argc != 4) || 
+		(!ft_strcmp(type, "Sphere") && !BONUS_ON && argc != 3))
+		exit_message(data, "Sphere: Incorrect number of parameters", \
+		EXIT_FAILURE);
 	else if (ft_strcmp(type, "Ambiance") && ft_strcmp(type, "Cylinder") && \
-		argc != 3)
+		ft_strcmp(type, "Sphere") && argc != 3)
 	{
 		ft_putstr_fd(type, 2);
-		ft_putstr_fd(": ", 2);
-		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
+		exit_message(data, ": Incorrect number of parameters", EXIT_FAILURE);
 	}
 }
 

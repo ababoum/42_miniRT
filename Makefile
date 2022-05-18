@@ -56,7 +56,7 @@ SRCS		= srcs/main.c \
 				srcs/parsing/split.c \
 				srcs/parsing/populate_obj.c \
 				srcs/parsing/populate_obj2.c \
-				srcs/parsing/populate_bonus.c \
+				srcs/parsing/populate_cn.c \
 				srcs/ft3d/ft3d_perspective.c \
 				srcs/ft3d/ft3d_resize.c \
 				srcs/ft3d/ft3d_rotate.c \
@@ -64,7 +64,6 @@ SRCS		= srcs/main.c \
 				srcs/ft3d/ft3d_setrot.c \
 				srcs/ft3d/ft3d_translate.c \
 				srcs/ft3d/ft3d.c
-
 
 INCLUDES	= ./includes/miniRT.h \
 				./includes/types.h \
@@ -95,6 +94,11 @@ clean:
 fclean:	clean
 		@rm -f $(NAME)
 		@echo "$(F_CYAN)$(F_BOLD) $(NAME) executable successfully deleted.$(F_NONE)"
+		
+
+bonus: $(OBJS) $(INCLUDES) #$(LIB_MLX)
+		$(CC) $(CFLAGS) $(OBJS) $(LIB_MLX) -D BONUS -o $(NAME) $(MLX_FLAGS)
+		@echo "$(F_GREEN)$(F_BOLD) $(NAME) bonus executable is compiled and ready.$(F_NONE)"
 
 re:	fclean $(NAME)
 
