@@ -51,12 +51,10 @@ SRCS		= srcs/main.c \
 				srcs/parsing/get_next_line_utils.c \
 				srcs/parsing/parse_file.c \
 				srcs/parsing/checks.c \
-				srcs/parsing/checks_bonus.c \
 				srcs/parsing/strings_functions.c \
 				srcs/parsing/split.c \
 				srcs/parsing/populate_obj.c \
 				srcs/parsing/populate_obj2.c \
-				srcs/parsing/populate_bonus.c \
 				srcs/ft3d/ft3d_perspective.c \
 				srcs/ft3d/ft3d_resize.c \
 				srcs/ft3d/ft3d_rotate.c \
@@ -65,12 +63,15 @@ SRCS		= srcs/main.c \
 				srcs/ft3d/ft3d_translate.c \
 				srcs/ft3d/ft3d.c
 
+SRCS_BONUS	= srcs/parsing/populate_bonus.c \
+				srcs/parsing/checks_bonus.c
 
 INCLUDES	= ./includes/miniRT.h \
 				./includes/types.h \
 				./includes/ft3d.h
 
 OBJS		= $(SRCS:.c=.o)
+OBJS_BONUS	= $(SRCS_BONUS:.c=.o)
 
 NAME		= miniRT
 
@@ -95,6 +96,11 @@ clean:
 fclean:	clean
 		@rm -f $(NAME)
 		@echo "$(F_CYAN)$(F_BOLD) $(NAME) executable successfully deleted.$(F_NONE)"
+		
+
+bonus: $(OBJS) $(OBJS_BONUS) $(INCLUDES) #$(LIB_MLX)
+		$(CC) $(CFLAGS) $(OBJS) $(OBJS_BONUS) $(LIB_MLX) -D BONUS -o $(NAME) $(MLX_FLAGS)
+		@echo "$(F_GREEN)$(F_BOLD) $(NAME) bonus executable is compiled and ready.$(F_NONE)"
 
 re:	fclean $(NAME)
 

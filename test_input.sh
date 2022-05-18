@@ -14,5 +14,3 @@ echo "6) Zero ambiance file"
 ./miniRT scenes/tests/0amb.rt
 echo "7) Zero light file"
 ./miniRT scenes/tests/0light.rt
-
-

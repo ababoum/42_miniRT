@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/18 11:00:18 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/18 12:43:58 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	parse_line_redir(t_data *data, char *line, char *type, int i)
 {
 	size_t			index;
-	const char		*obj_names[] = {"A", "C", "L", "sp", "pl", "cy"};
+	const char		*obj_names[] = {"A", "C", "L", "sp", "pl", "cy", "cn"};
 	const t_pop_fn	pop_fn_lst[] = {
 		populate_amb, populate_cam, populate_light, \
 		populate_sphere, populate_plan, populate_cyl \
@@ -24,6 +24,8 @@ static void	parse_line_redir(t_data *data, char *line, char *type, int i)
 	index = 0;
 	while (index < sizeof(obj_names) / sizeof(char *))
 	{
+		if (!ft_strcmp(type, "cn") && !BONUS_ON)
+			break ;
 		if (!ft_strcmp(type, obj_names[index]))
 		{
 			pop_fn_lst[index](data, line + i);
