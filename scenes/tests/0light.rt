@@ -1,0 +1,10 @@
+A	0.5									200,200,200
+C	0,0,0		0,0,-1		30
+# grey plan
+pl	0,0,-50				0,0,1			100,100,100
+# black sphere in the middle 
+sp	0,0,-10					5			0,0,0
+# red sphere to the right
+sp	2,0,-10					3			255,0,0
+# red sphere to the left
+sp	-2,0,-10				3			255,0,0

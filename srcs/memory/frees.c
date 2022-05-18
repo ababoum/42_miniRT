@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:56:37 by mababou           #+#    #+#             */
-/*   Updated: 2022/04/14 17:10:21 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/18 10:52:03 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	exit_message(t_data *data, char *message, int exit_code)
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd("\n", 2);
-	clear_exit(data, exit_code);
 	ft_putstr_fd(RESET_TXT, 2);
+	clear_exit(data, exit_code);
 }

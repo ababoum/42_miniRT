@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 15:24:24 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/18 11:00:18 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	parse_input(t_data *data, const char *path)
 		line = get_next_line(fd);
 	}
 	if (!data->cam)
-		exit_message(data, "Camera needed in the input file\n", EXIT_FAILURE);
+		exit_message(data, "Camera needed in the input file", EXIT_FAILURE);
 	if (!data->amb)
-		exit_message(data, "Ambiance needed in the input file\n", EXIT_FAILURE);
+		exit_message(data, "Ambiance needed in the input file", EXIT_FAILURE);
 	if (!data->light_lst)
-		exit_message(data, "Light needed in the input file\n", EXIT_FAILURE);
+		exit_message(data, "Light needed in the input file", EXIT_FAILURE);
 }

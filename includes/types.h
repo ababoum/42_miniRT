@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:17:50 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/18 10:58:24 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,14 @@
 # define CAMERA			12
 
 # define DAMIER_FACTOR	20
+
+# ifndef BONUS
+#  define BONUS_ON 0
+# endif
+
+# ifdef BONUS
+#  define BONUS_ON 1
+# endif
 
 typedef struct s_memlog {
 	void			*ptr;
