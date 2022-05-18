@@ -95,7 +95,7 @@ void		pixel_put(t_data *data, int x, int y, int color);
 
 // rays
 void		prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat);
-int			compute_pixel_color(t_ray *ray, t_data *data);
+int			compute_pixel_color(int pixel, t_data *data, t_m4 mat);
 int			calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb);
 void		set_direction_ray_pt(t_ray *ray, float x, float y, float z);
 
@@ -141,11 +141,11 @@ int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		get_color_sphere(t_ray *ray, \
 				t_sphere *sp, int *color, float *distance);
 	// plan
-int			intersection_pt_pl(t_ray *ray, t_plan *pl, t_3D_point *pt);
+int intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
 void		get_color_plan(t_ray *ray, \
 				t_plan *pl, int *color, float *distance);
 	// cylinder
-int			intersection_pt_cy(t_ray *ray, t_cyl *cy, t_3D_point *pt);
+int			intersection_impact_cy(t_ray *ray, t_cyl *cy, t_impact *impact);
 void		get_color_cyl(t_ray *ray, \
 				t_cyl *cy, int *color, float *distance);
 int			cy_switch_val(t_ray *ray, t_cyl *cy, float *t_);

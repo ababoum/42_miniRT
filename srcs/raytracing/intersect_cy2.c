@@ -15,7 +15,7 @@
 static int	is_cap_met(t_ray *ray, t_cyl *cy, float t, float *t_)
 {
 	if (powf(ray->origin.x + t * ray->dir.x, 2) + \
-		powf(ray->origin.y + t * ray->dir.y, 2) <= powf(cy->radius, 2))
+		powf(ray->origin.z + t * ray->dir.z, 2) <= powf(cy->radius, 2))
 	{
 		*t_ = t;
 		return (1);
@@ -26,8 +26,8 @@ static int	is_cap_met(t_ray *ray, t_cyl *cy, float t, float *t_)
 
 static void	init_cap_values(t_ray *ray, t_cyl *cy, float *t_top, float *t_bot)
 {
-	*t_top = ((cy->height / 2) - ray->origin.z) / ray->dir.z;
-	*t_bot = ((-cy->height / 2) - ray->origin.z) / ray->dir.z;
+	*t_top = ((cy->height / 2) - ray->origin.y) / ray->dir.y;
+	*t_bot = ((-cy->height / 2) - ray->origin.y) / ray->dir.y;
 }
 
 int	cy_switch_val(t_ray *ray, t_cyl *cy, float *t_)

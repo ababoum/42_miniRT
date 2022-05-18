@@ -52,6 +52,10 @@
 
 # define DAMIER_FACTOR	20
 
+// must be a divider of WIN_HEIGHT and WIN_WIDTH
+# define RENDERING_Q	1
+
+
 typedef struct s_memlog {
 	void			*ptr;
 	struct s_memlog	*next;
@@ -107,6 +111,8 @@ typedef struct s_light {
 	struct s_light	*next;
 }	t_light;
 
+
+
 typedef struct s_data {
 	void		*session;
 	void		*win;
@@ -134,6 +140,7 @@ typedef struct s_plan {
 	t_3D_point	point;
 	t_vec		normal;
 	int			rgb[3];
+	int			rgb2[3];
 }	t_plan;
 
 typedef struct s_cylinder {
@@ -142,6 +149,7 @@ typedef struct s_cylinder {
 	float		radius;
 	float		height;
 	int			rgb[3];
+	int			rgb2[3];
 }	t_cyl;
 
 // BONUS
@@ -161,9 +169,11 @@ typedef struct s_eq_param {
 
 typedef struct s_impact {
 	float		distance;
-	t_3D_point	point;
+	t_3D_point	pt;
 	t_vec		normal;
+	int			*rgb;
 }	t_impact;
+
 
 typedef void	(*t_pop_fn)(t_data *, char *);
 

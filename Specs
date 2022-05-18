@@ -19,10 +19,6 @@
 (X) Plan
 (X) Cylinder
 ( ) Cone
-( ) Hyperboloid
-( ) Paraboloid
-( ) Pyramid
-( ) Triangle
 
 -> Create a struct for the object
 -> Create a function to generate the object
@@ -65,6 +61,3 @@
 	(for example, should we allow the light to have multiple sources?)
 
 -> Verifier l'ordre de la multiplication matricielle: A.B != B.A
-
-
-

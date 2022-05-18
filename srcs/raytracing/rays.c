@@ -12,11 +12,11 @@
 
 #include "../../includes/miniRT.h"
 
-void	prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
+void prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
 {
-	float	ratio;
-	float	x_ecran;
-	float	y_ecran;
+	float ratio;
+	float x_ecran;
+	float y_ecran;
 
 	ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
 	x_ecran = (pos % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
@@ -39,31 +39,32 @@ void set_direction_ray_pt(t_ray *ray, float x, float y, float z)
 			   z - ray->origin.z);
 }
 
-int compute_pixel_color(t_ray *ray, t_data *data)
+int compute_pixel_color(int pixel, t_data *data, t_m4 mat)
 {
 	int color;
 	float distance;
 	t_obj *obj;
+	t_ray ray;
 
 	color = 0;
 	obj = data->obj_lst;
 	distance = -1;
 	while (obj)
 	{
+		prepare_initial_ray(&ray, data, pixel, mat);
 		if (obj->type == SPHERE)
-			get_color_sphere(ray, (t_sphere *)(obj->ptr), &color, &distance);
+			get_color_sphere(&ray, (t_sphere *) (obj->ptr), &color, &distance);
 		else if (obj->type == PLAN)
-			get_color_plan(ray, (t_plan *)(obj->ptr), &color, &distance);
+			get_color_plan(&ray, (t_plan *) (obj->ptr), &color, &distance);
 		else if (obj->type == CYLINDER)
-			get_color_cyl(ray, (t_cyl *)(obj->ptr), &color, &distance);
+			get_color_cyl(&ray, (t_cyl *) (obj->ptr), &color, &distance);
 		obj = obj->next;
 	}
 	return (color);
 }
 
-int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
+int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 {
-	(void) ray;
 	t_vec vec;
 	float f;
 	int color;
@@ -73,19 +74,24 @@ int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 	set_vector(&vec, light->src.x - norm->origin.x, \
         light->src.y - norm->origin.y, \
         light->src.z - norm->origin.z);
-	if (object_between(&light->src, &norm->origin, data))
-		return (0);
-	normalize_v(&vec);
-	f = scalar(vec, norm->dir);
-	if (f < 0)
-		f = 0;
-	color = (rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow));
-	//specular
-	if (f >= 0.98f)
+	color = 0;
+	if (!object_between(&light->src, &norm->origin, data))
 	{
-		f = (f - 0.98f) / 0.02f;
-		color = add_color(color, \
-            rgb_ambiant(arr_to_rgb(light->rgb), light->rgb, f * light->pow));
+		normalize_v(&vec);
+		f = scalar(vec, norm->dir);
+		if (f < 0)
+			f = 0;
+		color = (rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow));
+		//specular
+		if (f >= 0.98f)
+		{
+			f = (f - 0.98f) / 0.02f;
+			color = add_color(color,
+							  rgb_ambiant(arr_to_rgb(light->rgb), light->rgb,
+										  f * light->pow));
+		}
 	}
+	if (light->next)
+		color = add_color(color, calc_spot(norm, ray, light->next, rgb));
 	return (color);
 }
