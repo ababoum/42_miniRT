@@ -31,3 +31,13 @@ float	vec_dot(t_vec u, t_vec v)
 	dot += u.z * v.z;
 	return (dot);
 }
+
+float	pt_vec_dot(t_3D_point u, t_vec v)
+{
+	float	dot;
+
+	dot = u.x * v.x;
+	dot += u.y * v.y;
+	dot += u.z * v.z;
+	return (dot);
+}

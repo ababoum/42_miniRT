@@ -58,6 +58,8 @@ int compute_pixel_color(int pixel, t_data *data, t_m4 mat)
 			get_color_plan(&ray, (t_plan *) (obj->ptr), &color, &distance);
 		else if (obj->type == CYLINDER)
 			get_color_cyl(&ray, (t_cyl *) (obj->ptr), &color, &distance);
+		else if (obj->type == CONE)
+			get_color_cone(&ray, (t_cone *) (obj->ptr), &color, &distance);
 		obj = obj->next;
 	}
 	return (color);

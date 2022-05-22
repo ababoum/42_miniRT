@@ -20,3 +20,12 @@ float	distance_3d(t_3D_point A, t_3D_point B)
 			powf(A.z - B.z, 2) \
 			));
 }
+
+float	distance_3d_vec(t_vec A, t_vec  B)
+{
+	return (sqrtf(\
+			powf(A.x - B.x, 2) + \
+			powf(A.y - B.y, 2) + \
+			powf(A.z - B.z, 2) \
+			));
+}

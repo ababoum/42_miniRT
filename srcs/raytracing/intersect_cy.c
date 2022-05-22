@@ -12,25 +12,6 @@
 
 #include "../../includes/miniRT.h"
 
-float discriminant_cy(t_ray *ray, t_cyl *cy, t_eq_param *eq_sys)
-{
-	float dr[3];
-
-	dr[0] = ray->dir.x;
-	dr[1] = ray->dir.y;
-	dr[2] = ray->dir.z;
-	eq_sys->a = powf(dr[0], 2) + powf(dr[2], 2);
-	eq_sys->b = ray->origin.z * powf(dr[0], 2) + \
-                ray->origin.x * powf(dr[2], 2) + \
-                2 * ray->origin.x * powf(dr[0], 2) + \
-                2 * ray->origin.z * powf(dr[2], 2);
-	eq_sys->c = powf(ray->origin.x, 2) + powf(ray->origin.z, 2) - \
-                powf(cy->radius, 2);
-
-	return (powf(eq_sys->b, 2) - 4 * eq_sys->a * eq_sys->c);
-}
-
-
 void discriminant_cy_2(t_ray *ray, t_cyl *cy, t_eq_param *eq_sys)
 {
 	float dr[3];
@@ -162,22 +143,7 @@ int intersection_impact_cy(t_ray *ray, t_cyl *cy, t_impact *impact)
 	{
 		return (CAPS_ON * intersection_cy_caps(ray, cy, impact));
 	}
-//		return (0);
-		//TODO good or bad idea EPSILON?
-	/*else if (fabs(eq_sys.delta) < 0 * EPSILON)
-	{
-		t[0] = -eq_sys.b / (2 * eq_sys.a);
-		if (ffabs(ray->origin.y + ray->dir.y * t[0]) > cy->height / 2)
-			return (0);
-		else if (t[0] < 0)
-			return (0);
-		else
-		{
-			set_point(&(impact->pt), ray->origin.x + t[0] * ray->dir.x, \
-        ray->origin.y + t[0] * ray->dir.y, ray->origin.z + t[0] * ray->dir.z);
-			return (1);
-		}
-	} */else
+	else
 		return (dbl_intersection_pt_cy(ray, cy, impact, eq_sys));
 	return (0);
 }

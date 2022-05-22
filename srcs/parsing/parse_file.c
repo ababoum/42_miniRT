@@ -18,7 +18,7 @@ static void	parse_line_redir(t_data *data, char *line, char *type, int i)
 	const char		*obj_names[] = {"A", "C", "L", "sp", "pl", "cy", "cn"};
 	const t_pop_fn	pop_fn_lst[] = {
 		populate_amb, populate_cam, populate_light, \
-		populate_sphere, populate_plan, populate_cyl \
+		populate_sphere, populate_plan, populate_cyl, populate_cn \
 	};
 
 	index = 0;

@@ -127,6 +127,7 @@ void		normalize(t_3D_point *pt);
 void		normalize_v(t_vec *v);
 t_vec		vec_prod(t_vec v1, t_vec v2);
 float		vec_dot(t_vec v1, t_vec v2);
+float	pt_vec_dot(t_3D_point u, t_vec v);
 
 // sorting objects
 int			test_middle_f(float f1, float f2, float f3);
@@ -140,8 +141,10 @@ void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
 int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		get_color_sphere(t_ray *ray, \
 				t_sphere *sp, int *color, float *distance);
-	// plan
-int intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
+void 		get_color_cone(t_ray *ray, t_cone *cone, int *color, float *distance);
+
+// plan
+int 		intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
 void		get_color_plan(t_ray *ray, \
 				t_plan *pl, int *color, float *distance);
 	// cylinder
@@ -150,8 +153,12 @@ void		get_color_cyl(t_ray *ray, \
 				t_cyl *cy, int *color, float *distance);
 int			cy_switch_val(t_ray *ray, t_cyl *cy, float *t_);
 
+int			intersection_impact_cone(t_ray *ray, t_cone *cone, t_impact *impact);
+
+
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);
+float		distance_3d_vec(t_vec A, t_vec  B);
 float		ffabs(float f);
 float		max(float n1, float n2);
 float		min(float n1, float n2);

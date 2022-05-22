@@ -164,6 +164,7 @@ typedef struct s_cone {
 	t_vec		dir;
 	float		angle;
 	int			rgb[3];
+	int			rgb2[3];
 }	t_cone;
 
 typedef struct s_eq_param {
