@@ -65,6 +65,45 @@ int compute_pixel_color(int pixel, t_data *data, t_m4 mat)
 	return (color);
 }
 
+int calc_phong(t_ray *norm, t_ray *ray, t_light *light)
+{
+	t_vec vec;
+	t_vec vec_l;
+	int color;
+	float d;
+
+	color = 0;
+
+	if (!BONUS_ON)
+		return (0);
+
+	while (light)
+	{
+		set_vector(&vec_l, light->src.x - norm->origin.x,
+				   light->src.y - norm->origin.y,
+				   light->src.z - norm->origin.z);
+		normalize_v(&vec_l);
+		set_vector(&vec, vec_l.x - ray->dir.x,
+				   vec_l.y - ray->dir.y,
+				   vec_l.z - ray->dir.z);
+		normalize_v(&vec);
+
+		d = distance_3d(norm->origin, light->src);
+		vec.x = norm->origin.x + d * vec.x;
+		vec.y = norm->origin.y + d * vec.y;
+		vec.z = norm->origin.z + d * vec.z;
+
+		d = distance_3d_vec_pt(vec, light->src);
+		if (d < PHONG_SIZE)
+			color = add_color(color, rgb_factor(rgb_to_int(light->rgb),
+												1 - powf(d / PHONG_SIZE, 1)));
+
+		light = light->next;
+	}
+
+	return color;
+}
+
 int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 {
 	t_vec vec;
@@ -85,13 +124,6 @@ int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 			f = 0;
 		color = (rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow));
 		//specular
-		if (f >= 0.98f)
-		{
-			f = (f - 0.98f) / 0.02f;
-			color = add_color(color,
-							  rgb_ambiant(arr_to_rgb(light->rgb), light->rgb,
-										  f * light->pow));
-		}
 	}
 	if (light->next)
 		color = add_color(color, calc_spot(norm, ray, light->next, rgb));

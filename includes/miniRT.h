@@ -97,6 +97,7 @@ void		pixel_put(t_data *data, int x, int y, int color);
 void		prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat);
 int			compute_pixel_color(int pixel, t_data *data, t_m4 mat);
 int			calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb);
+int			calc_phong(t_ray *norm, t_ray *ray, t_light *light);
 void		set_direction_ray_pt(t_ray *ray, float x, float y, float z);
 
 // 3D geometry
@@ -127,7 +128,7 @@ void		normalize(t_3D_point *pt);
 void		normalize_v(t_vec *v);
 t_vec		vec_prod(t_vec v1, t_vec v2);
 float		vec_dot(t_vec v1, t_vec v2);
-float	pt_vec_dot(t_3D_point u, t_vec v);
+float		pt_vec_dot(t_3D_point u, t_vec v);
 
 // sorting objects
 int			test_middle_f(float f1, float f2, float f3);
@@ -159,6 +160,7 @@ int			intersection_impact_cone(t_ray *ray, t_cone *cone, t_impact *impact);
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);
 float		distance_3d_vec(t_vec A, t_vec  B);
+float		distance_3d_vec_pt(t_vec A, t_3D_point B);
 float		ffabs(float f);
 float		max(float n1, float n2);
 float		min(float n1, float n2);

@@ -50,6 +50,8 @@ void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 
 		*color = add_color(*color, \
                         calc_spot(&norm, ray, data->light_lst, color_obj));
+		*color = add_color(*color, \
+                        calc_phong(&norm, ray, data->light_lst));
 	}
 }
 
@@ -81,6 +83,8 @@ void get_color_plan(t_ray *ray, t_plan *pl, int *color, float *distance)
 		normalize_v(&norm.dir);
 		*color = add_color(*color, \
                         calc_spot(&norm, ray, data->light_lst, impact.rgb));
+		*color = add_color(*color, \
+                        calc_phong(&norm, ray, data->light_lst));
 	}
 }
 
@@ -134,6 +138,9 @@ void get_color_cyl(t_ray *ray, t_cyl *cy, int *color, float *distance)
 		normalize_v(&norm.dir);
 		*color = add_color(*color, \
                         calc_spot(&norm, ray, data->light_lst, impact.rgb));
+		*color = add_color(*color, \
+                        calc_phong(&norm, ray, data->light_lst));
+
 	}
 }
 
@@ -184,6 +191,9 @@ void get_color_cone(t_ray *ray, t_cone *cone, int *color, float *distance)
 		normalize_v(&norm.dir);
 		*color = add_color(*color, \
                         calc_spot(&norm, ray, data->light_lst, impact.rgb));
+
+		*color = add_color(*color, \
+                        calc_phong(&norm, ray, data->light_lst));
 		// spot ?
 	}
 }

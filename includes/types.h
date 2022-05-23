@@ -51,6 +51,7 @@
 # define CAMERA			12
 
 # define DAMIER_FACTOR	20
+# define PHONG_SIZE		1
 
 // must be a divider of WIN_HEIGHT and WIN_WIDTH
 # define RENDERING_Q	1

@@ -12,13 +12,12 @@
 ===== FILE PARSING ======
 
 ( ) Check if camera, ambiance or light is inexistant at the end of file parsing
-( ) Problem with light color, R switch with B
 
 ===== OBJECTS ======
 
 (X) Plan
 (X) Cylinder
-( ) Cone
+(X) Cone
 
 -> Create a struct for the object
 -> Create a function to generate the object
@@ -51,7 +50,7 @@
 
 ===== INPUT FILES ======
 
-( ) Find the input format for bonus objets
+(X) Find the input format for bonus objets
 ( ) Create or download example files
 
 
