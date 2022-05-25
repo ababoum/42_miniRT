@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft3d.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plefevre <plefevre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 23:19:32 by plefevre          #+#    #+#             */
-/*   Updated: 2022/01/08 00:56:54 by plefevre         ###   ########.fr       */
+/*   Updated: 2022/05/25 17:10:25 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_point	point_new(float x, float y, float z)
 	result.x = x;
 	result.y = y;
 	result.z = z;
-
 	return (result);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   populate_bonus.c                                   :+:      :+:    :+:   */
+/*   populate_cn.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:08:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:27:36 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 18:38:19 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ void	populate_cn(t_data *data, char *line)
 	arg = ft_split(data, tab[3], ",");
 	check_arg(data, arg, 3, "Incorrect Cone color settings");
 	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Cone color values", EXIT_FAILURE);
+	check_int_color("Incorrect Cone color values", obj->rgb);
 }

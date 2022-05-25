@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 15:50:35 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 18:42:39 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	populate_amb(t_data *data, char *line)
 	data->amb->rgb[0] = ft_atoi(rgb[0]);
 	data->amb->rgb[1] = ft_atoi(rgb[1]);
 	data->amb->rgb[2] = ft_atoi(rgb[2]);
-	if (!check_int_color(data->amb->rgb))
-		exit_message(data, "Incorrect 'Ambiance' color values", EXIT_FAILURE);
+	check_int_color("Incorrect 'Ambiance' color values", data->amb->rgb);
 }
 
 void	populate_light(t_data *data, char *line)
@@ -51,8 +50,7 @@ void	populate_light(t_data *data, char *line)
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect 'Light' color settings");
 	set_rgb(lux->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	if (!check_int_color(lux->rgb))
-		exit_message(data, "Incorrect 'Light' color values", EXIT_FAILURE);
+	check_int_color("Incorrect 'Light' color values", lux->rgb);
 }
 
 void	populate_cam(t_data *data, char *line)

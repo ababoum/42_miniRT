@@ -30,6 +30,7 @@ SRCS		= srcs/main.c \
 				srcs/maths/math_fns.c \
 				srcs/maths/distance.c \
 				srcs/maths/3D_geo.c \
+				srcs/maths/points.c \
 				srcs/maths/angles.c \
 				srcs/raytracing/rays.c \
 				srcs/raytracing/intersect_sp.c \
@@ -95,11 +96,6 @@ fclean:	clean
 		@rm -f $(NAME)
 		@echo "$(F_CYAN)$(F_BOLD) $(NAME) executable successfully deleted.$(F_NONE)"
 		
-
-bonus: $(OBJS) $(INCLUDES) #$(LIB_MLX)
-		$(CC) $(CFLAGS) $(OBJS) $(LIB_MLX) -D BONUS -o $(NAME) $(MLX_FLAGS)
-		@echo "$(F_GREEN)$(F_BOLD) $(NAME) bonus executable is compiled and ready.$(F_NONE)"
-
 re:	fclean $(NAME)
 
 .PHONY: clean fclean all re

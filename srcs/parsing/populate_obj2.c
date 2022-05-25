@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 19:00:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/18 14:01:32 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 18:46:03 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,9 @@ void	populate_plan(t_data *data, char *line)
 	obj->normal = vector_f(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect Plan color settings");
-	obj->rgb[0] = ft_atoi(arg[0]);
-	obj->rgb[1] = ft_atoi(arg[1]);
-	obj->rgb[2] = ft_atoi(arg[2]);
-	obj->rgb2[0] = obj->rgb[0] / 2;
-	obj->rgb2[1] = obj->rgb[1] / 2;
-	obj->rgb2[2] = obj->rgb[2] / 2;
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Plan color values", EXIT_FAILURE);
+	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	set_rgb(obj->rgb2, obj->rgb[0] / 2, obj->rgb[1] / 2, obj->rgb[2] / 2);
+	check_int_color("Incorrect Plan color values", obj->rgb);
 }
 
 void	populate_sphere(t_data *data, char *line)
@@ -54,17 +49,10 @@ void	populate_sphere(t_data *data, char *line)
 	obj->radius = ft_atof(tab[1]) / 2;
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect Sphere color settings");
-	obj->rgb[0] = ft_atoi(arg[0]);
-	obj->rgb[1] = ft_atoi(arg[1]);
-	obj->rgb[2] = ft_atoi(arg[2]);
+	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
 	if (BONUS_ON)
-	{
-		obj->rgb2[0] = obj->rgb[0] / 2;
-		obj->rgb2[1] = obj->rgb[1] / 2;
-		obj->rgb2[2] = obj->rgb[2] / 2;
-	}
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Sphere color values", EXIT_FAILURE);
+		set_rgb(obj->rgb2, obj->rgb[0] / 2, obj->rgb[1] / 2, obj->rgb[2] / 2);
+	check_int_color("Incorrect Sphere color values", obj->rgb);
 }
 
 void	populate_cyl(t_data *data, char *line)
@@ -92,9 +80,6 @@ void	populate_cyl(t_data *data, char *line)
 	arg = ft_split(data, tab[4], ",");
 	check_arg(data, arg, 3, "Incorrect Cylinder color settings");
 	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	obj->rgb2[0] = obj->rgb[0] / 2;
-	obj->rgb2[1] = obj->rgb[1] / 2;
-	obj->rgb2[2] = obj->rgb[2] / 2;
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Cylinder color values", EXIT_FAILURE);
+	set_rgb(obj->rgb2, obj->rgb[0] / 2, obj->rgb[1] / 2, obj->rgb[2] / 2);
+	check_int_color("Incorrect Cylinder color values", obj->rgb);
 }

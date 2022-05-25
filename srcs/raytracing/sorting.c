@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 19:45:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 15:09:35 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 19:22:18 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,15 @@ int	test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3)
 				&& test_middle_f(p1->z, p2->z, p3->z));
 }
 
+// does it only work for spheres?
 int	object_between(t_3D_point *p1, t_3D_point *p2, t_data *data)
 {
-	t_obj	*objs = data->obj_lst;
+	t_obj	*objs;
 	t_ray	ray;
 
+	objs = data->obj_lst;
 	set_point(&(&ray)->origin, p1->x, p1->y, p1->z);
 	set_direction_ray_pt(&ray, p2->x, p2->y, p2->z);
-
 	while (objs)
 	{
 		if (objs->type == SPHERE)
@@ -51,9 +52,9 @@ int	object_between(t_3D_point *p1, t_3D_point *p2, t_data *data)
 }
 
 // For optimization res is in arg, it must have size >= 3
-void projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res)
+void	projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res)
 {
-	float k;
+	float	k;
 
 	k = ray->dir.x * (pt->x - ray->origin.x) \
 		+ ray->dir.y * (pt->y - ray->origin.y) \

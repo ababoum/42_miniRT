@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/18 13:55:58 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 18:55:58 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ void	check_line_args(t_data *data, char *type, int argc)
 		exit_message(data, "Ambiance: Incorrect number of parameters", \
 		EXIT_FAILURE);
 	else if (!ft_strcmp(type, "Cylinder") && argc != 5)
-		exit_message(data, "Cylinder: Incorrect number of parameters", EXIT_FAILURE);
-	else if ((!ft_strcmp(type, "Sphere") && BONUS_ON && (argc != 4 && argc !=3)) ||
+		exit_message(data, \
+		"Cylinder: Incorrect number of parameters", EXIT_FAILURE);
+	else if ((!ft_strcmp(type, "Sphere") && BONUS_ON && \
+		(argc != 4 && argc != 3)) || \
 		(!ft_strcmp(type, "Sphere") && !BONUS_ON && argc != 3))
 		exit_message(data, "Sphere: Incorrect number of parameters", \
 		EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 11:47:25 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 15:24:13 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 19:09:24 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // get info about intersection with a given object
 
-void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
+void	get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 {
-	t_data *data;
+	t_data	*data;
 	t_ray norm;
 	t_3D_point pt;
 	int *color_obj;
@@ -36,7 +36,7 @@ void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 			color_obj = sp->rgb2;
 		dist = distance_3d(data->cam->pov, pt);
 		if (dist > *distance && *distance >= 0)
-			return;
+			return ;
 		*distance = dist;
 		// Ambiant light
 		*color = rgb_ambiant(arr_to_rgb(color_obj), \
@@ -84,11 +84,11 @@ void get_color_plan(t_ray *ray, t_plan *pl, int *color, float *distance)
 	}
 }
 
-void get_color_cyl(t_ray *ray, t_cyl *cy, int *color, float *distance)
+void	get_color_cyl(t_ray *ray, t_cyl *cy, int *color, float *distance)
 {
-	t_data *data;
-	t_impact impact;
-	t_ray norm;
+	t_data		*data;
+	t_impact	impact;
+	t_ray		norm;
 
 	float v;
 	float dist;
@@ -100,7 +100,7 @@ void get_color_cyl(t_ray *ray, t_cyl *cy, int *color, float *distance)
 	{
 		dist = distance_3d(data->cam->pov, impact.pt);
 		if (dist > *distance && *distance >= 0)
-			return;
+			return ;
 		*distance = dist;
 		*color = rgb_ambiant(arr_to_rgb(impact.rgb), \
             data->amb->rgb, data->amb->grad);

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:19:27 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 18:46:51 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		mlx_events(t_data *data);
 int			add_color(int rgb1, int rgb2);
 
 // colors
-int			check_int_color(int rgb[3]);
+void		check_int_color(char *message, int rgb[3]);
 int			rgb_to_int(int rgb[3]);
 void		set_rgb(int *rgb, int r, int g, int b);
 int			rgb_ambiant(int rgb, int *lrgb, float grad);
@@ -141,7 +141,7 @@ int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		get_color_sphere(t_ray *ray, \
 				t_sphere *sp, int *color, float *distance);
 	// plan
-int intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
+int			intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
 void		get_color_plan(t_ray *ray, \
 				t_plan *pl, int *color, float *distance);
 	// cylinder

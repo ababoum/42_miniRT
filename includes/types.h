@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:17:50 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 16:56:06 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 # define SPHERE			0
 # define PLAN			1
 # define CYLINDER		2
-// BONUS OBJECTS
 # define CONE			3
 
 # define AMBIANCE		10
@@ -52,17 +51,14 @@
 
 # define DAMIER_FACTOR	20
 
-// must be a divider of WIN_HEIGHT and WIN_WIDTH
-# define RENDERING_Q	1
-
-
-# ifndef BONUS
-#  define BONUS_ON 1
-# endif
-
 # ifdef BONUS
 #  define BONUS_ON 1
+# else
+#  define BONUS_ON 1
 # endif
+
+// must be a divider of WIN_HEIGHT and WIN_WIDTH
+# define RENDERING_Q	1
 
 typedef struct s_memlog {
 	void			*ptr;

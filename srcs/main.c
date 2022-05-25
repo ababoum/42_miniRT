@@ -6,51 +6,50 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 18:14:48 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/25 16:57:35 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 
 // the matrix is used to set the casted rays as coming from the camera
-static void prepare_camera_mat(t_data *data, t_m4 *mat)
+static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 {
-	float rot_angles[2];
+	float	rot_angles[2];
 
 	set_identity(mat);
 	translate_mat(mat, data->cam->pov.x, \
-        data->cam->pov.y, data->cam->pov.z);
+		data->cam->pov.y, data->cam->pov.z);
 	rot_angles[0] = get_angle(data->cam->dir.x, data->cam->dir.y);
 	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
-                        data->cam->dir.y * data->cam->dir.y), \
-                        data->cam->dir.z);
+								data->cam->dir.y * data->cam->dir.y), \
+								data->cam->dir.z);
 	rotate_z_mat(mat, rot_angles[0]);
 	rotate_x_mat(mat, rot_angles[1]);
 }
 
-int transform_pixel(int i)
+int	transform_pixel(int i)
 {
-	int line_b;
-	int square;
-	int x_square;
-	int y_square;
+	int	line_b;
+	int	square;
+	int	x_square;
+	int	y_square;
 
 	line_b = (i / (RENDERING_Q * WIN_WIDTH)) * (RENDERING_Q * WIN_WIDTH);
 	square = (i - line_b) / (RENDERING_Q * RENDERING_Q) * RENDERING_Q;
 	x_square = i % RENDERING_Q;
 	y_square = i % (RENDERING_Q * RENDERING_Q) / RENDERING_Q;
-
 	return (i);
 	return (line_b + square + WIN_WIDTH * y_square + x_square);
 }
 
-void draw_data(t_data *data)
+void	draw_data(t_data *data)
 {
-	t_m4 mat;
-	int i;
-	int j;
-	int pixel;
-	int color;
+	t_m4	mat;
+	int		i;
+	int		j;
+	int		pixel;
+	int		color;
 
 	prepare_camera_mat(data, &mat);
 	i = 0;
@@ -62,9 +61,7 @@ void draw_data(t_data *data)
 		while (j < RENDERING_Q * RENDERING_Q)
 		{
 			pixel = transform_pixel(i);
-			pixel_put(data, pixel % WIN_WIDTH, pixel / WIN_WIDTH,
-					  color
-			);
+			pixel_put(data, pixel % WIN_WIDTH, pixel / WIN_WIDTH, color);
 			i++;
 			j++;
 		}
@@ -72,9 +69,9 @@ void draw_data(t_data *data)
 	printf("Image ready\n");
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	if (ac != 2)
 	{
