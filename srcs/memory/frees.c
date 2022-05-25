@@ -49,7 +49,7 @@ void	clear_exit(t_data *data, int exit_code)
 void	exit_message(t_data *data, char *message, int exit_code)
 {
 	ft_putstr_fd(RED_TXT, 2);
-	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd("Error: \n", 2);
 	ft_putstr_fd(message, 2);
 	ft_putstr_fd("\n", 2);
 	ft_putstr_fd(RESET_TXT, 2);

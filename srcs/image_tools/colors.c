@@ -23,7 +23,7 @@ int	check_int_color(int rgb[3])
 
 int	rgb_to_int(int rgb[3])
 {
-	return (0xFFFF * rgb[0] + 0xFF * rgb[1] + rgb[2]);
+	return (0x10000 * rgb[0] + 0x100 * rgb[1] + rgb[2]);
 }
 
 int	add_color(int rgb1, int rgb2)

@@ -44,7 +44,7 @@ int transform_pixel(int i)
 	return (line_b + square + WIN_WIDTH * y_square + x_square);
 }
 
-void draw_data(t_data *data)
+void draw_data(t_data *data, int start, int end)
 {
 	t_m4 mat;
 	int i;
@@ -53,8 +53,8 @@ void draw_data(t_data *data)
 	int color;
 
 	prepare_camera_mat(data, &mat);
-	i = 0;
-	while (i < WIN_WIDTH * WIN_HEIGHT)
+	i = start;
+	while (i < end)
 	{
 		j = 0;
 		pixel = transform_pixel(i);
@@ -69,7 +69,19 @@ void draw_data(t_data *data)
 			j++;
 		}
 	}
-	printf("Image ready\n");
+}
+
+int render(t_data *data)
+{
+	static int i = 0;
+
+	if (i < WIN_HEIGHT * WIN_WIDTH)
+	{
+		draw_data(data, i, i + WIN_WIDTH);
+		i+=WIN_WIDTH;
+		mlx_put_image_to_window(data->session, data->win, data->img->ptr, 0, 0);
+	}
+	return (0);
 }
 
 int main(int ac, char **av)
@@ -85,10 +97,8 @@ int main(int ac, char **av)
 	if (!data)
 		return (EXIT_FAILURE);
 	data_init(data, av[1]);
-	mlx_start(data);
-	img_init(data);
-	draw_data(data);
-	mlx_put_image_to_window(data->session, data->win, data->img->ptr, 0, 0);
 	mlx_events(data);
+	mlx_loop_hook(data->session, render, data);
 	mlx_loop(data->session);
+	return (0);
 }

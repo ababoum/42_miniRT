@@ -40,3 +40,9 @@ int	rgb_ambiant(int rgb, int *amb_rgb, float grad)
 	b *= grad * amb_rgb[2] / 256;
 	return (b + g * 256 + r * 65536);
 }
+void rgb_cpy(const int *rgb1, int *rgb2)
+{
+	rgb2[0] = rgb1[0];
+	rgb2[1] = rgb1[1];
+	rgb2[2] = rgb1[2];
+}

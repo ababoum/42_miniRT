@@ -35,7 +35,14 @@ void	populate_cn(t_data *data, char *line)
 	arg = ft_split(data, tab[3], ",");
 	check_arg(data, arg, 3, "Incorrect Cone color settings");
 	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	set_rgb(obj->rgb2, ft_atoi(arg[0]) / 2, ft_atoi(arg[1]) / 2, ft_atoi(arg[2])/2);
+	if (BONUS_ON && tab_len(tab) == 5)
+	{
+		arg = ft_split(data, tab[4], ",");
+		check_arg(data, arg, 3, "Incorrect Sphere color settings");
+		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	}
+	else
+		rgb_cpy(obj->rgb, obj->rgb2);
 	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Cone color values", EXIT_FAILURE);
 }

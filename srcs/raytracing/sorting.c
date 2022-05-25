@@ -14,7 +14,7 @@
 
 int	test_middle_f(float f1, float f2, float f3)
 {
-	return ((f1 >= f2 && f2 >= f3) || (f1 <= f2 && f2 <= f3));
+	return ((f1 + EPSILON2>= f2 && f2 >= f3 - EPSILON2) || (f1-EPSILON2 <= f2 && f2 <= f3 + EPSILON2));
 }
 
 //test if p2 is beetween p2 and p3
@@ -29,12 +29,23 @@ int	object_between(t_3D_point *p1, t_3D_point *p2, t_data *data)
 {
 	t_obj	*objs = data->obj_lst;
 	t_ray	ray;
-
-	set_point(&(&ray)->origin, p1->x, p1->y, p1->z);
-	set_direction_ray_pt(&ray, p2->x, p2->y, p2->z);
+	t_impact impact;
 
 	while (objs)
 	{
+		set_point(&(&ray)->origin, p1->x, p1->y, p1->z);
+		set_direction_ray_pt(&ray, p2->x, p2->y, p2->z);
+
+		if (objs->type == PLAN)
+		{
+			t_plan *pl = (t_plan *) objs->ptr;
+			if (intersection_impact_pl(&ray, pl, &impact))
+			{
+				if (test_middle(p1, &impact.pt, p2) && distance_3d(*p2, impact.pt) > EPSILON)
+					return (1);
+			}
+		}
+
 		if (objs->type == SPHERE)
 		{
 			t_sphere *sp = (t_sphere *) objs->ptr;
@@ -42,6 +53,27 @@ int	object_between(t_3D_point *p1, t_3D_point *p2, t_data *data)
 			if (intersection_pt_sp(&ray, sp, &pt))
 			{
 				if (test_middle(p1, &pt, p2) && distance_3d(*p2, pt) > EPSILON)
+					return (1);
+			}
+		}
+
+
+		if (objs->type == CYLINDER)
+		{
+			t_cyl *cy = (t_cyl *) objs->ptr;
+			if (intersection_impact_cy(&ray, cy, &impact))
+			{
+				if (test_middle(p1, &(impact.pt), p2) && distance_3d(*p2, impact.pt) > 1*EPSILON)
+					return (1);
+			}
+		}
+
+		if (objs->type == CONE)
+		{
+			t_cone *cn = (t_cone *) objs->ptr;
+			if (intersection_impact_cone(&ray, cn, &impact))
+			{
+				if (test_middle(p1, &(impact.pt), p2) && distance_3d(*p2, impact.pt) > 1*EPSILON)
 					return (1);
 			}
 		}

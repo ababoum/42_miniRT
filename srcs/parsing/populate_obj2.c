@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/mman.h>
 #include "../../includes/miniRT.h"
+#include "../../minilibx-linux/mlx_int.h"
 
-void	populate_plan(t_data *data, char *line)
+void populate_plan(t_data *data, char *line)
 {
-	char		**tab;
-	char		**arg;
-	t_plan		*obj;
+	char **tab;
+	char **arg;
+	t_plan *obj;
 
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Plan", tab_len(tab));
@@ -29,21 +31,23 @@ void	populate_plan(t_data *data, char *line)
 	obj->normal = vector_f(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect Plan color settings");
-	obj->rgb[0] = ft_atoi(arg[0]);
-	obj->rgb[1] = ft_atoi(arg[1]);
-	obj->rgb[2] = ft_atoi(arg[2]);
-	obj->rgb2[0] = obj->rgb[0] / 2;
-	obj->rgb2[1] = obj->rgb[1] / 2;
-	obj->rgb2[2] = obj->rgb[2] / 2;
+	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	if (BONUS_ON && tab_len(tab) == 4)
+	{
+		arg = ft_split(data, tab[3], ",");
+		check_arg(data, arg, 3, "Incorrect Sphere color settings");
+		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	} else
+		rgb_cpy(obj->rgb, obj->rgb2);
 	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Plan color values", EXIT_FAILURE);
 }
 
-void	populate_sphere(t_data *data, char *line)
+void populate_sphere(t_data *data, char *line)
 {
-	char		**tab;
-	char		**arg;
-	t_sphere	*obj;
+	char **tab;
+	char **arg;
+	t_sphere *obj;
 
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Sphere", tab_len(tab));
@@ -54,32 +58,45 @@ void	populate_sphere(t_data *data, char *line)
 	obj->radius = ft_atof(tab[1]) / 2;
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect Sphere color settings");
-	obj->rgb[0] = ft_atoi(arg[0]);
-	obj->rgb[1] = ft_atoi(arg[1]);
-	obj->rgb[2] = ft_atoi(arg[2]);
-	if (BONUS_ON && tab_len(tab) == 4)
+	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	if (BONUS_ON && tab_len(tab) >= 4)
 	{
 		arg = ft_split(data, tab[3], ",");
 		check_arg(data, arg, 3, "Incorrect Sphere color settings");
-		obj->rgb2[0] =  ft_atoi(arg[0]);
-		obj->rgb2[1] =  ft_atoi(arg[1]);
-		obj->rgb2[2] =  ft_atoi(arg[2]);
-	}
-	else
+		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	} else
+		rgb_cpy(obj->rgb, obj->rgb2);
+	if (BONUS_ON && tab_len(tab) >= 5)
 	{
-		obj->rgb2[0] = obj->rgb[0];
-		obj->rgb2[1] = obj->rgb[1];
-		obj->rgb2[2] = obj->rgb[2];
+//		int fd = verify_file_png(data,tab[4]);
+//		(void)fd;
+		int w;
+		int h;
+		t_img *img;
+		img = mlx_xpm_file_to_image (data->session , tab[4], &w, &h );
+
+		if (img == 0)
+			exit_message(data, "Can't load texture.xpm", 4);
+		if (w != 512 || h != 512)
+			exit_message(data, "Bad texture.xpm size", 4);
+
+		int i = 0;
+		while (i < 512 * 512)
+		{
+			obj->texture[i] = *(img->data + 4 * i);
+			i++;
+		}
+		obj->isTexture = 1;
 	}
 	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Sphere color values", EXIT_FAILURE);
 }
 
-void	populate_cyl(t_data *data, char *line)
+void populate_cyl(t_data *data, char *line)
 {
-	char	**tab;
-	char	**arg;
-	t_cyl	*obj;
+	char **tab;
+	char **arg;
+	t_cyl *obj;
 
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Cylinder", tab_len(tab));
@@ -100,9 +117,14 @@ void	populate_cyl(t_data *data, char *line)
 	arg = ft_split(data, tab[4], ",");
 	check_arg(data, arg, 3, "Incorrect Cylinder color settings");
 	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	obj->rgb2[0] = obj->rgb[0] / 2;
-	obj->rgb2[1] = obj->rgb[1] / 2;
-	obj->rgb2[2] = obj->rgb[2] / 2;
+	if (BONUS_ON && tab_len(tab) == 6)
+	{
+		arg = ft_split(data, tab[5], ",");
+		check_arg(data, arg, 3, "Incorrect Sphere color settings");
+		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	} else
+		rgb_cpy(obj->rgb, obj->rgb2);
 	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Cylinder color values", EXIT_FAILURE);
 }
+

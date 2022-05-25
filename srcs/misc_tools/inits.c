@@ -22,5 +22,7 @@ void	data_init(t_data *data, const char *path)
 	data->light_lst = 0;
 	data->session = 0;
 	data->win = 0;
+	mlx_start(data);
+	img_init(data);
 	parse_input(data, path);
 }

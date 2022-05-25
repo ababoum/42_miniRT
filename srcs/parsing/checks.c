@@ -30,6 +30,25 @@ int	verify_file(t_data *data, const char *path)
 	return (fd);
 }
 
+int	verify_file_png(t_data *data, const char *path)
+{
+	int	fd;
+
+	if (ft_strlen(path) < 4 || ft_strcmp(path + ft_strlen(path) - 4, ".xpm"))
+	{
+		exit_message(data, "Incorrect filename (extension should be .xpm)\n", \
+			EXIT_FAILURE);
+	}
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		perror(path);
+		clear_exit(data, 1);
+	}
+	return (fd);
+}
+
+
 void	check_scene_setting(t_data *data, int setting_type)
 {
 	if (setting_type == CAMERA)
@@ -53,19 +72,22 @@ void	check_scene_setting(t_data *data, int setting_type)
 	}
 }
 
-void	check_line_args(t_data *data, char *type, int argc)
+int	check_line_args_2(char *type, int argc)
 {
-	if (!ft_strcmp(type, "Ambiance") && argc != 2)
-		exit_message(data, "Ambiance: Incorrect number of parameters", \
-		EXIT_FAILURE);
-	else if (!ft_strcmp(type, "Cylinder") && argc != 5)
-		exit_message(data, "Cylinder: Incorrect number of parameters", EXIT_FAILURE);
-	else if ((!ft_strcmp(type, "Sphere") && BONUS_ON && (argc != 4 && argc !=3)) ||
-		(!ft_strcmp(type, "Sphere") && !BONUS_ON && argc != 3))
-		exit_message(data, "Sphere: Incorrect number of parameters", \
-		EXIT_FAILURE);
-	else if (ft_strcmp(type, "Ambiance") && ft_strcmp(type, "Cylinder") && \
-		ft_strcmp(type, "Sphere") && argc != 3)
+	if (!ft_strcmp(type, "Ambiance"))
+		return (argc != 2);
+	if (!ft_strcmp(type, "Cylinder"))
+		return (!(argc == 5 || (BONUS_ON && argc == 6)));
+	if ((!ft_strcmp(type, "Sphere")))
+		return (!(argc == 3 || (BONUS_ON && argc == 4)|| (BONUS_ON && argc == 5)));
+	if ((!ft_strcmp(type, "Plan")))
+		return (!(argc == 3 || (BONUS_ON && argc == 4)));
+	return (argc != 3);
+}
+
+void 	check_line_args(t_data *data, char *type, int argc)
+{
+	if (check_line_args_2(type, argc))
 	{
 		ft_putstr_fd(type, 2);
 		exit_message(data, ": Incorrect number of parameters", EXIT_FAILURE);

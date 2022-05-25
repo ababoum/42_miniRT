@@ -76,6 +76,7 @@ t_cone		*new_cone(t_data *data); // BONUS
 // parsing
 void		parse_input(t_data *data, const char *path);
 int			verify_file(t_data *data, const char *path);
+int			verify_file_png(t_data *data, const char *path);
 void		check_line_args(t_data *data, char *type, int argc);
 void		check_scene_setting(t_data *data, int setting_type);
 void		check_arg(t_data *data, char **arg, int argc, char *msg_if_fail);
@@ -89,6 +90,9 @@ void		populate_plan(t_data *data, char *line);
 void		populate_sphere(t_data *data, char *line);
 void		populate_cyl(t_data *data, char *line);
 void		populate_cn(t_data *data, char *line); // BONUS
+
+void 		rgb_cpy(const int *rgb1, int *rgb2);
+
 
 // Screen drawing
 void		pixel_put(t_data *data, int x, int y, int color);

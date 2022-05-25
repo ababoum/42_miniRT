@@ -39,6 +39,7 @@
 # define BUFFER_SIZE	42
 
 # define EPSILON		0.0005
+# define EPSILON2		0.000001
 
 # define SPHERE			0
 # define PLAN			1
@@ -51,10 +52,11 @@
 # define CAMERA			12
 
 # define DAMIER_FACTOR	20
-# define PHONG_SIZE		1
+# define PHONG_SIZE		20
 
 // must be a divider of WIN_HEIGHT and WIN_WIDTH
 # define RENDERING_Q	1
+# define PAS_RENDERING	WIN_WIDTH
 
 
 # ifndef BONUS
@@ -94,13 +96,13 @@ typedef struct s_vec {
 	float	z;
 }	t_vec;
 
-typedef struct s_img {
+typedef struct s_img2 {
 	void	*ptr;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_img;
+}	t_img2;
 
 typedef struct s_ambiance {
 	float	grad;
@@ -123,7 +125,7 @@ typedef struct s_light {
 typedef struct s_data {
 	void		*session;
 	void		*win;
-	t_img		*img;
+	t_img2		*img;
 	t_memlog	*mem_lst;
 	t_obj		*obj_lst;
 	t_ambiance	*amb;
@@ -137,10 +139,12 @@ typedef struct s_ray {
 }	t_ray;
 
 typedef struct s_sphere {
-	t_3D_point	center;
-	float		radius;
-	int			rgb[3];
-	int			rgb2[3];
+	t_3D_point		center;
+	float			radius;
+	int				rgb[3];
+	int				rgb2[3];
+	unsigned char	texture[1024*1024];
+	int				isTexture;
 }	t_sphere;
 
 typedef struct s_plan {

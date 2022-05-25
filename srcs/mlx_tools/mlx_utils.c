@@ -31,9 +31,9 @@ void	mlx_start(t_data *data)
 
 void	img_init(t_data *data)
 {
-	t_img	*img;
+	t_img2	*img;
 
-	img = malloc_log(data, sizeof(t_img));
+	img = malloc_log(data, sizeof(t_img2));
 	data->img = img;
 	img->ptr = img_log(data, WIN_WIDTH, WIN_HEIGHT);
 	img->addr = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, \

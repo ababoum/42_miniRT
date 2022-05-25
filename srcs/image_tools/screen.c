@@ -16,7 +16,7 @@
 void	pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-	t_img	*img;
+	t_img2	*img;
 	int		x_img;
 	int		y_img;
 

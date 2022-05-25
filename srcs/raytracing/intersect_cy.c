@@ -126,8 +126,10 @@ int dbl_intersection_pt_cy(t_ray *ray, t_cyl *cy, t_impact *impact, \
 		return (1);
 	}
 	t_ = switch_val(t_, t[0], t[1]);
+/*
 	if (is_between(ray->origin.y + ray->dir.y * t_, \
                         -cy->height / 2, cy->height / 2))
+*/
 		return (CAPS_ON * intersection_cy_caps(ray, cy, impact));
 	return (0);
 }

@@ -12,6 +12,7 @@
 ===== FILE PARSING ======
 
 ( ) Check if camera, ambiance or light is inexistant at the end of file parsing
+( ) Message : "Error\n"
 
 ===== OBJECTS ======
 

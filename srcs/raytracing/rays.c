@@ -71,34 +71,36 @@ int calc_phong(t_ray *norm, t_ray *ray, t_light *light)
 	t_vec vec_l;
 	int color;
 	float d;
+	float n;
 
 	color = 0;
 
 	if (!BONUS_ON)
 		return (0);
 
-	while (light)
+	set_vector(&vec_l, light->src.x - norm->origin.x,
+			   light->src.y - norm->origin.y,
+			   light->src.z - norm->origin.z);
+	n = norm_v(&vec_l);
+	normalize_v(&vec_l);
+
+	d = -vec_dot(norm->dir, ray->dir);
+	set_vector(&vec,
+			   ray->dir.x + 2 * d * norm->dir.x,
+			   ray->dir.y + 2 * d * norm->dir.y,
+			   ray->dir.z + 2 * d * norm->dir.z
+	);
+	normalize_v(&vec);
+
+	d = acosf(vec_dot(vec, vec_l));
+
+	if (n > 0.1)
+		d *= n*n;
+	if (d < PHONG_SIZE)
 	{
-		set_vector(&vec_l, light->src.x - norm->origin.x,
-				   light->src.y - norm->origin.y,
-				   light->src.z - norm->origin.z);
-		normalize_v(&vec_l);
-		set_vector(&vec, vec_l.x - ray->dir.x,
-				   vec_l.y - ray->dir.y,
-				   vec_l.z - ray->dir.z);
-		normalize_v(&vec);
-
-		d = distance_3d(norm->origin, light->src);
-		vec.x = norm->origin.x + d * vec.x;
-		vec.y = norm->origin.y + d * vec.y;
-		vec.z = norm->origin.z + d * vec.z;
-
-		d = distance_3d_vec_pt(vec, light->src);
-		if (d < PHONG_SIZE)
-			color = add_color(color, rgb_factor(rgb_to_int(light->rgb),
-												1 - powf(d / PHONG_SIZE, 1)));
-
-		light = light->next;
+		d /= PHONG_SIZE;
+		color = add_color(color, rgb_factor(rgb_to_int(light->rgb),
+											light->pow * (1 - powf(d, 1))));
 	}
 
 	return color;
@@ -121,9 +123,11 @@ int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 		normalize_v(&vec);
 		f = scalar(vec, norm->dir);
 		if (f < 0)
-			f = 0;
+			f = -f;
 		color = (rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow));
-		//specular
+		color = add_color(color, \
+                        calc_phong(norm, ray, light));
+
 	}
 	if (light->next)
 		color = add_color(color, calc_spot(norm, ray, light->next, rgb));
