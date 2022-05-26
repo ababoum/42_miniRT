@@ -6,87 +6,83 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 14:52:02 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 19:08:33 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/miniRT.h"
 
 // the matrix is used to set the casted rays as coming from the camera
-static void prepare_camera_mat(t_data *data, t_m4 *mat)
+static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 {
-	float rot_angles[2];
+	float	rot_angles[2];
 
 	set_identity(mat);
 	translate_mat(mat, data->cam->pov.x, \
-        data->cam->pov.y, data->cam->pov.z);
+		data->cam->pov.y, data->cam->pov.z);
 	rot_angles[0] = get_angle(data->cam->dir.x, data->cam->dir.y);
 	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
-                        data->cam->dir.y * data->cam->dir.y), \
-                        data->cam->dir.z);
+		data->cam->dir.y * data->cam->dir.y), \
+		data->cam->dir.z);
 	rotate_z_mat(mat, rot_angles[0]);
 	rotate_x_mat(mat, rot_angles[1]);
 }
 
-int transform_pixel(int i)
+// why 2 returns?
+int	transform_pixel(int i)
 {
-	int line_b;
-	int square;
-	int x_square;
-	int y_square;
+	int	line_b;
+	int	square;
+	int	x_square;
+	int	y_square;
 
 	line_b = (i / (RENDERING_Q * WIN_WIDTH)) * (RENDERING_Q * WIN_WIDTH);
 	square = (i - line_b) / (RENDERING_Q * RENDERING_Q) * RENDERING_Q;
 	x_square = i % RENDERING_Q;
 	y_square = i % (RENDERING_Q * RENDERING_Q) / RENDERING_Q;
-
 	return (i);
 	return (line_b + square + WIN_WIDTH * y_square + x_square);
 }
 
-void draw_data(t_data *data, int start, int end)
+void	draw_data(t_data *data, int start, int end)
 {
-	t_m4 mat;
-	int i;
-	int j;
-	int pixel;
-	int color;
+	t_m4	mat;
+	int		i;
+	int		j;
+	int		color;
 
 	prepare_camera_mat(data, &mat);
 	i = start;
 	while (i < end)
 	{
 		j = 0;
-		pixel = transform_pixel(i);
-		color = compute_pixel_color(pixel, data, mat);
+		color = compute_pixel_color(transform_pixel(i), data, mat);
 		while (j < RENDERING_Q * RENDERING_Q)
 		{
-			pixel = transform_pixel(i);
-			pixel_put(data, pixel % WIN_WIDTH, pixel / WIN_WIDTH,
-					  color
-			);
+			pixel_put(data, transform_pixel(i) % WIN_WIDTH, \
+				transform_pixel(i) / WIN_WIDTH, color);
 			i++;
 			j++;
 		}
 	}
 }
 
-int render(t_data *data)
+int	render(t_data *data)
 {
-	static int i = 0;
+	static int	i = 0;
 
 	if (i < WIN_HEIGHT * WIN_WIDTH)
 	{
 		draw_data(data, i, i + WIN_WIDTH);
-		i+=WIN_WIDTH;
+		i += WIN_WIDTH;
 		mlx_put_image_to_window(data->session, data->win, data->img->ptr, 0, 0);
 	}
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	if (ac != 2)
 	{

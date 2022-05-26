@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 15:18:00 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 21:08:37 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		populate_cyl(t_data *data, char *line);
 void		populate_cn(t_data *data, char *line); // BONUS
 void		rgb_cpy(const int *rgb1, int *rgb2);
 
-// Screen drawing
+// screen drawing
 void		pixel_put(t_data *data, int x, int y, int color);
 
 // rays
@@ -146,22 +146,23 @@ int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		get_color_sphere(t_ray *ray, \
 				t_sphere *sp, int *color, float *distance);
 
-// plan
+	// plan
 int			intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
 void		get_color_plan(t_ray *ray, \
 				t_plan *pl, int *color, float *distance);
-// cylinder
+	// cylinder
 int			intersection_impact_cy(t_ray *ray, t_cyl *cy, t_impact *impact);
 void		get_color_cyl(t_ray *ray, \
 				t_cyl *cy, int *color, float *distance);
 int			cy_switch_val(t_ray *ray, t_cyl *cy, float *t_);
 
-// cone
+	// cone
 void		get_color_cone(t_ray *ray, \
 				t_cone *cone, int *color, float *distance);
 int			intersection_impact_cone(t_ray *ray, \
 				t_cone *cone, t_impact *impact);
-
+	// utils
+void		get_h(int *x, int *y, unsigned char *texture);
 
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);
@@ -173,9 +174,6 @@ float		min(float n1, float n2);
 int			rgb_factor(int rgb, float factor);
 float		switch_val(float n, float n1, float n2);
 int			is_between(float nb, float min, float max);
-
-// vision
-float		max_vision_axis(float fov);
 
 // tests
 void		draw_circle(t_data *data, t_2D_point *center, float radius);

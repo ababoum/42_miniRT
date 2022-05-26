@@ -6,17 +6,17 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:18:57 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/05 11:59:29 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 20:52:29 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-void prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
+void	prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
 {
-	float ratio;
-	float x_ecran;
-	float y_ecran;
+	float	ratio;
+	float	x_ecran;
+	float	y_ecran;
 
 	ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
 	x_ecran = (pos % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
@@ -37,12 +37,12 @@ void	set_direction_ray_pt(t_ray *ray, float x, float y, float z)
 				z - ray->origin.z);
 }
 
-int compute_pixel_color(int pixel, t_data *data, t_m4 mat)
+int	compute_pixel_color(int pixel, t_data *data, t_m4 mat)
 {
-	int color;
-	float distance;
-	t_obj *obj;
-	t_ray ray;
+	int		color;
+	float	distance;
+	t_obj	*obj;
+	t_ray	ray;
 
 	color = 0;
 	obj = data->obj_lst;
@@ -51,70 +51,29 @@ int compute_pixel_color(int pixel, t_data *data, t_m4 mat)
 	{
 		prepare_initial_ray(&ray, data, pixel, mat);
 		if (obj->type == SPHERE)
-			get_color_sphere(&ray, (t_sphere *) (obj->ptr), &color, &distance);
+			get_color_sphere(&ray, (t_sphere *)(obj->ptr), &color, &distance);
 		else if (obj->type == PLAN)
-			get_color_plan(&ray, (t_plan *) (obj->ptr), &color, &distance);
+			get_color_plan(&ray, (t_plan *)(obj->ptr), &color, &distance);
 		else if (obj->type == CYLINDER)
-			get_color_cyl(&ray, (t_cyl *) (obj->ptr), &color, &distance);
+			get_color_cyl(&ray, (t_cyl *)(obj->ptr), &color, &distance);
 		else if (obj->type == CONE)
-			get_color_cone(&ray, (t_cone *) (obj->ptr), &color, &distance);
+			get_color_cone(&ray, (t_cone *)(obj->ptr), &color, &distance);
 		obj = obj->next;
 	}
 	return (color);
 }
 
-int calc_phong(t_ray *norm, t_ray *ray, t_light *light)
+int	calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 {
-	t_vec vec;
-	t_vec vec_l;
-	int color;
-	float d;
-	float n;
-
-	color = 0;
-
-	if (!BONUS_ON)
-		return (0);
-
-	set_vector(&vec_l, light->src.x - norm->origin.x,
-			   light->src.y - norm->origin.y,
-			   light->src.z - norm->origin.z);
-	n = norm_v(&vec_l);
-	normalize_v(&vec_l);
-
-	d = -vec_dot(norm->dir, ray->dir);
-	set_vector(&vec,
-			   ray->dir.x + 2 * d * norm->dir.x,
-			   ray->dir.y + 2 * d * norm->dir.y,
-			   ray->dir.z + 2 * d * norm->dir.z
-	);
-	normalize_v(&vec);
-
-	d = acosf(vec_dot(vec, vec_l));
-
-	if (n > 0.1)
-		d *= n*n;
-	if (d < PHONG_SIZE)
-	{
-		d /= PHONG_SIZE;
-		color = add_color(color, rgb_factor(rgb_to_int(light->rgb),
-											light->pow * (1 - powf(d, 1))));
-	}
-
-	return color;
-}
-
-int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
-{
-	t_vec vec;
-	float f;
-	int color;
-	t_data *data;
+	t_vec	vec;
+	float	f;
+	int		color;
+	t_data	*data;
 
 	data = get_data(0, 0);
 	set_vector(&vec, light->src.x - norm->origin.x, \
-        light->src.y - norm->origin.y, \
-        light->src.z - norm->origin.z);
+		light->src.y - norm->origin.y, \
+		light->src.z - norm->origin.z);
 	color = 0;
 	if (!object_between(&light->src, &norm->origin, data))
 	{
@@ -122,11 +81,10 @@ int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 		f = scalar(vec, norm->dir);
 //		if (f < 0)
 //			f = -f;
-		if (f>=0)
+		if (f >= 0)
 		{
-			color = (rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow));
-			color = add_color(color, \
-                        calc_phong(norm, ray, light));
+			color = rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow);
+			color = add_color(color, calc_phong(norm, ray, light));
 		}
 	}
 	if (light->next)

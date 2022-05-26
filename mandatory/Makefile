@@ -31,6 +31,10 @@ SRCS		= ../srcs/main.c \
 				../srcs/maths/3D_geo.c \
 				../srcs/maths/points.c \
 				../srcs/maths/angles.c \
+				../srcs/raytracing/color_sp.c \
+				../srcs/raytracing/color_pl.c \
+				../srcs/raytracing/color_cy.c \
+				../srcs/raytracing/color_cn.c \
 				../srcs/raytracing/rays.c \
 				../srcs/raytracing/intersect_sp.c \
 				../srcs/raytracing/ray_on_obj.c \
@@ -38,8 +42,8 @@ SRCS		= ../srcs/main.c \
 				../srcs/raytracing/intersect_cy.c \
 				../srcs/raytracing/intersect_cy2.c \
 				../srcs/raytracing/intersect_cone.c \
-				../srcs/raytracing/vision_field.c \
 				../srcs/raytracing/sorting.c \
+				../srcs/raytracing/phong.c \
 				../srcs/maths/vectors1.c \
 				../srcs/maths/vectors2.c \
 				../srcs/maths/vectors3.c \
