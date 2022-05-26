@@ -88,9 +88,7 @@ static int intersection_cy_caps(t_ray *ray, t_cyl *cy, t_impact *impact)
 		impact->rgb = cy->rgb;
 	else
 		impact->rgb = cy->rgb2;
-
 	reverse_op(cy, &(impact->pt));
-
 	return (2);
 }
 

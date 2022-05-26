@@ -79,7 +79,7 @@ void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 	t_data *data;
 	t_ray norm;
 	t_3D_point pt;
-	int color_obj[3];
+	int *color_obj;
 	float dist;
 
 	int x;
@@ -168,7 +168,6 @@ void get_color_plan(t_ray *ray, t_plan *pl, int *color, float *distance)
 		normalize_v(&norm.dir);
 		*color = add_color(*color, \
                         calc_spot(&norm, ray, data->light_lst, impact.rgb));
-
 	}
 }
 

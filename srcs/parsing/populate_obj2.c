@@ -14,11 +14,11 @@
 #include "../../includes/miniRT.h"
 #include "../../minilibx-linux/mlx_int.h"
 
-void populate_plan(t_data *data, char *line)
+void	populate_plan(t_data *data, char *line)
 {
-	char **tab;
-	char **arg;
-	t_plan *obj;
+	char		**tab;
+	char		**arg;
+	t_plan		*obj;
 
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Plan", tab_len(tab));
@@ -43,11 +43,11 @@ void populate_plan(t_data *data, char *line)
 		exit_message(data, "Incorrect Plan color values", EXIT_FAILURE);
 }
 
-void populate_sphere(t_data *data, char *line)
+void	populate_sphere(t_data *data, char *line)
 {
-	char **tab;
-	char **arg;
-	t_sphere *obj;
+	char		**tab;
+	char		**arg;
+	t_sphere	*obj;
 
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Sphere", tab_len(tab));
@@ -92,11 +92,11 @@ void populate_sphere(t_data *data, char *line)
 		exit_message(data, "Incorrect Sphere color values", EXIT_FAILURE);
 }
 
-void populate_cyl(t_data *data, char *line)
+void	populate_cyl(t_data *data, char *line)
 {
-	char **tab;
-	char **arg;
-	t_cyl *obj;
+	char	**tab;
+	char	**arg;
+	t_cyl	*obj;
 
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Cylinder", tab_len(tab));
@@ -127,4 +127,3 @@ void populate_cyl(t_data *data, char *line)
 	if (!check_int_color(obj->rgb))
 		exit_message(data, "Incorrect Cylinder color values", EXIT_FAILURE);
 }
-

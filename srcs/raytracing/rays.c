@@ -21,22 +21,20 @@ void prepare_initial_ray(t_ray *ray, t_data *data, int pos, t_m4 mat)
 	ratio = WIN_HEIGHT * 1.0f / WIN_WIDTH;
 	x_ecran = (pos % WIN_WIDTH * 1.0f) / WIN_WIDTH * 2.0f - 1;
 	y_ecran = ((pos / WIN_WIDTH * 1.0f) / WIN_HEIGHT * 2.0f - 1) * ratio;
-
-	// TODO check FOV
 	set_point(&ray->origin, 0, 0, 0);
 	set_vector(&ray->dir, \
-        x_ecran * 1.0f, \
-        1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0), \
-        y_ecran * 1.0f);
+		x_ecran * 1.0f, \
+		1 / tanf(0.5f * data->cam->fov * 2 * M_PI / 180.0), \
+		y_ecran * 1.0f);
 	ray_mult_mat(ray, mat);
 	normalize_v(&ray->dir);
 }
 
-void set_direction_ray_pt(t_ray *ray, float x, float y, float z)
+void	set_direction_ray_pt(t_ray *ray, float x, float y, float z)
 {
-	set_vector(&ray->dir, x - ray->origin.x,
-			   y - ray->origin.y,
-			   z - ray->origin.z);
+	set_vector(&ray->dir, x - ray->origin.x, \
+				y - ray->origin.y, \
+				z - ray->origin.z);
 }
 
 int compute_pixel_color(int pixel, t_data *data, t_m4 mat)

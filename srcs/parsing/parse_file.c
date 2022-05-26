@@ -33,7 +33,7 @@ static void	parse_line_redir(t_data *data, char *line, char *type, int i)
 		}
 		index++;
 	}
-	exit_message(data, "Unrecognized object type in the file\n", EXIT_FAILURE);
+	exit_message(data, "Unrecognized object type in the file", EXIT_FAILURE);
 }
 
 void	parse_line(t_data *data, char *line)
@@ -60,7 +60,7 @@ void	parse_input(t_data *data, const char *path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (*line != '\n' && *line != '#')
+		if (*line != '\n' && *line != '#' && *line != '\n')
 			parse_line(data, line);
 		free(line);
 		line = get_next_line(fd);

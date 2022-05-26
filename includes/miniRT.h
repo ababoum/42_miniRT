@@ -33,7 +33,7 @@ void		mlx_events(t_data *data);
 int			add_color(int rgb1, int rgb2);
 
 // colors
-int			check_int_color(int rgb[3]);
+void		check_int_color(char *message, int rgb[3]);
 int			rgb_to_int(int rgb[3]);
 void		set_rgb(int *rgb, int r, int g, int b);
 int			rgb_ambiant(int rgb, int *lrgb, float grad);
