@@ -17,6 +17,7 @@ t_cone	*new_cone(t_data *data)
 	t_cone	*cone;
 
 	cone = malloc_log(data, sizeof(t_cone));
+	cone->texture=0;
 	obj_add_back(&(data->obj_lst), new_obj(data, cone, CONE));
 	return (cone);
 }

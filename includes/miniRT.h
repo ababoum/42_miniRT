@@ -178,4 +178,6 @@ float		max_vision_axis(float fov);
 void		draw_circle(t_data *data, t_2D_point *center, float radius);
 void		draw_sp(t_data *data);
 
+void set_texture(t_data *data, char *filename, unsigned char *texture);
+
 #endif

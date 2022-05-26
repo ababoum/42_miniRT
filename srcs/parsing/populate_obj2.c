@@ -15,27 +15,6 @@
 #include "../../minilibx-linux/mlx_int.h"
 
 
-void set_Texture(t_data *data, char *filename, unsigned char *texture)
-{
-	int w;
-	int h;
-	t_img *img;
-	img = mlx_xpm_file_to_image (data->session , filename, &w, &h );
-
-	if (img == 0)
-		exit_message(data, "Can't load texture.xpm", 4);
-	if (w != TEXTURE_SIZE || h != TEXTURE_SIZE)
-		exit_message(data, "Bad texture.xpm size", 4);
-
-	int i = 0;
-	while (i < TEXTURE_SIZE * TEXTURE_SIZE)
-	{
-		texture[i] = *(img->data + 4 * i);
-		i++;
-	}
-
-}
-
 void	populate_plan(t_data *data, char *line)
 {
 	char		**tab;
@@ -64,7 +43,7 @@ void	populate_plan(t_data *data, char *line)
 	if (BONUS_ON && tab_len(tab) >= 5)
 	{
 		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
-		set_Texture(data, tab[4],obj->texture);
+		set_texture(data, tab[4], obj->texture);
 	}
 	check_int_color("Incorrect Plan color values",obj->rgb);
 
@@ -95,7 +74,7 @@ void	populate_sphere(t_data *data, char *line)
 	if (BONUS_ON && tab_len(tab) >= 5)
 	{
 		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
-		set_Texture(data, tab[4],obj->texture);
+		set_texture(data, tab[4], obj->texture);
 	}
 	check_int_color("Incorrect Sphere color values",obj->rgb);
 }
@@ -132,5 +111,10 @@ void	populate_cyl(t_data *data, char *line)
 		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
 	} else
 		rgb_cpy(obj->rgb, obj->rgb2);
+	if (BONUS_ON && tab_len(tab) >= 7)
+	{
+		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
+		set_texture(data, tab[6], obj->texture);
+	}
 	check_int_color("Incorrect Cylinder color values", obj->rgb);
 }

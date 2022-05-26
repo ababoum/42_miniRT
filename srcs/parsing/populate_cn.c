@@ -35,7 +35,7 @@ void	populate_cn(t_data *data, char *line)
 	arg = ft_split(data, tab[3], ",");
 	check_arg(data, arg, 3, "Incorrect Cone color settings");
 	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	if (BONUS_ON && tab_len(tab) == 5)
+	if (BONUS_ON && tab_len(tab) >= 5)
 	{
 		arg = ft_split(data, tab[4], ",");
 		check_arg(data, arg, 3, "Incorrect Sphere color settings");
@@ -43,6 +43,11 @@ void	populate_cn(t_data *data, char *line)
 	}
 	else
 		rgb_cpy(obj->rgb, obj->rgb2);
+	if (BONUS_ON && tab_len(tab) >= 6)
+	{
+		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
+		set_texture(data, tab[5],obj->texture);
+	}
 	check_int_color("Incorrect Cone color values", obj->rgb);
 
 }

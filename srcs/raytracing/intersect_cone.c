@@ -95,7 +95,9 @@ int dbl_intersection_pt_cone(t_ray *ray, t_cone *cone, t_impact *impact, \
 		impact->rgb = cone->rgb;
 	else
 		impact->rgb = cone->rgb2;
-
+	impact->tx =
+			get_angle(impact->pt.x, impact->pt.z) / (M_PI * 2) * TEXTURE_SIZE;
+	impact->ty = impact->pt.y;
 	reverse_op_cone(cone, &(impact->pt));
 	return (1);
 

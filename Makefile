@@ -22,6 +22,7 @@ SRCS		= srcs/main.c \
 				srcs/image_tools/screen.c \
 				srcs/image_tools/colors.c \
 				srcs/image_tools/rgb.c \
+				srcs/image_tools/texture.c \
 				srcs/memory/frees.c \
 				srcs/memory/memory_log.c \
 				srcs/memory/data_access.c \

@@ -120,12 +120,14 @@ int calc_spot(t_ray *norm, t_ray *ray, t_light *light, int *rgb)
 	{
 		normalize_v(&vec);
 		f = scalar(vec, norm->dir);
-		if (f < 0)
-			f = -f;
-		color = (rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow));
-		color = add_color(color, \
+//		if (f < 0)
+//			f = -f;
+		if (f>=0)
+		{
+			color = (rgb_ambiant(arr_to_rgb(rgb), light->rgb, f * light->pow));
+			color = add_color(color, \
                         calc_phong(norm, ray, light));
-
+		}
 	}
 	if (light->next)
 		color = add_color(color, calc_spot(norm, ray, light->next, rgb));

@@ -162,6 +162,7 @@ typedef struct s_cylinder {
 	float		height;
 	int			rgb[3];
 	int			rgb2[3];
+	unsigned char	*texture;
 }	t_cyl;
 
 // BONUS
@@ -171,6 +172,7 @@ typedef struct s_cone {
 	float		angle;
 	int			rgb[3];
 	int			rgb2[3];
+	unsigned char	*texture;
 }	t_cone;
 
 typedef struct s_eq_param {

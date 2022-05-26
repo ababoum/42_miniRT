@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+#include "../../minilibx-linux/mlx_int.h"
 
 // get info about intersection with a given object
 
@@ -37,9 +38,9 @@ int calc_coord(int x, int y)
 	x %= TEXTURE_SIZE;
 	y %= TEXTURE_SIZE;
 	if (x < 0)
-		x += 512;
+		x += TEXTURE_SIZE;
 	if (y < 0)
-		y += 512;
+		y += TEXTURE_SIZE;
 	return (y * 512 + x);
 
 }
@@ -116,6 +117,7 @@ void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 
 		if (sp->texture)
 		{
+
 			get_h(&x, &y, sp->texture);
 			float ax = atanf(x) / 40;
 			float ay = atanf(y) / 40;
@@ -250,6 +252,8 @@ void get_color_cone(t_ray *ray, t_cone *cone, int *color, float *distance)
 	float v;
 	float dist;
 	int ret;
+	int x;
+	int y;
 
 	data = get_data(0, 0);
 	ret = intersection_impact_cone(ray, cone, &impact);
@@ -277,6 +281,20 @@ void get_color_cone(t_ray *ray, t_cone *cone, int *color, float *distance)
 		set_vector(&norm.dir, cone->center.x - v * cone->dir.x, \
             cone->center.y - v * cone->dir.y, \
             cone->center.z - v * cone->dir.z);
+
+		if (cone->texture)
+		{
+			x = (int) (impact.tx);
+			y = (int) (impact.ty * 20);
+			get_h(&x, &y, cone->texture);
+			float ax = atanf(x) / 40;
+			float ay = atanf(y) / 40;
+			t_m4 mat;
+			set_identity(&mat);
+			rotate_x_mat(&mat, ax);
+			rotate_z_mat(&mat, ay);
+			vec_mult_mat(&norm.dir, mat);
+		}
 
 		norm.dir.x = impact.pt.x - norm.dir.x;
 		norm.dir.y = impact.pt.y - norm.dir.y;
