@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 18:14:48 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:52:02 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
+		ft_putstr_fd(RED_TXT, 2);
 		ft_putstr_fd("Error\nPlease have one input with .rt extension\n", 2);
+		ft_putstr_fd(RESET_TXT, 2);
 		return (EXIT_FAILURE);
 	}
 	data = malloc(sizeof(t_data));

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:17:50 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:47:40 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,6 @@
 # define PAS_RENDERING	WIN_WIDTH
 
 # define TEXTURE_SIZE	512
-
-# ifndef BONUS
-#  define BONUS_ON 1
-# endif
-
-# ifdef BONUS
-#  define BONUS_ON 1
-# endif
 
 typedef struct s_memlog {
 	void			*ptr;

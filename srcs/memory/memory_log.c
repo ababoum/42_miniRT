@@ -6,13 +6,13 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 16:52:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/03/11 14:16:07 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:02:57 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
-static t_memlog	*new_mem(t_data *data, void *ptr, int type)
+t_memlog	*new_mem(t_data *data, void *ptr, int type)
 {
 	t_memlog	*new;
 
@@ -35,7 +35,7 @@ static t_memlog	*mem_lstlast(t_memlog *lst)
 	return (tmp);
 }
 
-static void	mem_add_back(t_memlog **alst, t_memlog *new)
+void	mem_add_back(t_memlog **alst, t_memlog *new)
 {
 	t_memlog	*last;
 

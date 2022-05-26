@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/18 12:43:58 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:03:45 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ void	parse_input(t_data *data, const char *path)
 
 	fd = verify_file(data, path);
 	line = get_next_line(fd);
+	mem_add_back(&(data->mem_lst), new_mem(data, line, MEM_TYPE));
 	while (line)
 	{
 		if (*line != '\n' && *line != '#' && *line != '\n')
 			parse_line(data, line);
-		free(line);
 		line = get_next_line(fd);
+		mem_add_back(&(data->mem_lst), new_mem(data, line, MEM_TYPE));
 	}
 	if (!data->cam)
 		exit_message(data, "Camera needed in the input file", EXIT_FAILURE);

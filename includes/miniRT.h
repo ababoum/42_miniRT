@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:19:27 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 15:18:00 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int			arr_to_rgb(int *rgb);
 // memory & frees
 void		*malloc_log(t_data *data, int size);
 void		*img_log(t_data *data, int width, int height);
+void		mem_add_back(t_memlog **alst, t_memlog *new);
+t_memlog	*new_mem(t_data *data, void *ptr, int type);
 t_data		*get_data(int code, t_data *input);
 void		clear_exit(t_data *data, int exit_code);
 void		exit_message(t_data *data, char *message, int exit_code);
@@ -89,9 +91,7 @@ void		populate_plan(t_data *data, char *line);
 void		populate_sphere(t_data *data, char *line);
 void		populate_cyl(t_data *data, char *line);
 void		populate_cn(t_data *data, char *line); // BONUS
-
-void 		rgb_cpy(const int *rgb1, int *rgb2);
-
+void		rgb_cpy(const int *rgb1, int *rgb2);
 
 // Screen drawing
 void		pixel_put(t_data *data, int x, int y, int color);
@@ -145,24 +145,27 @@ void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
 int			intersection_pt_sp(t_ray *ray, t_sphere *sp, t_3D_point *pt);
 void		get_color_sphere(t_ray *ray, \
 				t_sphere *sp, int *color, float *distance);
-void 		get_color_cone(t_ray *ray, t_cone *cone, int *color, float *distance);
 
 // plan
-int 		intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
+int			intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
 void		get_color_plan(t_ray *ray, \
 				t_plan *pl, int *color, float *distance);
-	// cylinder
+// cylinder
 int			intersection_impact_cy(t_ray *ray, t_cyl *cy, t_impact *impact);
 void		get_color_cyl(t_ray *ray, \
 				t_cyl *cy, int *color, float *distance);
 int			cy_switch_val(t_ray *ray, t_cyl *cy, float *t_);
 
-int			intersection_impact_cone(t_ray *ray, t_cone *cone, t_impact *impact);
+// cone
+void		get_color_cone(t_ray *ray, \
+				t_cone *cone, int *color, float *distance);
+int			intersection_impact_cone(t_ray *ray, \
+				t_cone *cone, t_impact *impact);
 
 
 // maths
 float		distance_3d(t_3D_point A, t_3D_point B);
-float		distance_3d_vec(t_vec A, t_vec  B);
+float		distance_3d_vec(t_vec A, t_vec B);
 float		distance_3d_vec_pt(t_vec A, t_3D_point B);
 float		ffabs(float f);
 float		max(float n1, float n2);

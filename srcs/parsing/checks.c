@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/18 13:55:58 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/26 14:57:28 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,26 @@ int	check_line_args_2(char *type, int argc)
 	if (!ft_strcmp(type, "Cylinder"))
 		return (!(argc == 5 || (BONUS_ON && argc == 6)));
 	if ((!ft_strcmp(type, "Sphere")))
-		return (!(argc == 3 || (BONUS_ON && argc == 4)|| (BONUS_ON && argc == 5)));
+		return (!(argc == 3 || (BONUS_ON && argc == 4) || \
+		(BONUS_ON && argc == 5)));
 	if ((!ft_strcmp(type, "Plan")))
-		return (!(argc == 3 || (BONUS_ON && argc == 4) || (BONUS_ON && argc == 5) ));
+		return (!(argc == 3 || (BONUS_ON && argc == 4) || \
+		(BONUS_ON && argc == 5)));
 	return (argc != 3);
 }
 
-void 	check_line_args(t_data *data, char *type, int argc)
+void	check_line_args(t_data *data, char *type, int argc)
 {
 	if (check_line_args_2(type, argc))
 	{
-		ft_putstr_fd(type, 2);
-		exit_message(data, ": Incorrect number of parameters", EXIT_FAILURE);
+		if (!ft_strcmp(type, "Ambiance"))
+			exit_message(data, "Ambiance: Incorrect number of parameters", 1);
+		if (!ft_strcmp(type, "Cylinder"))
+			exit_message(data, "Cylinder: Incorrect number of parameters", 1);
+		if (!ft_strcmp(type, "Sphere"))
+			exit_message(data, "Sphere: Incorrect number of parameters", 1);
+		if (!ft_strcmp(type, "Plan"))
+			exit_message(data, "Plan: Incorrect number of parameters", 1);
 	}
 }
 
