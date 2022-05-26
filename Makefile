@@ -11,7 +11,7 @@ F_BLUE		= \033[34m
 CC			= @gcc
 
 #Remove -O3 -fsanitize=address for debuging
-CFLAGS		= -Wall -Wextra -Werror -g -lm
+CFLAGS		= -Wall -Wextra -Werror -g -lm -D BONUS_ON=1
 
 
 SRCS		= srcs/main.c \
@@ -85,9 +85,23 @@ MLX_FLAGS	= -lX11 -lXext -lm
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(INCLUDES) #$(LIB_MLX)
+
+
+$(NAME): no_bonus $(OBJS) $(INCLUDES) #$(LIB_MLX)
 		$(CC) $(CFLAGS) $(OBJS) $(LIB_MLX) -o $(NAME) $(MLX_FLAGS)
 		@echo "$(F_GREEN)$(F_BOLD) $(NAME) executable is compiled and ready.$(F_NONE)"
+
+bonus: with_bonus $(OBJS) $(INCLUDES) #$(LIB_MLX)
+		$(CC) $(CFLAGS) $(OBJS) $(LIB_MLX) -o $(NAME) $(MLX_FLAGS)
+		@echo "$(F_GREEN)$(F_BOLD) $(NAME) executable is compiled and ready.$(F_NONE)"
+
+
+no_bonus:
+	$(eval CFLAGS = -Wall -Wextra -Werror -g -lm -D BONUS_ON=0)
+
+with_bonus:
+	$(eval CFLAGS = -Wall -Wextra -Werror -g -lm -D BONUS_ON=1)
+
 
 clean:
 		@rm -f $(OBJS)

@@ -90,7 +90,7 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		ft_putstr_fd("Please have one input with .rt extension\n", 2);
+		ft_putstr_fd("Error\nPlease have one input with .rt extension\n", 2);
 		return (EXIT_FAILURE);
 	}
 	data = malloc(sizeof(t_data));

@@ -16,7 +16,7 @@ void	check_line_args_bonus(t_data *data, char *type, int argc)
 {
 	if (!ft_strcmp(type, "Cone") && argc != 4 && argc != 5 && argc != 6)
 	{
-		ft_putstr_fd("Cone: ", STDERR_FILENO);
+		ft_putstr_fd("Error\nCone: ", STDERR_FILENO);
 		exit_message(data, "Incorrect number of parameters", EXIT_FAILURE);
 	}
 }
