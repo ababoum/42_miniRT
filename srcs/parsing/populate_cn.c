@@ -43,6 +43,6 @@ void	populate_cn(t_data *data, char *line)
 	}
 	else
 		rgb_cpy(obj->rgb, obj->rgb2);
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Cone color values", EXIT_FAILURE);
+	check_int_color("Incorrect Cone color values", obj->rgb);
+
 }

@@ -26,22 +26,20 @@ void get_x_y(int *x, int *y, t_3D_point pt, t_sphere *sp)
 	a2 += M_PI_2;
 	a2 = fmod(a2, 2 * M_PI);
 
-	*x = a1 / (M_PI * 2) * 512;
-	*y = (a2) / (M_PI) * 512;
+	*x = a1 / (M_PI * 2) * TEXTURE_SIZE;
+	*y = (a2) / (M_PI) * TEXTURE_SIZE;
 	*x = *x;
 
 }
 
 int calc_coord(int x, int y)
 {
-	if (x == -1)
-		x = 511;
-	if (x == 512)
-		x = 0;
-	if (y == -1)
-		y = 511;
-	if (y == 512)
-		y = 0;
+	x %= TEXTURE_SIZE;
+	y %= TEXTURE_SIZE;
+	if (x < 0)
+		x += 512;
+	if (y < 0)
+		y += 512;
 	return (y * 512 + x);
 
 }
@@ -55,9 +53,6 @@ void get_h(int *x, int *y, unsigned char *texture)
 
 	lx = *x;
 	ly = *y;
-	sx = 0;
-	sy = 0;
-
 	sx = texture[calc_coord(lx - 1, ly + 1)] / 2 +
 		 texture[calc_coord(lx - 1, ly)] +
 		 texture[calc_coord(lx - 1, ly - 1)] / 2 -
@@ -71,7 +66,7 @@ void get_h(int *x, int *y, unsigned char *texture)
 		 texture[calc_coord(lx, ly - 1)] -
 		 texture[calc_coord(lx + 1, ly - 1)] / 2;
 	*x = sx;
-	*y = sy;
+	*y = -sy;
 }
 
 void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
@@ -79,7 +74,7 @@ void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 	t_data *data;
 	t_ray norm;
 	t_3D_point pt;
-	int *color_obj;
+	int color_obj[3];
 	float dist;
 
 	int x;
@@ -90,7 +85,7 @@ void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 	if (intersection_pt_sp(ray, sp, &pt))
 	{
 		get_x_y(&x, &y, pt, sp);
-		if (!sp->isTexture)
+		if (!sp->texture || 1)
 		{
 			if (((DAMIER_FACTOR * x / (512) + DAMIER_FACTOR * y / (512)) % 2))
 				rgb_cpy(sp->rgb, color_obj);
@@ -119,11 +114,11 @@ void get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
             pt.y - sp->center.y, \
             pt.z - sp->center.z);
 
-		if (sp->isTexture)
+		if (sp->texture)
 		{
 			get_h(&x, &y, sp->texture);
-			float ax = atan(x) / 1;
-			float ay = atan(y) / 1;
+			float ax = atanf(x) / 40;
+			float ay = atanf(y) / 40;
 			t_m4 mat;
 			set_identity(&mat);
 			rotate_x_mat(&mat, ax);
@@ -147,6 +142,9 @@ void get_color_plan(t_ray *ray, t_plan *pl, int *color, float *distance)
 	t_ray norm;
 	float dist;
 
+	int x;
+	int y;
+
 	set_point(&(impact.pt), 0, 0, 0);
 	data = get_data(0, 0);
 	if (intersection_impact_pl(ray, pl, &impact))
@@ -165,9 +163,24 @@ void get_color_plan(t_ray *ray, t_plan *pl, int *color, float *distance)
 		set_vector(&norm.dir, pl->normal.x,
 				   pl->normal.y,
 				   pl->normal.z);
+
+		if (pl->texture)
+		{
+			x = (int) (impact.tx * 40);
+			y = (int) (impact.ty * 40);
+			get_h(&x, &y, pl->texture);
+			float ax = atanf(x) / 8;
+			float ay = atanf(y) / 8;
+			t_m4 mat;
+			set_identity(&mat);
+			rotate_x_mat(&mat, ax);
+			rotate_z_mat(&mat, ay);
+			vec_mult_mat(&norm.dir, mat);
+		}
+
 		normalize_v(&norm.dir);
-		*color = add_color(*color, \
-                        calc_spot(&norm, ray, data->light_lst, impact.rgb));
+		*color = add_color(*color,
+						   calc_spot(&norm, ray, data->light_lst, impact.rgb));
 	}
 }
 

@@ -14,6 +14,28 @@
 #include "../../includes/miniRT.h"
 #include "../../minilibx-linux/mlx_int.h"
 
+
+void set_Texture(t_data *data, char *filename, unsigned char *texture)
+{
+	int w;
+	int h;
+	t_img *img;
+	img = mlx_xpm_file_to_image (data->session , filename, &w, &h );
+
+	if (img == 0)
+		exit_message(data, "Can't load texture.xpm", 4);
+	if (w != TEXTURE_SIZE || h != TEXTURE_SIZE)
+		exit_message(data, "Bad texture.xpm size", 4);
+
+	int i = 0;
+	while (i < TEXTURE_SIZE * TEXTURE_SIZE)
+	{
+		texture[i] = *(img->data + 4 * i);
+		i++;
+	}
+
+}
+
 void	populate_plan(t_data *data, char *line)
 {
 	char		**tab;
@@ -32,17 +54,21 @@ void	populate_plan(t_data *data, char *line)
 	arg = ft_split(data, tab[2], ",");
 	check_arg(data, arg, 3, "Incorrect Plan color settings");
 	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	if (BONUS_ON && tab_len(tab) == 4)
+	if (BONUS_ON && tab_len(tab) >= 4)
 	{
 		arg = ft_split(data, tab[3], ",");
 		check_arg(data, arg, 3, "Incorrect Sphere color settings");
 		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
 	} else
 		rgb_cpy(obj->rgb, obj->rgb2);
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Plan color values", EXIT_FAILURE);
-}
+	if (BONUS_ON && tab_len(tab) >= 5)
+	{
+		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
+		set_Texture(data, tab[4],obj->texture);
+	}
+	check_int_color("Incorrect Plan color values",obj->rgb);
 
+}
 void	populate_sphere(t_data *data, char *line)
 {
 	char		**tab;
@@ -68,28 +94,10 @@ void	populate_sphere(t_data *data, char *line)
 		rgb_cpy(obj->rgb, obj->rgb2);
 	if (BONUS_ON && tab_len(tab) >= 5)
 	{
-//		int fd = verify_file_png(data,tab[4]);
-//		(void)fd;
-		int w;
-		int h;
-		t_img *img;
-		img = mlx_xpm_file_to_image (data->session , tab[4], &w, &h );
-
-		if (img == 0)
-			exit_message(data, "Can't load texture.xpm", 4);
-		if (w != 512 || h != 512)
-			exit_message(data, "Bad texture.xpm size", 4);
-
-		int i = 0;
-		while (i < 512 * 512)
-		{
-			obj->texture[i] = *(img->data + 4 * i);
-			i++;
-		}
-		obj->isTexture = 1;
+		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
+		set_Texture(data, tab[4],obj->texture);
 	}
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Sphere color values", EXIT_FAILURE);
+	check_int_color("Incorrect Sphere color values",obj->rgb);
 }
 
 void	populate_cyl(t_data *data, char *line)
@@ -124,6 +132,5 @@ void	populate_cyl(t_data *data, char *line)
 		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
 	} else
 		rgb_cpy(obj->rgb, obj->rgb2);
-	if (!check_int_color(obj->rgb))
-		exit_message(data, "Incorrect Cylinder color values", EXIT_FAILURE);
+	check_int_color("Incorrect Cylinder color values", obj->rgb);
 }

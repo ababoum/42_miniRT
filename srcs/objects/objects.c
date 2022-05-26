@@ -17,7 +17,7 @@ t_sphere	*new_sphere(t_data *data)
 	t_sphere	*sphere;
 
 	sphere = malloc_log(data, sizeof(t_sphere));
-	sphere->isTexture = 0;
+	sphere->texture = 0;
 	obj_add_back(&(data->obj_lst), new_obj(data, sphere, SPHERE));
 	return (sphere);
 }
@@ -27,6 +27,7 @@ t_plan	*new_plan(t_data *data)
 	t_plan	*plan;
 
 	plan = malloc_log(data, sizeof(t_plan));
+	plan->texture = 0;
 	obj_add_back(&(data->obj_lst), new_obj(data, plan, PLAN));
 	return (plan);
 }

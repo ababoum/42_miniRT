@@ -27,7 +27,6 @@ int intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact)
 	if (disc[1] * disc[0] <= 0)
 		return (0);
 
-
 	set_identity(&mat);
 	rot_angles[0] = get_angle(pl->normal.x, pl->normal.y) + M_PI_2;
 	rot_angles[1] = get_angle(sqrtf(pl->normal.x * pl->normal.x + \
@@ -58,12 +57,14 @@ int intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact)
 			  ray->origin.y - f * ray->dir.y,
 			  ray->origin.z - f * ray->dir.z);
 
-
 	p.x = impact->pt.x;
 	p.y = impact->pt.y;
 	p.z = impact->pt.z;
 
 	pt3d_mult_mat(&p, mat);
+	impact->tx = p.x;
+	impact->ty = p.z;
+
 	if (p.x < 0)
 		p.x = -p.x + DAMIER_FACTOR / 40.0;
 	if (p.z < 0)

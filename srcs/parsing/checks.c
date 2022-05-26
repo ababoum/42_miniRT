@@ -30,25 +30,6 @@ int	verify_file(t_data *data, const char *path)
 	return (fd);
 }
 
-int	verify_file_png(t_data *data, const char *path)
-{
-	int	fd;
-
-	if (ft_strlen(path) < 4 || ft_strcmp(path + ft_strlen(path) - 4, ".xpm"))
-	{
-		exit_message(data, "Incorrect filename (extension should be .xpm)\n", \
-			EXIT_FAILURE);
-	}
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(path);
-		clear_exit(data, 1);
-	}
-	return (fd);
-}
-
-
 void	check_scene_setting(t_data *data, int setting_type)
 {
 	if (setting_type == CAMERA)
@@ -81,7 +62,7 @@ int	check_line_args_2(char *type, int argc)
 	if ((!ft_strcmp(type, "Sphere")))
 		return (!(argc == 3 || (BONUS_ON && argc == 4)|| (BONUS_ON && argc == 5)));
 	if ((!ft_strcmp(type, "Plan")))
-		return (!(argc == 3 || (BONUS_ON && argc == 4)));
+		return (!(argc == 3 || (BONUS_ON && argc == 4) || (BONUS_ON && argc == 5) ));
 	return (argc != 3);
 }
 

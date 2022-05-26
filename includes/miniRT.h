@@ -76,7 +76,6 @@ t_cone		*new_cone(t_data *data); // BONUS
 // parsing
 void		parse_input(t_data *data, const char *path);
 int			verify_file(t_data *data, const char *path);
-int			verify_file_png(t_data *data, const char *path);
 void		check_line_args(t_data *data, char *type, int argc);
 void		check_scene_setting(t_data *data, int setting_type);
 void		check_arg(t_data *data, char **arg, int argc, char *msg_if_fail);

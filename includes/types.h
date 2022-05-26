@@ -58,6 +58,7 @@
 # define RENDERING_Q	1
 # define PAS_RENDERING	WIN_WIDTH
 
+# define TEXTURE_SIZE	512
 
 # ifndef BONUS
 #  define BONUS_ON 1
@@ -143,8 +144,7 @@ typedef struct s_sphere {
 	float			radius;
 	int				rgb[3];
 	int				rgb2[3];
-	unsigned char	texture[1024*1024];
-	int				isTexture;
+	unsigned char	*texture;
 }	t_sphere;
 
 typedef struct s_plan {
@@ -152,6 +152,7 @@ typedef struct s_plan {
 	t_vec		normal;
 	int			rgb[3];
 	int			rgb2[3];
+	unsigned char	*texture;
 }	t_plan;
 
 typedef struct s_cylinder {
@@ -184,6 +185,8 @@ typedef struct s_impact {
 	t_3D_point	pt;
 	t_vec		normal;
 	int			*rgb;
+	float		tx;
+	float		ty;
 }	t_impact;
 
 typedef void	(*t_pop_fn)(t_data *, char *);
