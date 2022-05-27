@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:38:39 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 15:54:01 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 17:02:23 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	rgb_ambiant(int rgb, int *amb_rgb, float grad)
 	b *= grad * amb_rgb[2] / 256;
 	return (b + g * 256 + r * 65536);
 }
-void rgb_cpy(const int *rgb1, int *rgb2)
+
+void	rgb_cpy(const int *rgb1, int *rgb2)
 {
 	rgb2[0] = rgb1[0];
 	rgb2[1] = rgb1[1];

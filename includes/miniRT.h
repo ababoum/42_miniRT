@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 21:08:37 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 19:07:33 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,11 @@ int			test_middle_f(float f1, float f2, float f3);
 int			test_middle(t_3D_point *p1, t_3D_point *p2, t_3D_point *p3);
 int			object_between(t_3D_point *p1, t_3D_point *p2, \
 				t_data *data);
+int			plan_test(t_ray *ray, t_plan *pl, t_3D_point *p1, t_3D_point *p2);
+int			sphere_test(t_ray *ray, t_sphere *sp, \
+					t_3D_point *p1, t_3D_point *p2);
+int			cyl_test(t_ray *ray, t_cyl *cy, t_3D_point *p1, t_3D_point *p2);
+int			cn_test(t_ray *ray, t_cone *cn, t_3D_point *p1, t_3D_point *p2);
 
 // intersections
 void		projection_pt_droite(t_ray *ray, t_3D_point *pt, t_3D_point *res);
@@ -175,10 +180,7 @@ int			rgb_factor(int rgb, float factor);
 float		switch_val(float n, float n1, float n2);
 int			is_between(float nb, float min, float max);
 
-// tests
-void		draw_circle(t_data *data, t_2D_point *center, float radius);
-void		draw_sp(t_data *data);
-
-void set_texture(t_data *data, char *filename, unsigned char *texture);
+// textures
+void		set_texture(t_data *data, char *filename, unsigned char *texture);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 14:47:40 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 17:11:00 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,30 +140,30 @@ typedef struct s_sphere {
 }	t_sphere;
 
 typedef struct s_plan {
-	t_3D_point	point;
-	t_vec		normal;
-	int			rgb[3];
-	int			rgb2[3];
+	t_3D_point		point;
+	t_vec			normal;
+	int				rgb[3];
+	int				rgb2[3];
 	unsigned char	*texture;
 }	t_plan;
 
 typedef struct s_cylinder {
-	t_3D_point	point;
-	t_vec		dir;
-	float		radius;
-	float		height;
-	int			rgb[3];
-	int			rgb2[3];
+	t_3D_point		point;
+	t_vec			dir;
+	float			radius;
+	float			height;
+	int				rgb[3];
+	int				rgb2[3];
 	unsigned char	*texture;
 }	t_cyl;
 
 // BONUS
 typedef struct s_cone {
-	t_3D_point	center;
-	t_vec		dir;
-	float		angle;
-	int			rgb[3];
-	int			rgb2[3];
+	t_3D_point		center;
+	t_vec			dir;
+	float			angle;
+	int				rgb[3];
+	int				rgb2[3];
 	unsigned char	*texture;
 }	t_cone;
 

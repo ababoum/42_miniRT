@@ -43,6 +43,7 @@ SRCS		= ../srcs/main.c \
 				../srcs/raytracing/intersect_cy2.c \
 				../srcs/raytracing/intersect_cone.c \
 				../srcs/raytracing/sorting.c \
+				../srcs/raytracing/obj_sorting.c \
 				../srcs/raytracing/phong.c \
 				../srcs/maths/vectors1.c \
 				../srcs/maths/vectors2.c \
@@ -56,11 +57,14 @@ SRCS		= ../srcs/main.c \
 				../srcs/parsing/get_next_line_utils.c \
 				../srcs/parsing/parse_file.c \
 				../srcs/parsing/checks.c \
+				../srcs/parsing/check_params.c \
 				../srcs/parsing/checks_bonus.c \
 				../srcs/parsing/strings_functions.c \
 				../srcs/parsing/split.c \
 				../srcs/parsing/populate_obj.c \
-				../srcs/parsing/populate_obj2.c \
+				../srcs/parsing/populate_sp.c \
+				../srcs/parsing/populate_pl.c \
+				../srcs/parsing/populate_cy.c \
 				../srcs/parsing/populate_cn.c \
 				../srcs/ft3d/ft3d_perspective.c \
 				../srcs/ft3d/ft3d_resize.c \

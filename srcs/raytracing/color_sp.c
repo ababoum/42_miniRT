@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 20:53:44 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 21:49:43 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 17:13:01 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,8 @@ void	get_color_sphere(t_ray *ray, t_sphere *sp, int *color, float *distance)
 		if (distance_3d(data->cam->pov, pt) > *distance && *distance >= 0)
 			return ;
 		*distance = distance_3d(data->cam->pov, pt);
-		// Ambiant light
 		*color = rgb_ambiant(arr_to_rgb(color_obj), \
 			data->amb->rgb, data->amb->grad);
-		// spot
 		prepare_sphere_spot(sp, &pt, &norm, x_y);
 		*color = add_color(*color, \
 				calc_spot(&norm, ray, data->light_lst, color_obj));

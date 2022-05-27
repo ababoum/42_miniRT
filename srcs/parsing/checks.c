@@ -6,29 +6,11 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 14:57:28 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 16:34:30 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-
-int	verify_file(t_data *data, const char *path)
-{
-	int	fd;
-
-	if (ft_strlen(path) < 3 || ft_strcmp(path + ft_strlen(path) - 3, ".rt"))
-	{
-		exit_message(data, "Incorrect filename (extension should be .rt)\n", \
-			EXIT_FAILURE);
-	}
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-	{
-		perror(path);
-		clear_exit(data, 1);
-	}
-	return (fd);
-}
 
 void	check_scene_setting(t_data *data, int setting_type)
 {
@@ -87,13 +69,4 @@ void	check_arg(t_data *data, char **arg, int argc, char *msg_if_fail)
 {
 	if (tab_len(arg) != argc)
 		exit_message(data, msg_if_fail, EXIT_FAILURE);
-}
-
-int	check_dir_vector(t_vec vector)
-{
-	if (vector.x < -1 || vector.x > 1 || \
-		vector.y < -1 || vector.y > 1 || \
-		vector.z < -1 || vector.z > 1)
-		return (0);
-	return (1);
 }

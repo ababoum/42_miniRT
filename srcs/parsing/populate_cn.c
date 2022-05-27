@@ -1,16 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   populate_bonus.c                                   :+:      :+:    :+:   */
+/*   populate_cn.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 16:08:05 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:27:36 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 17:00:33 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
+
+static void	populate_cn_bonus(t_data *data, char **tab, t_cone *obj)
+{
+	char	**arg;
+
+	if (BONUS_ON && tab_len(tab) >= 5)
+	{
+		arg = ft_split(data, tab[4], ",");
+		check_arg(data, arg, 3, "Incorrect Sphere color settings");
+		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
+	}
+	else
+		rgb_cpy(obj->rgb, obj->rgb2);
+	if (BONUS_ON && tab_len(tab) >= 6)
+	{
+		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
+		set_texture(data, tab[5], obj->texture);
+	}
+}
 
 void	populate_cn(t_data *data, char *line)
 {
@@ -35,19 +54,6 @@ void	populate_cn(t_data *data, char *line)
 	arg = ft_split(data, tab[3], ",");
 	check_arg(data, arg, 3, "Incorrect Cone color settings");
 	set_rgb(obj->rgb, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	if (BONUS_ON && tab_len(tab) >= 5)
-	{
-		arg = ft_split(data, tab[4], ",");
-		check_arg(data, arg, 3, "Incorrect Sphere color settings");
-		set_rgb(obj->rgb2, ft_atoi(arg[0]), ft_atoi(arg[1]), ft_atoi(arg[2]));
-	}
-	else
-		rgb_cpy(obj->rgb, obj->rgb2);
-	if (BONUS_ON && tab_len(tab) >= 6)
-	{
-		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
-		set_texture(data, tab[5],obj->texture);
-	}
 	check_int_color("Incorrect Cone color values", obj->rgb);
-
+	populate_cn_bonus(data, tab, obj);
 }

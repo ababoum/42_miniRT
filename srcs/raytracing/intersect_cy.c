@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:23:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/08 16:03:25 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 17:52:12 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void discriminant_cy_2(t_ray *ray, t_cyl *cy, t_eq_param *eq_sys)
 }
 
 
-// I need cy->dir to be aligned with (OY)
 static void prepare_ray_for_cy(t_ray *ray, t_cyl *cy)
 {
 	t_m4 mat;
@@ -49,7 +48,6 @@ static void prepare_ray_for_cy(t_ray *ray, t_cyl *cy)
 	rot_angles[1] = get_angle(sqrtf(cy->dir.x * cy->dir.x + \
                         cy->dir.y * cy->dir.y), \
                         cy->dir.z);
-//	rotate_z_mat(&mat, M_PI);
 	rotate_x_mat(&mat, rot_angles[1]);
 	rotate_z_mat(&mat, -rot_angles[0]);
 	translate_mat(&mat, -cy->point.x, -cy->point.y, -cy->point.z);

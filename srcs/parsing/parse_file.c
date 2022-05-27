@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 15:03:45 by mababou          ###   ########.fr       */
+/*   Updated: 2022/05/27 16:23:20 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	parse_line(t_data *data, char *line)
 	i = 0;
 	while (is_char(line[i], SPACES))
 		i++;
+	if (!line[i])
+		return ;
 	type = ft_split(data, line, SPACES)[0];
 	i += ft_strlen(type);
 	while (is_char(line[i], SPACES))
