@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/27 16:34:30 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:03:23 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,26 @@ void	check_scene_setting(t_data *data, int setting_type)
 	}
 	else if (setting_type == LIGHT)
 	{
-		if (data->light_lst && !BONUS_ON)
+		if (data->light_lst && !data->bonus)
 			exit_message(data, "One light source allowed", EXIT_FAILURE);
 	}
 }
 
 int	check_line_args_2(char *type, int argc)
 {
+	t_data	*data;
+
+	data = get_data(0, 0);
 	if (!ft_strcmp(type, "Ambiance"))
 		return (argc != 2);
 	if (!ft_strcmp(type, "Cylinder"))
-		return (!(argc == 5 || (BONUS_ON && argc == 6)));
+		return (!(argc == 5 || (data->bonus && argc == 6)));
 	if ((!ft_strcmp(type, "Sphere")))
-		return (!(argc == 3 || (BONUS_ON && argc == 4) || \
-		(BONUS_ON && argc == 5)));
+		return (!(argc == 3 || (data->bonus && argc == 4) || \
+		(data->bonus && argc == 5)));
 	if ((!ft_strcmp(type, "Plan")))
-		return (!(argc == 3 || (BONUS_ON && argc == 4) || \
-		(BONUS_ON && argc == 5)));
+		return (!(argc == 3 || (data->bonus && argc == 4) || \
+		(data->bonus && argc == 5)));
 	return (argc != 3);
 }
 

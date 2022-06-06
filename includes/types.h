@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/27 17:11:00 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/06 15:50:52 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_data {
 	t_ambiance	*amb;
 	t_camera	*cam;
 	t_light		*light_lst;
+	int			bonus;
 }	t_data;
 
 typedef struct s_ray {

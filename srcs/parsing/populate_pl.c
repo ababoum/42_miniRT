@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:42:27 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/27 17:06:37 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:00:25 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	populate_pl_bonus(t_data *data, char **tab, t_plan *obj)
 {
 	char	**arg;
 
-	if (BONUS_ON && tab_len(tab) >= 4)
+	if (data->bonus && tab_len(tab) >= 4)
 	{
 		arg = ft_split(data, tab[3], ",");
 		check_arg(data, arg, 3, "Incorrect Plan color settings");
@@ -26,7 +26,7 @@ static void	populate_pl_bonus(t_data *data, char **tab, t_plan *obj)
 	}
 	else
 		rgb_cpy(obj->rgb, obj->rgb2);
-	if (BONUS_ON && tab_len(tab) >= 5)
+	if (data->bonus && tab_len(tab) >= 5)
 	{
 		obj->texture = malloc_log(data, TEXTURE_SIZE * TEXTURE_SIZE);
 		set_texture(data, tab[4], obj->texture);

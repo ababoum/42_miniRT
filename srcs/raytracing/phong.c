@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 19:56:12 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 20:35:28 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:02:38 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int	calc_phong(t_ray *norm, t_ray *ray, t_light *light)
 	t_vec	vec_l;
 	float	d;
 	float	n;
+	t_data	*data;
 
-	if (!BONUS_ON)
+	data = get_data(0, 0);
+	if (!data->bonus)
 		return (0);
 	prepare_vec_l(&vec_l, norm, light);
 	n = norm_v(&vec_l);

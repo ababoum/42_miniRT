@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 17:44:24 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/27 16:23:20 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:00:12 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	parse_line_redir(t_data *data, char *line, char *type, int i)
 	index = 0;
 	while (index < sizeof(obj_names) / sizeof(char *))
 	{
-		if (!ft_strcmp(type, "cn") && !BONUS_ON)
+		if (!ft_strcmp(type, "cn") && !data->bonus)
 			break ;
 		if (!ft_strcmp(type, obj_names[index]))
 		{

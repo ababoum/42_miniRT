@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/27 19:07:33 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/06 15:53:00 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,8 @@ int			is_between(float nb, float min, float max);
 
 // textures
 void		set_texture(t_data *data, char *filename, unsigned char *texture);
+
+// bonus
+void		mandatory_or_bonus(t_data *data);
 
 #endif
