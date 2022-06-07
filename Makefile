@@ -87,6 +87,7 @@ OBJS_MANDATORY	= $(SRCS_MANDATORY:.c=.o)
 OBJS_BONUS		= $(SRCS_BONUS:.c=.o)
 
 NAME			= miniRT
+NAME_BONUS		= miniRT_bonus
 
 LIB_MLX			= minilibx-linux/libmlx_Linux.a
 MLXPATH			= minilibx-linux
@@ -99,7 +100,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(OBJS_MANDATORY) $(INCLUDES) #$(LIB_MLX)
 		$(CC) $(OBJS) $(OBJS_MANDATORY) $(LIB_MLX) -o $(NAME) $(MLX_FLAGS)
-		@echo "$(F_GREEN)$(F_BOLD) miniRT executable is compiled and ready.$(F_NONE)"
+		@echo "$(F_GREEN)$(F_BOLD) $(NAME) executable is compiled and ready.$(F_NONE)"
 
 clean:
 		@rm -f $(OBJS)
@@ -108,12 +109,14 @@ clean:
 
 fclean:	clean
 		@rm -f $(NAME)
-		@rm -f $(NAME)_bonus
-		@echo "$(F_CYAN)$(F_BOLD) miniRT executable(s) successfully deleted.$(F_NONE)"
+		@rm -f $(NAME_BONUS)
+		@echo "$(F_CYAN)$(F_BOLD) $(NAME) executable(s) successfully deleted.$(F_NONE)"
 
-bonus: $(OBJS) $(OBJS_BONUS) $(INCLUDES) #$(LIB_MLX)
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJS) $(OBJS_BONUS) $(INCLUDES) #$(LIB_MLX)
 		$(CC) $(OBJS) $(OBJS_BONUS) $(LIB_MLX) -o $(NAME)_bonus $(MLX_FLAGS)
-		@echo "$(F_GREEN)$(F_BOLD) miniRT bonus executable is compiled and ready.$(F_NONE)"
+		@echo "$(F_GREEN)$(F_BOLD) $(NAME_BONUS) executable is compiled and ready.$(F_NONE)"
 		
 re:	fclean $(NAME)
 
