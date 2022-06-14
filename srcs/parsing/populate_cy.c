@@ -42,6 +42,7 @@ void	populate_cyl(t_data *data, char *line)
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Cylinder", tab_len(tab));
 	obj = new_cylinder(data);
+	obj->texture = 0;
 	arg = ft_split(data, tab[0], ",");
 	check_arg(data, arg, 3, "Incorrect Cylinder point coordinates");
 	obj->point = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
