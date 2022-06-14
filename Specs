@@ -12,7 +12,7 @@
 ===== FILE PARSING ======
 
 ( ) Check if camera, ambiance or light is inexistant at the end of file parsing
-( ) Message : "Error\n"
+(X) Message : "Error\n"
 
 ===== OBJECTS ======
 
@@ -27,7 +27,7 @@
 
 ===== DISPLAY ======
 
-( ) Exit when esc while loading image
+(X) Exit when esc while loading image
 
 (X) Add the "objects overlap" handling in the display
 	(for example by storing the distance to the intersection, in addition to the color,
@@ -36,12 +36,12 @@
 (X) Create a display function that takes the FOV into account, and excludes 
 	objects located behind the camera
 
-( ) Handle the Phong reflexion display
+(X) Handle the Phong reflexion display
 
 (X) Handle the "chessboard" pattern on objects
 	(should it be indicated in the input file?)
 
-( ) Handle the bump map texture
+(X) Handle the bump map texture
 
 (X) depth
 

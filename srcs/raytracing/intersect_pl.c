@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 12:02:08 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/27 18:29:14 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/14 12:28:52 by plefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	plan_spot(t_ray *ray, t_ray *ray2, t_impact *impact, t_3D_point *p)
 	float	f;
 
 	f = ray2->origin.y / ray2->dir.y;
-//	f = -disc[0] / disc[1];
 	set_point(&(impact->pt), \
 			ray->origin.x - f * ray->dir.x, \
 			ray->origin.y - f * ray->dir.y, \
@@ -66,7 +65,6 @@ int	intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact)
 	if (disc[1] * disc[0] <= 0)
 		return (0);
 	prepare_plan_mat(&mat, pl);
-
 	set_vector(&ray2.dir, ray->dir.x, ray->dir.y, ray->dir.z);
 	set_point(&ray2.origin, ray->origin.x, ray->origin.y, ray->origin.z);
 	ray_mult_mat(&ray2, mat);

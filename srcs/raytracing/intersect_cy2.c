@@ -57,3 +57,25 @@ int	cy_switch_val(t_ray *ray, t_cyl *cy, float *t_)
 		return (0);
 	return (1);
 }
+
+void	discriminant_cy_2(t_ray *ray, t_cyl *cy, t_eq_param *eq_sys)
+{
+	float	dr[3];
+	float	s1;
+	float	s2;
+
+	dr[0] = ray->dir.x;
+	dr[1] = ray->dir.y;
+	dr[2] = ray->dir.z;
+	eq_sys->a = powf(dr[0], 2) + powf(dr[2], 2);
+	eq_sys->b = 2 * ray->origin.x * dr[0] + \
+		2 * ray->origin.z * dr[2];
+	eq_sys->c = powf(ray->origin.x, 2) + powf(ray->origin.z, 2) - \
+		powf(cy->radius, 2);
+	(*eq_sys).delta = (powf(eq_sys->b, 2) - 4 * eq_sys->a * eq_sys->c);
+	s1 = (-(*eq_sys).b + sqrtf((*eq_sys).delta)) / (2 * (*eq_sys).a);
+	s2 = (-(*eq_sys).b - sqrtf((*eq_sys).delta)) / (2 * (*eq_sys).a);
+	if (fabs(ray->origin.y + s1 * ray->dir.y) > cy->height
+		&& fabs(ray->origin.y + s2 * ray->dir.y) > cy->height)
+		(*eq_sys).delta = -1;
+}

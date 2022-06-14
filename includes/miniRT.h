@@ -12,7 +12,7 @@
 
 #ifndef MINIRT_H
 # define MINIRT_H
-
+# define CAPS_ON 1
 # include "types.h"
 # include "../minilibx-linux/mlx.h"
 # include "ft3d.h"
@@ -156,6 +156,7 @@ int			intersection_impact_pl(t_ray *ray, t_plan *pl, t_impact *impact);
 void		get_color_plan(t_ray *ray, \
 				t_plan *pl, int *color, float *distance);
 	// cylinder
+void		discriminant_cy_2(t_ray *ray, t_cyl *cy, t_eq_param *eq_sys);
 int			intersection_impact_cy(t_ray *ray, t_cyl *cy, t_impact *impact);
 void		get_color_cyl(t_ray *ray, \
 				t_cyl *cy, int *color, float *distance);

@@ -18,7 +18,7 @@ static void	populate_cy_bonus(t_data *data, char **tab, t_cyl *obj)
 {
 	char	**arg;
 
-	if (data->bonus && tab_len(tab) == 6)
+	if (data->bonus && tab_len(tab) >= 6)
 	{
 		arg = ft_split(data, tab[5], ",");
 		check_arg(data, arg, 3, "Incorrect Cylinder color settings");

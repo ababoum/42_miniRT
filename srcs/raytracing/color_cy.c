@@ -6,15 +6,14 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/26 21:06:35 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/27 18:28:39 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/14 12:48:15 by plefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
 
 // parameters to modify in the texture
-static void
-	cyl_texture(t_cyl *cy, t_vec *norm_dir, t_impact *impact)
+static void	cyl_texture(t_cyl *cy, t_vec *norm_dir, t_impact *impact)
 {
 	float	ax;
 	float	ay;
@@ -23,11 +22,11 @@ static void
 
 	if (cy->texture)
 	{
-		x_y[0] = (int)(impact->tx); // to set
-		x_y[1] = (int)(impact->ty * 20); // to set
+		x_y[0] = (int)(impact->tx);
+		x_y[1] = (int)(impact->ty);
 		get_h(&x_y[0], &x_y[1], cy->texture);
-		ax = atanf(x_y[0]) / 40; // to set
-		ay = atanf(x_y[1]) / 40; // to set
+		ax = atanf((float) x_y[0]) / 4;
+		ay = atanf((float) x_y[1]) / 4;
 		set_identity(&mat);
 		rotate_x_mat(&mat, ax);
 		rotate_z_mat(&mat, ay);
@@ -35,8 +34,8 @@ static void
 	}
 }
 
-static void
-	process_cyl_normal(t_ray *norm, t_impact *impact, t_cyl *cy, int *ret)
+static void	process_cyl_normal(t_ray *norm, t_impact *impact, t_cyl *cy,
+		int *ret)
 {
 	float	v;
 
@@ -76,12 +75,11 @@ void	get_color_cyl(t_ray *ray, t_cyl *cy, int *color, float *dist)
 			return ;
 		*dist = distance_3d(data->cam->pov, impact.pt);
 		*color = rgb_ambiant(arr_to_rgb(impact.rgb), \
-			data->amb->rgb, data->amb->grad);
+				data->amb->rgb, data->amb->grad);
 		process_cyl_normal(&norm, &impact, cy, &ret);
 		cyl_texture(cy, &norm.dir, &impact);
 		normalize_v(&norm.dir);
 		*color = add_color(*color, \
-					calc_spot(&norm, ray, data->light_lst, impact.rgb));
-
+				calc_spot(&norm, ray, data->light_lst, impact.rgb));
 	}
 }

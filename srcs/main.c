@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/26 19:08:33 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/14 12:13:21 by plefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 	set_identity(mat);
 	translate_mat(mat, data->cam->pov.x, \
 		data->cam->pov.y, data->cam->pov.z);
-	rot_angles[0] = get_angle(data->cam->dir.x, data->cam->dir.y);
+	rot_angles[0] = get_angle(data->cam->dir.y, data->cam->dir.x);
 	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
 		data->cam->dir.y * data->cam->dir.y), \
 		data->cam->dir.z);
@@ -28,7 +28,6 @@ static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 	rotate_x_mat(mat, rot_angles[1]);
 }
 
-// why 2 returns?
 int	transform_pixel(int i)
 {
 	int	line_b;
@@ -40,7 +39,6 @@ int	transform_pixel(int i)
 	square = (i - line_b) / (RENDERING_Q * RENDERING_Q) * RENDERING_Q;
 	x_square = i % RENDERING_Q;
 	y_square = i % (RENDERING_Q * RENDERING_Q) / RENDERING_Q;
-	return (i);
 	return (line_b + square + WIN_WIDTH * y_square + x_square);
 }
 

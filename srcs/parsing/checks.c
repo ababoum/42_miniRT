@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 12:17:06 by mababou           #+#    #+#             */
-/*   Updated: 2022/06/06 16:03:23 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/14 12:13:52 by plefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	check_line_args_2(char *type, int argc)
 	if (!ft_strcmp(type, "Ambiance"))
 		return (argc != 2);
 	if (!ft_strcmp(type, "Cylinder"))
-		return (!(argc == 5 || (data->bonus && argc == 6)));
+		return (!(argc == 5 || (data->bonus && argc == 6) || \
+				(data->bonus && argc == 7)));
 	if ((!ft_strcmp(type, "Sphere")))
 		return (!(argc == 3 || (data->bonus && argc == 4) || \
 		(data->bonus && argc == 5)));
