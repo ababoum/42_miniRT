@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 16:42:55 by mababou           #+#    #+#             */
-/*   Updated: 2022/06/06 16:00:21 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/14 18:16:21 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	populate_cyl(t_data *data, char *line)
 	tab = ft_split(data, line, SPACES);
 	check_line_args(data, "Cylinder", tab_len(tab));
 	obj = new_cylinder(data);
-	obj->texture = 0;
-	arg = ft_split(data, tab[0], ",");
+	arg = (obj->texture = 0, ft_split(data, tab[0], ","));
 	check_arg(data, arg, 3, "Incorrect Cylinder point coordinates");
 	obj->point = point(ft_atof(arg[0]), ft_atof(arg[1]), ft_atof(arg[2]));
 	arg = ft_split(data, tab[1], ",");

@@ -1,0 +1,7 @@
+A	0.5									200,200,200
+C	0,0,10		0,0,-1		90
+L	0,20,0					0.8		100,100,100
+# sphere : center / diameter / color
+sp	0,0,0					3		255,0,0
+# plan : point / direction / color
+pl	0,-4,0				0,1,0			255,255,255

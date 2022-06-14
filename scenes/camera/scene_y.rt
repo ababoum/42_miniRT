@@ -1,0 +1,17 @@
+A	0.5									200,200,200
+C	0,-10,0		0,1,0		90
+L	-40,0,30					0.7		100,100,100
+# sphere : center / diameter / color
+sp	0,-2,0					3			255,0,0
+# cylinder : center / direction / diameter / height / RGB
+cy	2,0,0		0,1,0		4 	8	10,30,255
+# plan : point / direction / color
+pl	0,-1,0				0,1,0			0,125,0
+# plan : point / direction / color
+pl	0,3,0				0,1,0			87,0,140
+# sphere : center / diameter / color
+sp	0,0,0					3			255,0,0
+# sphere : center / diameter / color
+sp	0,2,0					3			255,255,0
+# cylinder : center / direction / diameter / height / RGB
+cy	-2,0,0		0,1,0		4 	8	10,130,255
