@@ -110,6 +110,7 @@ clean:
 fclean:	clean
 		@rm -f $(NAME)
 		@rm -f $(NAME_BONUS)
+		@rm -f $(OBJS_MANDATORY) $(OBJS_BONUS)
 		@echo "$(F_CYAN)$(F_BOLD) $(NAME) executable(s) successfully deleted.$(F_NONE)"
 
 bonus: $(NAME_BONUS)
