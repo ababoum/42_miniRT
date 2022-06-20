@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:35:10 by mababou           #+#    #+#             */
-/*   Updated: 2022/06/06 15:53:00 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/20 18:00:46 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ void		get_h(int *x, int *y, unsigned char *texture);
 float		distance_3d(t_3D_point A, t_3D_point B);
 float		distance_3d_vec(t_vec A, t_vec B);
 float		distance_3d_vec_pt(t_vec A, t_3D_point B);
-float		ffabs(float f);
 float		max(float n1, float n2);
 float		min(float n1, float n2);
 int			rgb_factor(int rgb, float factor);

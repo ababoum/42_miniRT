@@ -6,18 +6,11 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:39:36 by mababou           #+#    #+#             */
-/*   Updated: 2022/05/04 19:58:07 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/20 18:00:42 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/miniRT.h"
-
-float	ffabs(float f)
-{
-	if (f < 0)
-		return (-f);
-	return (f);
-}
 
 float	max(float n1, float n2)
 {

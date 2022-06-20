@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:23:31 by mababou           #+#    #+#             */
-/*   Updated: 2022/06/14 12:52:20 by plefevre         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:03:33 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	reverse_op(t_cyl *cy, t_3D_point *pt)
 	pt3d_mult_mat(pt, mat);
 }
 
+// cy_switch val tests if the ray intersects the cylinder caps.
+// if it does, it updates the parameter value (t_) that satisfies the 
+// intersection (the closest one if 2 solutions are found)
 static int	intersection_cy_caps(t_ray *ray, t_cyl *cy, t_impact *impact)
 {
 	float	t_;
