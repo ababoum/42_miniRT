@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:34:43 by mababou           #+#    #+#             */
-/*   Updated: 2022/06/06 15:50:52 by mababou          ###   ########.fr       */
+/*   Updated: 2022/06/28 23:51:11 by plefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define IMG_TYPE	2
 
 # define WIN_WIDTH	1080
-# define WIN_HEIGHT	1080 // width and height should be equal if fov is unique
+# define WIN_HEIGHT	1080 // width and height should be equal if fov is unique 
+//and less than 1080
 
 # define RED		0x00FF0000
 # define GREEN		0x0000FF00
