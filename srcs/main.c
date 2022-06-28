@@ -6,7 +6,7 @@
 /*   By: mababou <mababou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/01 19:38:50 by mababou           #+#    #+#             */
-/*   Updated: 2022/06/14 12:13:21 by plefevre         ###   ########.fr       */
+/*   Updated: 2022/06/28 15:45:45 by mababou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@
 static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 {
 	float	rot_angles[2];
+	int		orientation;
 
+	if ((data->cam->dir.x < 0 && data->cam->dir.y >= 0) || \
+		(data->cam->dir.y < 0 && data->cam->dir.x >= 0))
+		orientation = -1;
+	else
+		orientation = 1;
 	set_identity(mat);
 	translate_mat(mat, data->cam->pov.x, \
 		data->cam->pov.y, data->cam->pov.z);
 	rot_angles[0] = get_angle(data->cam->dir.y, data->cam->dir.x);
-	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
+	rot_angles[1] = get_angle(orientation * \
+		sqrtf(data->cam->dir.x * data->cam->dir.x + \
 		data->cam->dir.y * data->cam->dir.y), \
 		data->cam->dir.z);
 	rotate_z_mat(mat, rot_angles[0]);
