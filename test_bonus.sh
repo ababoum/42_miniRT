@@ -1,6 +1,6 @@
 #! /bin/bash
 
-echo "Camera along axis"
+echo "Bonus scenes"
 ./miniRT_bonus scenes/bonus/specular.rt &
 ./miniRT_bonus scenes/bonus/bump_map.rt &
 ./miniRT_bonus scenes/bonus/multispot.rt &
