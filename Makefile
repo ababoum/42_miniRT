@@ -93,18 +93,18 @@ LIB_MLX			= minilibx-linux/libmlx_Linux.a
 MLXPATH			= minilibx-linux
 MLX_FLAGS		= -lX11 -lXext -lm
 
-# $(LIB_MLX):
-# 	make -C ./minilibx-linux
+$(LIB_MLX):
+	make -C ./minilibx-linux
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(OBJS_MANDATORY) $(INCLUDES) #$(LIB_MLX)
+$(NAME): $(OBJS) $(OBJS_MANDATORY) $(INCLUDES) $(LIB_MLX)
 		$(CC) $(OBJS) $(OBJS_MANDATORY) $(LIB_MLX) -o $(NAME) $(MLX_FLAGS)
 		@echo "$(F_GREEN)$(F_BOLD) $(NAME) executable is compiled and ready.$(F_NONE)"
 
 clean:
 		@rm -f $(OBJS)
-#		$(MAKE) -C ./minilibx-linux clean
+		$(MAKE) -C ./minilibx-linux clean
 		@echo "$(F_CYAN)$(F_BOLD) .o files successfully deleted.$(F_NONE)"
 
 fclean:	clean
@@ -115,7 +115,7 @@ fclean:	clean
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJS) $(OBJS_BONUS) $(INCLUDES) #$(LIB_MLX)
+$(NAME_BONUS): $(OBJS) $(OBJS_BONUS) $(INCLUDES) $(LIB_MLX)
 		$(CC) $(OBJS) $(OBJS_BONUS) $(LIB_MLX) -o $(NAME)_bonus $(MLX_FLAGS)
 		@echo "$(F_GREEN)$(F_BOLD) $(NAME_BONUS) executable is compiled and ready.$(F_NONE)"
 		
