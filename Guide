@@ -1,7 +1,0 @@
-Camera parameters: (assuming that the camera is pointing towards negative Z)
-
-	x = i - W/2
-	y = j - H/2
-	z = - W / (2 * tan(FOV/2))
-
-
