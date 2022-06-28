@@ -20,7 +20,7 @@ static void	prepare_camera_mat(t_data *data, t_m4 *mat)
 	set_identity(mat);
 	translate_mat(mat, data->cam->pov.x, \
 		data->cam->pov.y, data->cam->pov.z);
-	rot_angles[0] = get_angle(data->cam->dir.y, data->cam->dir.x);
+	rot_angles[0] = get_angle(data->cam->dir.y, -data->cam->dir.x);
 	rot_angles[1] = get_angle(sqrtf(data->cam->dir.x * data->cam->dir.x + \
 		data->cam->dir.y * data->cam->dir.y), \
 		data->cam->dir.z);
