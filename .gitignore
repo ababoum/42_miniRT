@@ -3,4 +3,5 @@ scale_miniRT.pdf
 *.o
 minilibx-linux/obj/*.o
 miniRT
+miniRT_bonus
 .vscode/

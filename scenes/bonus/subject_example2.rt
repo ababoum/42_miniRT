@@ -1,0 +1,12 @@
+A	0.0									200,200,200
+C	5,5,10		0.5,-0.5,-1		90
+L	5,5,5					0.8		200,200,200
+# sphere : center / diameter / color
+sp	0,0,0					3			255,0,0
+# cone : center / direction / angle / RGB
+cn	2,0,0		-1,1,0	 	35	219,250,61
+# cylinder : center / direction / diameter / height / RGB
+cy	-2,0,0		1,1,0		3 	100	11,188,76
+# plan : point / direction / color
+pl	0,-1.5,0			0,1,0			58,74,64
+pl	0,0,-5				0,0,1			51,153,255
