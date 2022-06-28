@@ -80,13 +80,14 @@ int	dbl_intersection_pt_cy(t_ray *ray, t_cyl *cy, t_impact *im, \
 	t[1] = (-eq_sys.b - sqrtf(eq_sys.delta)) / (2 * eq_sys.a);
 	if (t[0] < 0 && t[1] < 0)
 		return (0);
-	else if ((t[0] < 0 && t[1] >= 0) || (t[1] < 0 && t[0] >= 0))
+	else if ((t[0] < -EPSILON && t[1] >= EPSILON)
+		|| (t[1] < -EPSILON && t[0] >= EPSILON))
 		t_ = max(t[0], t[1]);
 	else
 		t_ = min(t[0], t[1]);
 	if (!is_between(ray->origin.y + ray->dir.y * t_, \
 				-cy->height / 2, cy->height / 2))
-		return (CAPS_ON * intersection_cy_caps(ray, cy, im));
+		return (intersection_cy_caps(ray, cy, im));
 	set_point(&(im->pt), ray->origin.x + t_ * ray->dir.x, \
 			ray->origin.y + t_ * ray->dir.y, ray->origin.z + t_ * ray->dir.z);
 	im->tx = im->pt.y / cy->height * TEXTURE_SIZE;
@@ -106,7 +107,7 @@ int	intersection_impact_cy(t_ray *ray, t_cyl *cy, t_impact *impact)
 	prepare_ray_for_cy(ray, cy);
 	discriminant_cy_2(ray, cy, &eq_sys);
 	if (eq_sys.delta < 0)
-		return (CAPS_ON * intersection_cy_caps(ray, cy, impact));
+		return (intersection_cy_caps(ray, cy, impact));
 	else
 		return (dbl_intersection_pt_cy(ray, cy, impact, eq_sys));
 }

@@ -39,7 +39,7 @@
 # define BUFFER_SIZE	42
 
 # define EPSILON		0.0005
-# define EPSILON2		0.000001
+# define EPSILON2		0.0001
 
 # define SPHERE			0
 # define PLAN			1
@@ -185,5 +185,9 @@ typedef struct s_impact {
 }	t_impact;
 
 typedef void	(*t_pop_fn)(t_data *, char *);
+
+# ifndef BONUS_ON
+#  define BONUS_ON 1
+# endif
 
 #endif

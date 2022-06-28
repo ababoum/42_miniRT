@@ -58,7 +58,7 @@ void	draw_data(t_data *data, int start, int end)
 		while (j < RENDERING_Q * RENDERING_Q)
 		{
 			pixel_put(data, transform_pixel(i) % WIN_WIDTH, \
-				transform_pixel(i) / WIN_WIDTH, color);
+			transform_pixel(i) / WIN_WIDTH, color);
 			i++;
 			j++;
 		}
@@ -69,7 +69,7 @@ int	render(t_data *data)
 {
 	static int	i = 0;
 
-	if (i < WIN_HEIGHT * WIN_WIDTH)
+	if (i < WIN_HEIGHT * WIN_WIDTH + 1)
 	{
 		draw_data(data, i, i + WIN_WIDTH);
 		i += WIN_WIDTH;

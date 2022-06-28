@@ -12,7 +12,6 @@
 
 #ifndef MINIRT_H
 # define MINIRT_H
-# define CAPS_ON 1
 # include "types.h"
 # include "../minilibx-linux/mlx.h"
 # include "ft3d.h"
