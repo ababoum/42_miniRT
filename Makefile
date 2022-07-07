@@ -103,14 +103,14 @@ $(NAME): $(OBJS) $(OBJS_MANDATORY) $(INCLUDES)
 
 clean:
 		@rm -f $(OBJS)
+		@rm -f $(OBJS_MANDATORY) $(OBJS_BONUS)
 		make -C ./minilibx-linux clean
 		@echo "$(F_CYAN)$(F_BOLD) .o files successfully deleted.$(F_NONE)"
 
 fclean:	clean
 		@rm -f $(NAME)
 		@rm -f $(NAME_BONUS)
-		@rm -f $(OBJS_MANDATORY) $(OBJS_BONUS)
-		@rm -f $(NAME_BONUS) $(LIB_MLX)
+		@rm -f $(LIB_MLX)
 		@echo "$(F_CYAN)$(F_BOLD) $(NAME) executable(s) successfully deleted.$(F_NONE)"
 
 bonus: $(NAME_BONUS)
